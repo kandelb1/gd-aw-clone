@@ -1,0 +1,167 @@
+[gd_scene load_steps=25 format=3 uid="uid://dc2d66js70mhy"]
+
+[ext_resource type="PackedScene" uid="uid://c2i7g25ik8mcs" path="res://Scenes/Unit/Unit.tscn" id="1_rxtil"]
+[ext_resource type="Script" path="res://Scenes/Unit/APCUnit/APCUnit.cs" id="1_v1sib"]
+[ext_resource type="PackedScene" uid="uid://duhwlv31nw1fn" path="res://Scenes/UnitPathFollower/UnitPathFollower.tscn" id="2_l6gyu"]
+[ext_resource type="PackedScene" uid="uid://ofy82io2hwuj" path="res://Scenes/Unit/UnitAnimationPlayer/UnitAnimationPlayer.tscn" id="3_rk8q0"]
+[ext_resource type="Script" path="res://Scenes/Actions/MoveAction.cs" id="4_qqtov"]
+[ext_resource type="Texture2D" uid="uid://d3n3r8o1f0wx7" path="res://Assets/Game Boy Advance - Advance Wars 2 Black Hole Rising - Units Map.png" id="5_4rhvj"]
+[ext_resource type="Script" path="res://Scenes/Actions/UnloadAction.cs" id="6_8e8k5"]
+[ext_resource type="PackedScene" uid="uid://u7s36kyov32s" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.tscn" id="8_x81ko"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4btnl"]
+atlas = ExtResource("5_4rhvj")
+region = Rect2(339, 370, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wf0nj"]
+atlas = ExtResource("5_4rhvj")
+region = Rect2(356, 370, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_guc4d"]
+atlas = ExtResource("5_4rhvj")
+region = Rect2(373, 370, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uj5ff"]
+atlas = ExtResource("5_4rhvj")
+region = Rect2(3, 370, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_do8sy"]
+atlas = ExtResource("5_4rhvj")
+region = Rect2(20, 370, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eam82"]
+atlas = ExtResource("5_4rhvj")
+region = Rect2(37, 370, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqrc5"]
+atlas = ExtResource("5_4rhvj")
+region = Rect2(210, 591, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ba4bi"]
+atlas = ExtResource("5_4rhvj")
+region = Rect2(235, 591, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfoys"]
+atlas = ExtResource("5_4rhvj")
+region = Rect2(260, 591, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3lxq"]
+atlas = ExtResource("5_4rhvj")
+region = Rect2(210, 566, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxaya"]
+atlas = ExtResource("5_4rhvj")
+region = Rect2(235, 566, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yo0ff"]
+atlas = ExtResource("5_4rhvj")
+region = Rect2(260, 566, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpqpb"]
+atlas = ExtResource("5_4rhvj")
+region = Rect2(210, 616, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufjbe"]
+atlas = ExtResource("5_4rhvj")
+region = Rect2(235, 616, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ll35m"]
+atlas = ExtResource("5_4rhvj")
+region = Rect2(260, 616, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7mvk5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4btnl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wf0nj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_guc4d")
+}],
+"loop": true,
+"name": &"exhausted",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uj5ff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_do8sy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eam82")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqrc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ba4bi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gfoys")
+}],
+"loop": true,
+"name": &"move_down",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3lxq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nxaya")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yo0ff")
+}],
+"loop": true,
+"name": &"move_left",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lpqpb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ufjbe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ll35m")
+}],
+"loop": true,
+"name": &"move_up",
+"speed": 12.0
+}]
+
+[node name="APCUnit" type="Node2D"]
+script = ExtResource("1_v1sib")
+
+[node name="Unit" parent="." instance=ExtResource("1_rxtil")]
+
+[node name="UnitPathFollower" parent="." instance=ExtResource("2_l6gyu")]
+
+[node name="UnitAnimationPlayer" parent="." instance=ExtResource("3_rk8q0")]
+
+[node name="Actions" type="Node" parent="."]
+
+[node name="MoveAction" type="Node" parent="Actions"]
+script = ExtResource("4_qqtov")
+
+[node name="UnloadAction" type="Node" parent="Actions"]
+script = ExtResource("6_8e8k5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7mvk5")
+animation = &"idle"
+frame_progress = 0.325673
+
+[node name="UnitStatusIcons" parent="." instance=ExtResource("8_x81ko")]

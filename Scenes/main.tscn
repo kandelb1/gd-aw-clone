@@ -1,0 +1,43 @@
+[gd_scene load_steps=11 format=3 uid="uid://nq703fywuays"]
+
+[ext_resource type="Script" path="res://Scenes/main.cs" id="1_g02d7"]
+[ext_resource type="PackedScene" uid="uid://cbhni8moq7jko" path="res://Scenes/Unit/InfantryUnit/InfantryUnit.tscn" id="3_tpagr"]
+[ext_resource type="PackedScene" uid="uid://cdj7h33avqdxa" path="res://Scenes/TileHighlighter/TileHighlighter.tscn" id="3_xi5fq"]
+[ext_resource type="PackedScene" uid="uid://b740ixutie40o" path="res://Scenes/Unit/BattleshipUnit/BattleshipUnit.tscn" id="4_lprp5"]
+[ext_resource type="PackedScene" uid="uid://drs23343vvuw0" path="res://Scenes/Unit/FighterUnit/FighterUnit.tscn" id="5_mkuhx"]
+[ext_resource type="PackedScene" uid="uid://51acpypeapbj" path="res://Scenes/Unit/ReconUnit/ReconUnit.tscn" id="6_a4exj"]
+[ext_resource type="PackedScene" uid="uid://cayyb28b28ejr" path="res://Scenes/Unit/LanderUnit/LanderUnit.tscn" id="7_3poqg"]
+[ext_resource type="PackedScene" uid="uid://d1nmyipydkujp" path="res://Scenes/Unit/TCopterUnit/TCopterUnit.tscn" id="8_srsul"]
+[ext_resource type="PackedScene" uid="uid://dgmmabd1oa0qc" path="res://Scenes/Unit/MechInfantryUnit/MechInfantry.tscn" id="9_k4m4k"]
+[ext_resource type="PackedScene" uid="uid://dc2d66js70mhy" path="res://Scenes/Unit/APCUnit/APCUnit.tscn" id="10_e4afk"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_g02d7")
+
+[node name="TileHighlighter" parent="." instance=ExtResource("3_xi5fq")]
+shootColor = Color(0.811765, 0.054902, 0.0980392, 1)
+genericColor = Color(0.831373, 0.266667, 0.92549, 1)
+
+[node name="InfantryUnit" parent="." instance=ExtResource("3_tpagr")]
+position = Vector2(88, 88)
+
+[node name="BattleshipUnit" parent="." instance=ExtResource("4_lprp5")]
+position = Vector2(72, 8)
+
+[node name="FighterUnit" parent="." instance=ExtResource("5_mkuhx")]
+position = Vector2(120, 56)
+
+[node name="ReconUnit" parent="." instance=ExtResource("6_a4exj")]
+position = Vector2(152, 72)
+
+[node name="LanderUnit" parent="." instance=ExtResource("7_3poqg")]
+position = Vector2(184, 216)
+
+[node name="TCopterUnit" parent="." instance=ExtResource("8_srsul")]
+position = Vector2(104, 136)
+
+[node name="MechInfantry" parent="." instance=ExtResource("9_k4m4k")]
+position = Vector2(120, 88)
+
+[node name="APCUnit" parent="." instance=ExtResource("10_e4afk")]
+position = Vector2(136, 120)

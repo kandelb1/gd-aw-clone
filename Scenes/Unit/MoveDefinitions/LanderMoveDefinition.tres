@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MoveDefinition" load_steps=2 format=3 uid="uid://ckulo4egdvvbk"]
+
+[ext_resource type="Script" path="res://Scenes/Unit/MoveDefinition.cs" id="1_atddl"]
+
+[resource]
+script = ExtResource("1_atddl")
+moveDistance = 0
+terrainMoveCosts = {
+"beach": 1,
+"port": 1,
+"reef": 2,
+"sea": 1
+}

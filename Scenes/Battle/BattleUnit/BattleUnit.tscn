@@ -1,0 +1,186 @@
+[gd_scene load_steps=17 format=3 uid="uid://cqg6kti3b4wjc"]
+
+[ext_resource type="Script" path="res://Scenes/Battle/BattleUnit/BattleUnit.cs" id="1_x0a6o"]
+[ext_resource type="Texture2D" uid="uid://doky5efurycx8" path="res://Assets/orange-infantry-mech.png" id="1_yfnte"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usuom"]
+atlas = ExtResource("1_yfnte")
+region = Rect2(1, 233, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gy6q"]
+atlas = ExtResource("1_yfnte")
+region = Rect2(34, 233, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jajng"]
+atlas = ExtResource("1_yfnte")
+region = Rect2(240, 137, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3b7x6"]
+atlas = ExtResource("1_yfnte")
+region = Rect2(1, 137, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gx8nx"]
+atlas = ExtResource("1_yfnte")
+region = Rect2(34, 137, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aaxs2"]
+atlas = ExtResource("1_yfnte")
+region = Rect2(67, 137, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqskw"]
+atlas = ExtResource("1_yfnte")
+region = Rect2(100, 137, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvrl7"]
+atlas = ExtResource("1_yfnte")
+region = Rect2(133, 137, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jkcmn"]
+atlas = ExtResource("1_yfnte")
+region = Rect2(166, 137, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g8p6l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usuom")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2gy6q")
+}],
+"loop": true,
+"name": &"fire",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jajng")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3b7x6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gx8nx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aaxs2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqskw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvrl7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jkcmn")
+}],
+"loop": true,
+"name": &"run",
+"speed": 12.0
+}]
+
+[sub_resource type="Animation" id="Animation_ewycj"]
+resource_name = "battle_animation"
+length = 3.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Unit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.5, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [&"run"],
+"method": &"play"
+}, {
+"args": [&"idle"],
+"method": &"play"
+}, {
+"args": [&"fire"],
+"method": &"play"
+}, {
+"args": [&"idle"],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_eiltt"]
+resource_name = "fire"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Unit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": ["fire"],
+"method": &"play"
+}, {
+"args": ["idle"],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_smrbm"]
+resource_name = "run_in"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Unit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": ["run"],
+"method": &"play"
+}, {
+"args": ["idle"],
+"method": &"play"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Unit:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-10, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o714m"]
+_data = {
+"battle_animation": SubResource("Animation_ewycj"),
+"fire": SubResource("Animation_eiltt"),
+"run_in": SubResource("Animation_smrbm")
+}
+
+[node name="BattleUnit" type="Node2D"]
+script = ExtResource("1_x0a6o")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Unit" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_g8p6l")
+animation = &"fire"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_o714m")
+}

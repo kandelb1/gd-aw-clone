@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://u7s36kyov32s"]
+
+[ext_resource type="Texture2D" uid="uid://d3n3r8o1f0wx7" path="res://Assets/Game Boy Advance - Advance Wars 2 Black Hole Rising - Units Map.png" id="1_3w0gg"]
+[ext_resource type="Script" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.cs" id="1_3w1mj"]
+
+[node name="UnitStatusIcons" type="Node2D"]
+script = ExtResource("1_3w1mj")
+
+[node name="HealthSprite" type="Sprite2D" parent="."]
+position = Vector2(5, 5)
+texture = ExtResource("1_3w0gg")
+region_enabled = true
+region_rect = Rect2(556, 1233, 8, 7)
+
+[node name="LoadSprite" type="Sprite2D" parent="."]
+position = Vector2(-3, 5)
+texture = ExtResource("1_3w0gg")
+region_enabled = true
+region_rect = Rect2(520, 1233, 8, 8)

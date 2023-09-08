@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://duhwlv31nw1fn"]
+
+[ext_resource type="Script" path="res://Scenes/UnitPathFollower/UnitPathFollower.cs" id="1_sia4g"]
+
+[node name="UnitPathFollower" type="Node"]
+script = ExtResource("1_sia4g")

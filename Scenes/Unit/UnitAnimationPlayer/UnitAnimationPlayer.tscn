@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ofy82io2hwuj"]
+
+[ext_resource type="Script" path="res://Scenes/Unit/UnitAnimationPlayer/UnitAnimationPlayer.cs" id="1_b6nwa"]
+
+[node name="UnitAnimationPlayer" type="Node"]
+script = ExtResource("1_b6nwa")

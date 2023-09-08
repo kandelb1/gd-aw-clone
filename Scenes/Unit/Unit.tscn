@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2i7g25ik8mcs"]
+
+[ext_resource type="Script" path="res://Scenes/Unit/Unit.cs" id="1_nvijc"]
+
+[node name="Unit" type="Node" groups=["units"]]
+script = ExtResource("1_nvijc")

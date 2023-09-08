@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdj7h33avqdxa"]
+
+[ext_resource type="Script" path="res://Scenes/TileHighlighter/TileHighlighter.cs" id="1_sudjn"]
+[ext_resource type="PackedScene" uid="uid://b3oqishxguii4" path="res://Scenes/TileHighlighter/AttackCursor/AttackCursor.tscn" id="2_wjsnx"]
+
+[node name="TileHighlighter" type="Node"]
+script = ExtResource("1_sudjn")
+moveColor = Color(0.235294, 0.980392, 0, 1)
+
+[node name="AttackCursor" parent="." instance=ExtResource("2_wjsnx")]
