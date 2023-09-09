@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Level="*res://Scenes/Level/Level.tscn"
 UnitSystem="*res://Scenes/UnitSystem/UnitSystem.tscn"
 ValidActionPositionsCache="*res://Scenes/ValidActionPositionsCache/ValidActionPositionsCache.tscn"
+TurnSystem="*res://Scenes/TurnSystem/TurnSystem.tscn"
 
 [display]
 

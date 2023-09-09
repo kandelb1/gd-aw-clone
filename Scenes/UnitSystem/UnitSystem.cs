@@ -23,6 +23,8 @@ public partial class UnitSystem : Node
     private Unit selectedUnit;
     private BaseAction selectedAction;
 
+    private Node baseUI;
+
     public override void _Ready()
     {
         GD.Print("UnitSystem _Ready()");
@@ -35,6 +37,8 @@ public partial class UnitSystem : Node
         Instance = this;
 
         unitActionMenu = (PackedScene) GD.Load("res://Scenes/UI/UnitActionMenu/UnitActionMenu.tscn");
+        baseUI = GetNode<Node>("/root/main/UI"); // TODO: should I really be doing this?
+        GD.Print($"Base ui: {baseUI.Name}");
     }
 
     public override void _Input(InputEvent @event)
@@ -65,7 +69,8 @@ public partial class UnitSystem : Node
                 // otherwise try to select the unit on the grid position we clicked
                 if (!Level.Instance.IsOccupied(clickPos)) return;
                 Unit unit = Level.Instance.GetUnit(clickPos);
-                if (selectedUnit != null || unit == selectedUnit) return;
+                if (unit == selectedUnit) return;
+                if (unit.IsExhausted()) return;
                 
                 GD.Print($"clicked on {unit.Name}");
                 selectedUnit = unit;
@@ -74,7 +79,7 @@ public partial class UnitSystem : Node
                 menu.SetActions(unit.GetActions());
                 menu.ActionSelected += HandleActionSelected;
                 menu.MenuClosed += DeselectUnit;
-                AddChild(menu);
+                baseUI.AddChild(menu);
             }
         }else if (@event.IsActionPressed("right click")) // lets use right click to cancel for now
         {

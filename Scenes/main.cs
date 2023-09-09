@@ -4,8 +4,6 @@ using Godot.Collections;
 
 public partial class main : Node2D
 {
-
-
     public override void _Ready()
     {
         Level.Instance.MouseChangedPosition += HandleMouseMove;

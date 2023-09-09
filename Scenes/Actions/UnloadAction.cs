@@ -17,8 +17,8 @@ public partial class UnloadAction : BaseAction
     {
         unit.UnloadUnit(selectedUnit);
         selectedUnit.SetGridPosition(gridPos);
+        selectedUnit.SetExhausted(true);
         selectedUnit.SetHidden(false);
-        // selectedUnit.SetExhausted(true)
     }
 
     // TODO: make this work for multiple loaded units

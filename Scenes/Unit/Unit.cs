@@ -4,12 +4,15 @@ using System.Collections.Generic;
 
 public partial class Unit : Node
 {
-
+    
     [Signal]
     public delegate void HealthChangedEventHandler(int newHealth);
 
     [Signal]
     public delegate void UnitLoadedOrUnloadedEventHandler();
+    
+    [Signal]
+    public delegate void ExhaustedChangedEventHandler();
     
     private Node2D baseUnit;
     
@@ -34,6 +37,8 @@ public partial class Unit : Node
     private List<Unit> unitsLoaded;
     private Func<Unit, bool> loadRules;
 
+    private bool exhausted;
+
     // private UnitPathfinder pathfinder;
     
     public override void _Ready()
@@ -52,7 +57,9 @@ public partial class Unit : Node
         gridPos = Level.Instance.GetGridPosition(baseUnit.Position);
         GD.Print($"set gridPos to {gridPos}");
         unitsLoaded = new List<Unit>();
-        // pathfinder = GetNode<UnitPathfinder>("UnitPathfinder");
+
+        exhausted = false;
+        TurnSystem.Instance.TurnChanged += HandleTurnChanged;
     }
 
     public Vector2I GetGridPosition() => gridPos;
@@ -141,6 +148,19 @@ public partial class Unit : Node
     public void SetHidden(bool hidden)
     {
         baseUnit.Visible = !hidden;
+    }
+
+    public bool IsExhausted() => exhausted;
+
+    public void SetExhausted(bool exhausted)
+    {
+        this.exhausted = exhausted;
+        EmitSignal(SignalName.ExhaustedChanged);
+    }
+
+    private void HandleTurnChanged()
+    {
+        SetExhausted(false);
     }
 
 }

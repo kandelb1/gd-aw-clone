@@ -20,6 +20,13 @@ public partial class UnitAnimationPlayer : Node
         
         animSprite = GetNode<AnimatedSprite2D>("../AnimatedSprite2D");
         animSprite.Play("idle");
+        
+        unit.ExhaustedChanged += HandleExhaustedChanged;
+    }
+
+    private void HandleExhaustedChanged()
+    {
+        animSprite.Play(unit.IsExhausted() ? "exhausted" : "idle");
     }
 
     // private void HandleActionSelected(BaseAction action)
