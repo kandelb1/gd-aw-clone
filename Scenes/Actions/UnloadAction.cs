@@ -19,6 +19,29 @@ public partial class UnloadAction : BaseAction
         selectedUnit.SetGridPosition(gridPos);
         selectedUnit.SetExhausted(true);
         selectedUnit.SetHidden(false);
+
+        if (unit.HasUnitsLoaded())
+        {
+            GD.Print($"{unit.GetUnitName()} has more units loaded, forcing them to unload or wait");
+            // disable every action except Unload and Wait
+            foreach (BaseAction action in unit.GetActions())
+            {
+                switch (action)
+                {
+                    case UnloadAction:
+                        continue;
+                    case WaitAction:
+                        continue;
+                    default:
+                        action.SetDisabled(true);
+                        break;
+                }
+            }
+        }
+        else
+        {
+            unit.SetExhausted(true);
+        }
     }
 
     // TODO: make this work for multiple loaded units
@@ -39,6 +62,7 @@ public partial class UnloadAction : BaseAction
     public override bool IsActionAvailable()
     {
         // unloading is available if ANY of the loaded units can be put down in a neighboring tile
+        if (IsActionDisabled()) return false;
         if (!unit.HasUnitsLoaded()) return false;
         foreach (Vector2I neighbor in Level.Instance.GetNeighbors(unit.GetGridPosition()))
         {

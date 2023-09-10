@@ -14,7 +14,7 @@ public partial class LoadAction : BaseAction
     public override void _Ready()
     {
         pathFollower = unit.GetNode<UnitPathFollower>("../UnitPathFollower");
-        pathFollower.UnitStopped += HandleUnitStopped;
+        pathFollower.UnitStopped += HandleUnitStopped; // TODO: is it better to pass in a callback to pathFollower.MoveAlongPath() ?
     }
 
     public override string GetActionName() => "Load";
@@ -26,6 +26,7 @@ public partial class LoadAction : BaseAction
         unit.SetHidden(true);
         unit.SetGridPosition(new Vector2I(-1, -1));
         loaderUnit.LoadUnit(unit);
+        // unit.SetExhausted(true)
         CompleteAction();
     }
 
@@ -33,9 +34,6 @@ public partial class LoadAction : BaseAction
     {
         StartAction();
         loaderUnit = Level.Instance.GetUnit(gridPos);
-        // UnloadAction unload = loaderUnit.GetAction<UnloadAction>();
-        // unload.SetSelectedUnit(unit); // TODO: remove
-        // GD.Print($"{unit.GetUnitName()} is loading into {loaderUnit.GetUnitName()}. Setting the selectedUnit for UnloadAction");
         Vector2I[] gridPath = Level.Instance.GetPath(unit.GetGridPosition(), gridPos, unit.GetMoveDefinition(), true);
         pathFollower.MoveAlongPath(gridPath[1..]); // GetPath returns a path including the position you start on, so make sure to remove that
     }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://drs23343vvuw0"]
+[gd_scene load_steps=26 format=3 uid="uid://drs23343vvuw0"]
 
 [ext_resource type="Script" path="res://Scenes/Unit/FighterUnit/FighterUnit.cs" id="1_3va2e"]
 [ext_resource type="PackedScene" uid="uid://c2i7g25ik8mcs" path="res://Scenes/Unit/Unit.tscn" id="2_it70w"]
@@ -7,7 +7,20 @@
 [ext_resource type="Script" path="res://Scenes/Actions/MoveAction.cs" id="5_l4hey"]
 [ext_resource type="Script" path="res://Scenes/Actions/ShootAction.cs" id="6_dnujr"]
 [ext_resource type="Texture2D" uid="uid://d3n3r8o1f0wx7" path="res://Assets/Game Boy Advance - Advance Wars 2 Black Hole Rising - Units Map.png" id="7_7upxq"]
+[ext_resource type="Script" path="res://Scenes/Actions/WaitAction.cs" id="7_h1hdk"]
 [ext_resource type="PackedScene" uid="uid://u7s36kyov32s" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.tscn" id="8_7h2cl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nw565"]
+atlas = ExtResource("7_7upxq")
+region = Rect2(339, 465, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ki4vx"]
+atlas = ExtResource("7_7upxq")
+region = Rect2(356, 465, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ht1sa"]
+atlas = ExtResource("7_7upxq")
+region = Rect2(373, 465, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wyk5d"]
 atlas = ExtResource("7_7upxq")
@@ -59,6 +72,20 @@ region = Rect2(260, 154, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pe8pj"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nw565")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ki4vx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ht1sa")
+}],
+"loop": true,
+"name": &"exhausted",
+"speed": 4.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wyk5d")
@@ -133,9 +160,12 @@ script = ExtResource("5_l4hey")
 [node name="ShootAction" type="Node" parent="Actions"]
 script = ExtResource("6_dnujr")
 
+[node name="WaitAction" type="Node" parent="Actions"]
+script = ExtResource("7_h1hdk")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pe8pj")
 animation = &"idle"
-frame_progress = 0.806173
 
 [node name="UnitStatusIcons" parent="." instance=ExtResource("8_7h2cl")]
+visible = false

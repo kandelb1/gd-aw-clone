@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://51acpypeapbj"]
+[gd_scene load_steps=27 format=3 uid="uid://51acpypeapbj"]
 
 [ext_resource type="PackedScene" uid="uid://c2i7g25ik8mcs" path="res://Scenes/Unit/Unit.tscn" id="1_lbjxq"]
 [ext_resource type="Script" path="res://Scenes/Unit/ReconUnit/ReconUnit.cs" id="1_umwhw"]
@@ -7,7 +7,21 @@
 [ext_resource type="Script" path="res://Scenes/Actions/MoveAction.cs" id="4_5odby"]
 [ext_resource type="Script" path="res://Scenes/Actions/ShootAction.cs" id="5_oxx05"]
 [ext_resource type="Texture2D" uid="uid://d3n3r8o1f0wx7" path="res://Assets/Game Boy Advance - Advance Wars 2 Black Hole Rising - Units Map.png" id="6_q0dle"]
+[ext_resource type="Script" path="res://Scenes/Actions/WaitAction.cs" id="7_tkbm2"]
+[ext_resource type="Script" path="res://Scenes/Actions/LoadAction.cs" id="8_lqpgi"]
 [ext_resource type="PackedScene" uid="uid://u7s36kyov32s" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.tscn" id="9_pjfyg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mobx"]
+atlas = ExtResource("6_q0dle")
+region = Rect2(339, 294, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mchj5"]
+atlas = ExtResource("6_q0dle")
+region = Rect2(356, 294, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wsuj"]
+atlas = ExtResource("6_q0dle")
+region = Rect2(373, 294, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vmd0i"]
 atlas = ExtResource("6_q0dle")
@@ -59,6 +73,20 @@ region = Rect2(106, 539, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_munwi"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7mobx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mchj5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wsuj")
+}],
+"loop": true,
+"name": &"exhausted",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vmd0i")
@@ -133,9 +161,14 @@ script = ExtResource("4_5odby")
 [node name="ShootAction" type="Node" parent="Actions"]
 script = ExtResource("5_oxx05")
 
+[node name="WaitAction" type="Node" parent="Actions"]
+script = ExtResource("7_tkbm2")
+
+[node name="LoadAction" type="Node" parent="Actions"]
+script = ExtResource("8_lqpgi")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_munwi")
 animation = &"idle"
-frame_progress = 0.403448
 
 [node name="UnitStatusIcons" parent="." instance=ExtResource("9_pjfyg")]

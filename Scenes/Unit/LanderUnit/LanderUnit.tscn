@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cayyb28b28ejr"]
+[gd_scene load_steps=24 format=3 uid="uid://cayyb28b28ejr"]
 
 [ext_resource type="Script" path="res://Scenes/Unit/LanderUnit/LanderUnit.cs" id="1_ahruj"]
 [ext_resource type="PackedScene" uid="uid://c2i7g25ik8mcs" path="res://Scenes/Unit/Unit.tscn" id="2_srlcp"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://d3n3r8o1f0wx7" path="res://Assets/Game Boy Advance - Advance Wars 2 Black Hole Rising - Units Map.png" id="6_4qu1k"]
 [ext_resource type="Script" path="res://Scenes/Actions/LoadAction.cs" id="6_ewpqm"]
 [ext_resource type="Script" path="res://Scenes/Actions/UnloadAction.cs" id="7_av00h"]
+[ext_resource type="Script" path="res://Scenes/Actions/WaitAction.cs" id="8_bnyr8"]
 [ext_resource type="PackedScene" uid="uid://u7s36kyov32s" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.tscn" id="9_p3rfc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tegj1"]
@@ -142,8 +143,11 @@ script = ExtResource("6_ewpqm")
 [node name="UnloadAction" type="Node" parent="Actions"]
 script = ExtResource("7_av00h")
 
+[node name="WaitAction" type="Node" parent="Actions"]
+script = ExtResource("8_bnyr8")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_042dd")
-animation = &"idle"
+animation = &"exhausted"
 
 [node name="UnitStatusIcons" parent="." instance=ExtResource("9_p3rfc")]

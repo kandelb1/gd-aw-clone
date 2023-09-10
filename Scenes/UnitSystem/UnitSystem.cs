@@ -13,7 +13,6 @@ public partial class UnitSystem : Node
     
     [Signal]
     public delegate void ActionTakenEventHandler();
-    
 
     public static UnitSystem Instance { get; private set; }
 
@@ -99,7 +98,7 @@ public partial class UnitSystem : Node
         EmitSignal(SignalName.ActionSelected, action);
     }
 
-    private void DeselectUnit()
+    public void DeselectUnit()
     {
         selectedUnit = null;
         selectedAction = null;

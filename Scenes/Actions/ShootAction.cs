@@ -12,6 +12,7 @@ public partial class ShootAction : BaseAction
     {
         Unit enemyUnit = Level.Instance.GetUnit(gridPos);
         enemyUnit.Damage(2);
+        unit.SetExhausted(true);
     }
 
     public override List<Vector2I> GetValidPositions()

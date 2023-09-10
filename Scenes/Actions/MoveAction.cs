@@ -11,11 +11,42 @@ public partial class MoveAction : BaseAction
     public override void _Ready()
     {
         pathFollower = unit.GetNode<UnitPathFollower>("../UnitPathFollower");
+        pathFollower.UnitStopped += HandleUnitStopped;
     }
 
     public override void _Process(double delta)
     {
         // GD.Print("move action process");
+    }
+
+    private void HandleUnitStopped()
+    {
+        if (!IsActive()) return;
+        // TODO: this is duplicate code from UnloadAction, maybe we can move it to BaseAction.CompleteAction()?
+        if (unit.HasUnitsLoaded())
+        {
+            GD.Print($"{unit.GetUnitName()} has more units loaded, forcing them to unload or wait");
+            // disable every action except Unload and Wait
+            foreach (BaseAction action in unit.GetActions())
+            {
+                switch (action)
+                {
+                    case UnloadAction:
+                        continue;
+                    case WaitAction:
+                        continue;
+                    default:
+                        action.SetDisabled(true);
+                        break;
+                }
+            }
+        }
+        else
+        {
+            unit.SetExhausted(true);
+        }
+        
+        CompleteAction();
     }
 
     public override string GetActionName() => "Move";
@@ -90,12 +121,8 @@ public partial class MoveAction : BaseAction
         return reachableTiles;
     }
 
-    public override bool IsActionAvailable()
-    {
-        // lets just have move always available for now
-        return true;
-    }
-    
+    // public override bool IsActionAvailable() => GetValidPositions()
+
     public struct TileInfo
     { 
         public Vector2I position;

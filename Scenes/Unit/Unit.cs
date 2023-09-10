@@ -38,6 +38,7 @@ public partial class Unit : Node
     private Func<Unit, bool> loadRules;
 
     private bool exhausted;
+    // private bool alreadyMoved;
 
     // private UnitPathfinder pathfinder;
     
@@ -60,6 +61,8 @@ public partial class Unit : Node
 
         exhausted = false;
         TurnSystem.Instance.TurnChanged += HandleTurnChanged;
+        
+        // alreadyMoved = false;
     }
 
     public Vector2I GetGridPosition() => gridPos;
@@ -161,6 +164,14 @@ public partial class Unit : Node
     private void HandleTurnChanged()
     {
         SetExhausted(false);
+        foreach (BaseAction action in GetActions())
+        {
+            action.SetDisabled(false);
+        }
     }
+
+    // public bool IsMoveAvailable() => !alreadyMoved;
+    //
+    // public void SetMoved(bool moved) => alreadyMoved = moved;
 
 }

@@ -1,73 +1,74 @@
-[gd_scene load_steps=26 format=3 uid="uid://dgmmabd1oa0qc"]
+[gd_scene load_steps=27 format=3 uid="uid://dgmmabd1oa0qc"]
 
-[ext_resource type="Script" path="res://Scenes/Unit/MechInfantryUnit/MechInfantry.cs" id="1_swode"]
-[ext_resource type="PackedScene" uid="uid://c2i7g25ik8mcs" path="res://Scenes/Unit/Unit.tscn" id="2_4hv2e"]
-[ext_resource type="PackedScene" uid="uid://duhwlv31nw1fn" path="res://Scenes/UnitPathFollower/UnitPathFollower.tscn" id="3_tecxt"]
-[ext_resource type="PackedScene" uid="uid://ofy82io2hwuj" path="res://Scenes/Unit/UnitAnimationPlayer/UnitAnimationPlayer.tscn" id="4_k37xr"]
-[ext_resource type="Script" path="res://Scenes/Actions/MoveAction.cs" id="5_l3s0f"]
-[ext_resource type="Script" path="res://Scenes/Actions/ShootAction.cs" id="6_4mwwg"]
-[ext_resource type="Texture2D" uid="uid://d3n3r8o1f0wx7" path="res://Assets/Game Boy Advance - Advance Wars 2 Black Hole Rising - Units Map.png" id="7_snva5"]
-[ext_resource type="Script" path="res://Scenes/Actions/LoadAction.cs" id="7_vut2v"]
-[ext_resource type="PackedScene" uid="uid://u7s36kyov32s" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.tscn" id="10_umlol"]
+[ext_resource type="Script" path="res://Scenes/Unit/MechInfantryUnit/MechInfantry.cs" id="1_mga1l"]
+[ext_resource type="PackedScene" uid="uid://c2i7g25ik8mcs" path="res://Scenes/Unit/Unit.tscn" id="2_y8aw8"]
+[ext_resource type="PackedScene" uid="uid://duhwlv31nw1fn" path="res://Scenes/UnitPathFollower/UnitPathFollower.tscn" id="3_p75ig"]
+[ext_resource type="PackedScene" uid="uid://ofy82io2hwuj" path="res://Scenes/Unit/UnitAnimationPlayer/UnitAnimationPlayer.tscn" id="4_bwcig"]
+[ext_resource type="Script" path="res://Scenes/Actions/MoveAction.cs" id="5_lt4yn"]
+[ext_resource type="Script" path="res://Scenes/Actions/ShootAction.cs" id="6_aavet"]
+[ext_resource type="Script" path="res://Scenes/Actions/LoadAction.cs" id="7_rp7f1"]
+[ext_resource type="Script" path="res://Scenes/Actions/WaitAction.cs" id="8_ycrnv"]
+[ext_resource type="Texture2D" uid="uid://d3n3r8o1f0wx7" path="res://Assets/Game Boy Advance - Advance Wars 2 Black Hole Rising - Units Map.png" id="9_p3yhx"]
+[ext_resource type="PackedScene" uid="uid://u7s36kyov32s" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.tscn" id="10_inlpm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_phadk"]
-atlas = ExtResource("7_snva5")
+atlas = ExtResource("9_p3yhx")
 region = Rect2(339, 199, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a7b35"]
-atlas = ExtResource("7_snva5")
+atlas = ExtResource("9_p3yhx")
 region = Rect2(356, 199, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1x0ek"]
-atlas = ExtResource("7_snva5")
+atlas = ExtResource("9_p3yhx")
 region = Rect2(373, 199, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8rltu"]
-atlas = ExtResource("7_snva5")
+atlas = ExtResource("9_p3yhx")
 region = Rect2(3, 199, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p33kf"]
-atlas = ExtResource("7_snva5")
+atlas = ExtResource("9_p3yhx")
 region = Rect2(20, 199, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b8c1f"]
-atlas = ExtResource("7_snva5")
+atlas = ExtResource("9_p3yhx")
 region = Rect2(37, 199, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dyfmw"]
-atlas = ExtResource("7_snva5")
+atlas = ExtResource("9_p3yhx")
 region = Rect2(133, 129, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rb7b4"]
-atlas = ExtResource("7_snva5")
+atlas = ExtResource("9_p3yhx")
 region = Rect2(158, 129, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1cdpk"]
-atlas = ExtResource("7_snva5")
+atlas = ExtResource("9_p3yhx")
 region = Rect2(183, 129, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pkwye"]
-atlas = ExtResource("7_snva5")
+atlas = ExtResource("9_p3yhx")
 region = Rect2(133, 104, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ldqt0"]
-atlas = ExtResource("7_snva5")
+atlas = ExtResource("9_p3yhx")
 region = Rect2(158, 104, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nf8kq"]
-atlas = ExtResource("7_snva5")
+atlas = ExtResource("9_p3yhx")
 region = Rect2(183, 104, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vl3pu"]
-atlas = ExtResource("7_snva5")
+atlas = ExtResource("9_p3yhx")
 region = Rect2(133, 154, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_posga"]
-atlas = ExtResource("7_snva5")
+atlas = ExtResource("9_p3yhx")
 region = Rect2(158, 154, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h1ebx"]
-atlas = ExtResource("7_snva5")
+atlas = ExtResource("9_p3yhx")
 region = Rect2(183, 154, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_esx06"]
@@ -143,28 +144,31 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="MechInfantry" type="Node2D"]
-script = ExtResource("1_swode")
+[node name="MechInfantryUnit" type="Node2D"]
+script = ExtResource("1_mga1l")
 
-[node name="Unit" parent="." instance=ExtResource("2_4hv2e")]
+[node name="Unit" parent="." instance=ExtResource("2_y8aw8")]
 
-[node name="UnitPathFollower" parent="." instance=ExtResource("3_tecxt")]
+[node name="UnitPathFollower" parent="." instance=ExtResource("3_p75ig")]
 
-[node name="UnitAnimationPlayer" parent="." instance=ExtResource("4_k37xr")]
+[node name="UnitAnimationPlayer" parent="." instance=ExtResource("4_bwcig")]
 
 [node name="Actions" type="Node" parent="."]
 
 [node name="MoveAction" type="Node" parent="Actions"]
-script = ExtResource("5_l3s0f")
+script = ExtResource("5_lt4yn")
 
 [node name="ShootAction" type="Node" parent="Actions"]
-script = ExtResource("6_4mwwg")
+script = ExtResource("6_aavet")
 
 [node name="LoadAction" type="Node" parent="Actions"]
-script = ExtResource("7_vut2v")
+script = ExtResource("7_rp7f1")
+
+[node name="WaitAction" type="Node" parent="Actions"]
+script = ExtResource("8_ycrnv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_esx06")
 animation = &"idle"
 
-[node name="UnitStatusIcons" parent="." instance=ExtResource("10_umlol")]
+[node name="UnitStatusIcons" parent="." instance=ExtResource("10_inlpm")]

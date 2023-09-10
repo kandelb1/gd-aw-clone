@@ -9,8 +9,7 @@ public partial class UnitActionMenu : Node2D
 
     [Signal]
     public delegate void MenuClosedEventHandler();
-    
-    
+
     [Export] private PackedScene actionMenuButton;
 
     private VBoxContainer buttonList;
@@ -23,11 +22,8 @@ public partial class UnitActionMenu : Node2D
         foreach (BaseAction action in actions)
         {
             if (!action.IsActionAvailable()) continue;
+            // GD.Print($"{action.GetActionName()} is available, adding it to UnitActionMenu");
             action.AddActionToUI(buttonList, () => ActionClicked(action));
-            // UnitActionMenuButton button = actionMenuButton.Instantiate() as UnitActionMenuButton;
-            // button.SetAction(action);
-            // button.Pressed += () => { ActionClicked(action); };
-            // buttonList.AddChild(button);
         }
     }
 

@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://51acpypeapbj" path="res://Scenes/Unit/ReconUnit/ReconUnit.tscn" id="6_a4exj"]
 [ext_resource type="PackedScene" uid="uid://cayyb28b28ejr" path="res://Scenes/Unit/LanderUnit/LanderUnit.tscn" id="7_3poqg"]
 [ext_resource type="PackedScene" uid="uid://d1nmyipydkujp" path="res://Scenes/Unit/TCopterUnit/TCopterUnit.tscn" id="8_srsul"]
-[ext_resource type="PackedScene" uid="uid://dgmmabd1oa0qc" path="res://Scenes/Unit/MechInfantryUnit/MechInfantry.tscn" id="9_k4m4k"]
+[ext_resource type="PackedScene" uid="uid://dgmmabd1oa0qc" path="res://Scenes/Unit/MechInfantryUnit/MechInfantryUnit.tscn" id="9_k4m4k"]
 [ext_resource type="PackedScene" uid="uid://dc2d66js70mhy" path="res://Scenes/Unit/APCUnit/APCUnit.tscn" id="10_e4afk"]
 [ext_resource type="PackedScene" uid="uid://c8dtqss3fomk1" path="res://Scenes/UI/NextTurnButton/NextTurnButton.tscn" id="11_8rs4n"]
 
@@ -20,7 +20,7 @@ shootColor = Color(0.811765, 0.054902, 0.0980392, 1)
 genericColor = Color(0.831373, 0.266667, 0.92549, 1)
 
 [node name="InfantryUnit" parent="." instance=ExtResource("3_tpagr")]
-position = Vector2(88, 88)
+position = Vector2(120, 104)
 
 [node name="BattleshipUnit" parent="." instance=ExtResource("4_lprp5")]
 position = Vector2(72, 8)
@@ -37,11 +37,11 @@ position = Vector2(184, 216)
 [node name="TCopterUnit" parent="." instance=ExtResource("8_srsul")]
 position = Vector2(104, 136)
 
-[node name="MechInfantry" parent="." instance=ExtResource("9_k4m4k")]
-position = Vector2(120, 88)
-
 [node name="APCUnit" parent="." instance=ExtResource("10_e4afk")]
 position = Vector2(136, 120)
+
+[node name="MechInfantryUnit" parent="." instance=ExtResource("9_k4m4k")]
+position = Vector2(136, 104)
 
 [node name="UI" type="Node" parent="."]
 

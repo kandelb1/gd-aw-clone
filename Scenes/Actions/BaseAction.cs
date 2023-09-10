@@ -9,6 +9,7 @@ public abstract partial class BaseAction : Node
     protected Unit unit;
     protected bool targeting;
     protected bool active;
+    private bool disabled = false;
 
     public static PackedScene ACTION_BUTTON = ResourceLoader.Load<PackedScene>("res://Scenes/UI/UnitActionMenu/UnitActionMenuButton.tscn");
 
@@ -41,7 +42,7 @@ public abstract partial class BaseAction : Node
 
     public abstract List<Vector2I> GetValidPositions();
 
-    public virtual bool IsActionAvailable() => GetValidPositions().Count > 0;
+    public virtual bool IsActionAvailable() => !IsActionDisabled() && GetValidPositions().Count > 0;
 
     public bool IsValidPosition(Vector2I gridPos)
     {
@@ -55,5 +56,9 @@ public abstract partial class BaseAction : Node
         button.Pressed += actionClickedCallback;
         actionList.AddChild(button);
     }
+
+    public bool IsActionDisabled() => disabled;
+
+    public void SetDisabled(bool disabled) => this.disabled = disabled;
 
 }
