@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://biag4fe7qqak6"]
+
+[ext_resource type="Script" path="res://Scenes/Weapons/Weapon.cs" id="1_0jhcw"]
+
+[resource]
+script = ExtResource("1_0jhcw")
+weaponName = "Torpedoes"
+maxAmmo = 6
+damageTable = {
+"Battleship": 55,
+"Cruiser": 25,
+"Lander": 95,
+"Submarine": 55
+}

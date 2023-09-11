@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://bmi3yvr1lwn3o"]
+
+[ext_resource type="Script" path="res://Scenes/Weapons/Weapon.cs" id="1_ckkxo"]
+
+[resource]
+script = ExtResource("1_ckkxo")
+weaponName = "Anti Air Gun"
+maxAmmo = 0
+damageTable = {
+"BCopter": 115,
+"Bomber": 65,
+"Fighter": 55,
+"TCopter": 115
+}

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://biyi0lkdw1uu4"]
+
+[ext_resource type="Script" path="res://Scenes/Weapons/Weapon.cs" id="1_0fh45"]
+
+[resource]
+script = ExtResource("1_0fh45")
+weaponName = "Missiles"
+maxAmmo = 9
+damageTable = {
+"BCopter": 100,
+"Bomber": 100,
+"Fighter": 55,
+"TCopter": 100
+}

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://cqdkln8hua435"]
+
+[ext_resource type="Script" path="res://Scenes/Weapons/Weapon.cs" id="1_ir31i"]
+
+[resource]
+script = ExtResource("1_ir31i")
+weaponName = "Rockets"
+maxAmmo = 6
+damageTable = {
+"APC": 80,
+"AntiAir": 85,
+"Artillery": 80,
+"Battleship": 55,
+"Cruiser": 85,
+"Infantry": 95,
+"Lander": 60,
+"MTank": 55,
+"MechInfantry": 90,
+"Missiles": 90,
+"NeoTank": 50,
+"Recon": 90,
+"Rockets": 85,
+"Submarine": 85,
+"Tank": 85
+}

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://birliqmwkof7a"]
+
+[ext_resource type="Script" path="res://Scenes/Weapons/Weapon.cs" id="1_l1ldw"]
+
+[resource]
+script = ExtResource("1_l1ldw")
+weaponName = "Air to Surface Missiles"
+maxAmmo = 6
+damageTable = {
+"APC": 60,
+"AntiAir": 25,
+"Artillery": 65,
+"Battleship": 25,
+"Cruiser": 55,
+"Infantry": 45,
+"Lander": 25,
+"MTank": 25,
+"MechInfantry": 50,
+"Missiles": 65,
+"NeoTank": 20,
+"Recon": 55,
+"Rockets": 65,
+"Submarine": 25,
+"Tank": 55
+}

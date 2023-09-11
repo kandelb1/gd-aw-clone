@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://dxml53o4u3k32"]
+
+[ext_resource type="Script" path="res://Scenes/Weapons/Weapon.cs" id="1_krdow"]
+
+[resource]
+script = ExtResource("1_krdow")
+weaponName = "Vulcan Cannon"
+maxAmmo = 9
+damageTable = {
+"APC": 50,
+"AntiAir": 45,
+"Artillery": 50,
+"BCopter": 120,
+"Bomber": 75,
+"Fighter": 65,
+"Infantry": 105,
+"MTank": 10,
+"MechInfantry": 105,
+"Missiles": 55,
+"NeoTank": 5,
+"Recon": 60,
+"Rockets": 45,
+"TCopter": 120,
+"Tank": 25
+}
