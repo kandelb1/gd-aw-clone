@@ -24,10 +24,9 @@ public partial class Unit : Node
 
     private List<BaseAction> unitActions;
 
-    [Export] private bool enemy;
+    private bool enemy;
 
-    [Export]
-    private int health = 10;
+    [Export] private int health = 100;
 
     [Export] private MoveDefinition moveDef;
 
@@ -38,9 +37,10 @@ public partial class Unit : Node
     private Func<Unit, bool> loadRules;
 
     private bool exhausted;
-    // private bool alreadyMoved;
 
-    // private UnitPathfinder pathfinder;
+    // weapons are set by the parent script, just like moveDef
+    private Weapon primaryWeapon;
+    private Weapon secondaryWeapon;
     
     public override void _Ready()
     {
@@ -83,12 +83,15 @@ public partial class Unit : Node
 
     public bool IsEnemy() => enemy;
 
+    public void SetEnemy(bool enemy) => this.enemy = enemy;
+
     public int GetHealth() => health;
 
     public void Damage(int amount)
     {
         health -= amount;
         if (health < 0) health = 0;
+        GD.Print($"{GetUnitName()} took {amount} damage. Health is now at {health}");
         EmitSignal(SignalName.HealthChanged, health);
     }
 
@@ -170,8 +173,25 @@ public partial class Unit : Node
         }
     }
 
-    // public bool IsMoveAvailable() => !alreadyMoved;
-    //
-    // public void SetMoved(bool moved) => alreadyMoved = moved;
+    public Weapon GetPrimaryWeapon() => primaryWeapon;
 
+    public void SetPrimaryWeapon(Weapon weapon) => primaryWeapon = weapon;
+
+    public Weapon GetSecondaryWeapon() => secondaryWeapon;
+
+    public void SetSecondaryWeapon(Weapon weapon) => secondaryWeapon = weapon;
+
+    public bool CanShootAt(Unit defendingUnit)
+    {
+        if (primaryWeapon != null)
+        {
+            return primaryWeapon.GetBaseDamageAgainstUnit(defendingUnit) != -1;
+        }
+        if (secondaryWeapon != null)
+        {
+            return secondaryWeapon.GetBaseDamageAgainstUnit(defendingUnit) != -1;
+        }
+
+        return false;
+    }
 }

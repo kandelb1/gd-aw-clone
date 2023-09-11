@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://nlbck8tgbftd"]
+
+[ext_resource type="Script" path="res://Scenes/Weapons/Weapon.cs" id="1_g68tv"]
+
+[resource]
+script = ExtResource("1_g68tv")
+weaponName = "Cannon"
+maxAmmo = 9
+damageTable = {
+"APC": 70,
+"AntiAir": 75,
+"Artillery": 75,
+"Battleship": 40,
+"Cruiser": 65,
+"Infantry": 90,
+"Lander": 55,
+"MTank": 45,
+"MechInfantry": 85,
+"Missiles": 80,
+"NeoTank": 40,
+"Recon": 80,
+"Rockets": 80,
+"Submarine": 60,
+"Tank": 70
+}

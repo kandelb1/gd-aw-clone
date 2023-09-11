@@ -37,15 +37,42 @@ public partial class UnitStatusIcons : Node2D
     
     private void UpdateHealth(int newHealth)
     {
-        if (newHealth is 10 or 0)
+        if (newHealth is <= 100 and >= 91 or 0)
         {
             healthSprite.Hide();
         }
         else
         {
-            healthSprite.RegionRect = new Rect2(HEALTH_SPRITE_POSITIONS[newHealth], HEALTH_SPRITE_SIZE);
+            healthSprite.RegionRect = new Rect2(HEALTH_SPRITE_POSITIONS[GetHealthSpriteIndex(newHealth)], HEALTH_SPRITE_SIZE);
             healthSprite.Show();
         }
+    }
+
+    private int GetHealthSpriteIndex(int health)
+    {
+        switch (health)
+        {
+            case <= 90 and >= 81:
+                return 9;
+            case <= 80 and >= 71:
+                return 8;
+            case <= 70 and >= 61:
+                return 7;
+            case <= 60 and >= 51:
+                return 6;
+            case <= 50 and >= 41:
+                return 5;
+            case <= 40 and >= 31:
+                return 4;
+            case <= 30 and >= 21:
+                return 3;
+            case <= 20 and >= 11:
+                return 2;
+            case <= 10 and >= 1:
+                return 1;
+        }
+        GD.PrintErr($"Invalid health given to UnitStatusIcons.GetHealthSpriteIndex(): {health}");
+        return 1;
     }
 
     private void UpdateLoad()

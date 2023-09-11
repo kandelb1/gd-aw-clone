@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://bm1451wi5rdjb"]
+
+[ext_resource type="Script" path="res://Scenes/Weapons/Weapon.cs" id="1_vm53x"]
+
+[resource]
+script = ExtResource("1_vm53x")
+weaponName = "Bazooka"
+maxAmmo = 3
+damageTable = {
+"APC": 75,
+"AntiAir": 65,
+"Artillery": 70,
+"MTank": 15,
+"Missiles": 85,
+"NeoTank": 15,
+"Recon": 85,
+"Rockets": 85,
+"Tank": 55
+}

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://bikqgcje2mq50"]
+
+[ext_resource type="Script" path="res://Scenes/Weapons/Weapon.cs" id="1_1ve3r"]
+
+[resource]
+script = ExtResource("1_1ve3r")
+weaponName = "Machine Gun"
+maxAmmo = 0
+damageTable = {
+"APC": 45,
+"AntiAir": 7,
+"Artillery": 45,
+"BCopter": 12,
+"Infantry": 105,
+"MTank": 1,
+"MechInfantry": 95,
+"Missiles": 35,
+"NeoTank": 1,
+"Recon": 45,
+"Rockets": 55,
+"TCopter": 45,
+"Tank": 8
+}

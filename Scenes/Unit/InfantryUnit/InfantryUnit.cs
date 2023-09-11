@@ -3,6 +3,8 @@ using System;
 
 public partial class InfantryUnit : Node2D
 {
+
+    [Export] private bool isEnemy;
     private Unit unit;
 
     public override void _Ready()
@@ -13,5 +15,10 @@ public partial class InfantryUnit : Node2D
         moveDef.SetMoveDistance(3);
         unit.SetMoveDefinition(moveDef);
         unit.SetUnitName("Infantry");
+
+        Weapon machineGun = (Weapon) GD.Load("res://Scenes/Weapons/Infantry/MachineGun.tres").Duplicate();
+        unit.SetSecondaryWeapon(machineGun);
+        
+        unit.SetEnemy(isEnemy);
     }
 }

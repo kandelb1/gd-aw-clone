@@ -22,6 +22,10 @@ genericColor = Color(0.831373, 0.266667, 0.92549, 1)
 [node name="InfantryUnit" parent="." instance=ExtResource("3_tpagr")]
 position = Vector2(120, 104)
 
+[node name="InfantryUnit2" parent="." instance=ExtResource("3_tpagr")]
+position = Vector2(120, 88)
+isEnemy = true
+
 [node name="BattleshipUnit" parent="." instance=ExtResource("4_lprp5")]
 position = Vector2(72, 8)
 

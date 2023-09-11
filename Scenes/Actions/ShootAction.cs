@@ -11,7 +11,8 @@ public partial class ShootAction : BaseAction
     public override void TakeAction(Vector2I gridPos)
     {
         Unit enemyUnit = Level.Instance.GetUnit(gridPos);
-        enemyUnit.Damage(2);
+        enemyUnit.Damage(DamageCalculator.CalculateDamage(unit, enemyUnit));
+        // enemyUnit.Damage(10);
         unit.SetExhausted(true);
     }
 
@@ -27,10 +28,14 @@ public partial class ShootAction : BaseAction
             {
                 Vector2I test = new Vector2I(unitPos.X + i, unitPos.Y + j);
                 if (!Level.Instance.IsValid(test) || test == unitPos) continue;
+                
                 int distance = Math.Abs(i) + Math.Abs(j);
                 if (distance > shootDist) continue;
+                
                 if (!Level.Instance.IsOccupied(test)) continue;
-                if (unit.IsEnemy() == Level.Instance.GetUnit(test).IsEnemy()) continue;
+                Unit otherUnit = Level.Instance.GetUnit(test);
+                if (unit.IsEnemy() == otherUnit.IsEnemy()) continue;
+                if (!unit.CanShootAt(otherUnit)) continue;
                 positions.Add(test);
             }
         }
