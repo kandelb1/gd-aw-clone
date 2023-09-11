@@ -13,5 +13,8 @@ public partial class FighterUnit : Node2D
         moveDef.SetMoveDistance(9);
         unit.SetMoveDefinition(moveDef);
         unit.SetUnitName("Fighter");
+        Weapon missiles = (Weapon) GD.Load("res://Scenes/Weapons/Fighter/AirToAirMissiles.tres");
+        unit.SetPrimaryWeapon(missiles);
+        unit.SetDirectCombat(true);
     }
 }

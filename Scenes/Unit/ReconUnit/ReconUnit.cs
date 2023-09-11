@@ -13,5 +13,9 @@ public partial class ReconUnit : Node2D
         moveDef.SetMoveDistance(8);
         unit.SetMoveDefinition(moveDef);
         unit.SetUnitName("Recon");
+
+        Weapon machineGun = (Weapon) GD.Load("res://Scenes/Weapons/Recon/MachineGun.tres");
+        unit.SetSecondaryWeapon(machineGun);
+        unit.SetDirectCombat(true);
     }
 }

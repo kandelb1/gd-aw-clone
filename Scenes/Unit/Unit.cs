@@ -37,10 +37,15 @@ public partial class Unit : Node
     private Func<Unit, bool> loadRules;
 
     private bool exhausted;
+    private bool moved;
 
     // weapons are set by the parent script, just like moveDef
     private Weapon primaryWeapon;
     private Weapon secondaryWeapon;
+    private bool directCombat;
+    // if this unit is a direct combat unit, minRange and maxRange will be the same value (1)
+    private int minWeaponRange;
+    private int maxWeaponRange;
     
     public override void _Ready()
     {
@@ -60,6 +65,7 @@ public partial class Unit : Node
         unitsLoaded = new List<Unit>();
 
         exhausted = false;
+        moved = false;
         TurnSystem.Instance.TurnChanged += HandleTurnChanged;
         
         // alreadyMoved = false;
@@ -164,9 +170,14 @@ public partial class Unit : Node
         EmitSignal(SignalName.ExhaustedChanged);
     }
 
+    public bool HasAlreadyMoved() => moved;
+
+    public void SetMoved(bool moved) => this.moved = moved;
+    
     private void HandleTurnChanged()
     {
         SetExhausted(false);
+        moved = false;
         foreach (BaseAction action in GetActions())
         {
             action.SetDisabled(false);
@@ -175,14 +186,19 @@ public partial class Unit : Node
 
     public Weapon GetPrimaryWeapon() => primaryWeapon;
 
-    public void SetPrimaryWeapon(Weapon weapon) => primaryWeapon = weapon;
+    public void SetPrimaryWeapon(Weapon weapon)
+    {
+        weapon.SetCurrentAmmo(weapon.GetMaxAmmo()); // I have to do this here. Running into issues with the Weapon() constructor
+        primaryWeapon = weapon;
+    }
 
-    public Weapon GetSecondaryWeapon() => secondaryWeapon;
+    public Weapon GetSecondaryWeapon() => secondaryWeapon; // don't need to set the current ammo for secondary weapons as they have infinite ammo
 
     public void SetSecondaryWeapon(Weapon weapon) => secondaryWeapon = weapon;
 
     public bool CanShootAt(Unit defendingUnit)
     {
+        
         if (primaryWeapon != null)
         {
             return primaryWeapon.GetBaseDamageAgainstUnit(defendingUnit) != -1;
@@ -194,4 +210,18 @@ public partial class Unit : Node
 
         return false;
     }
+
+    public bool IsDirectCombat() => directCombat;
+
+    // defines whether a unit is direct combat or indirect combat. direct combat units have a range of 1. 
+    public void SetDirectCombat(bool directCombat, int minWeaponRange = 1, int maxWeaponRange = 1)
+    {
+        this.directCombat = directCombat;
+        this.minWeaponRange = minWeaponRange;
+        this.maxWeaponRange = maxWeaponRange;
+    }
+
+    public int GetMinWeaponRange() => minWeaponRange;
+
+    public int GetMaxWeaponRange() => maxWeaponRange;
 }

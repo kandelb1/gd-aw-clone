@@ -18,7 +18,9 @@ public partial class InfantryUnit : Node2D
 
         Weapon machineGun = (Weapon) GD.Load("res://Scenes/Weapons/Infantry/MachineGun.tres").Duplicate();
         unit.SetSecondaryWeapon(machineGun);
-        
-        unit.SetEnemy(isEnemy);
+        unit.SetDirectCombat(true);
+
+        // AnimatedSprite2D sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        // sprite.SpriteFrames = (SpriteFrames) GD.Load("res://Assets/Animations/OrangeStarInfantry.tres");
     }
 }

@@ -45,7 +45,7 @@ public partial class MoveAction : BaseAction
         {
             unit.SetExhausted(true);
         }
-        
+        unit.SetMoved(true);
         CompleteAction();
     }
 
@@ -63,26 +63,6 @@ public partial class MoveAction : BaseAction
         List<Vector2I> reachableTiles = GetReachableTiles(unit.GetGridPosition(), unit.GetMoveDefinition());
         // the first tile is always the unit's position, so remove that
         return reachableTiles.GetRange(1, reachableTiles.Count - 1);
-        // GD.Print("GetValidPositions()");
-        // Vector2I unitPos = unit.GetGridPosition();
-        // int moveDist = unit.GetMoveDefinition().GetMoveDistance();
-        //
-        // List<Vector2I> positions = new List<Vector2I>();
-        // for (int i = -moveDist; i <= moveDist; i++)
-        // {
-        //     for (int j = -moveDist; j <= moveDist; j++)
-        //     {
-        //         Vector2I test = new Vector2I(unitPos.X + i, unitPos.Y + j);
-        //         int distance = Math.Abs(i) + Math.Abs(j);
-        //         if (distance > moveDist) continue;
-        //         if (!Level.Instance.IsValid(test) || test == unitPos) continue;
-        //         if (Level.Instance.IsOccupied(test)) continue;
-        //         if (!Level.Instance.IsReachable(unitPos, test, unit.GetMoveDefinition())) continue;
-        //         positions.Add(test);
-        //     }
-        // }
-        //
-        // return positions;
     }
 
     // TODO: test whether building up a path using this BFS algorithm gives the same path as the one from astar...

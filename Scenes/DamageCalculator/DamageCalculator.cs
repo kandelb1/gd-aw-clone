@@ -27,6 +27,7 @@ public partial class DamageCalculator : Node
         // try the primary first, then the secondary
         Weapon primary = attackingUnit.GetPrimaryWeapon();
         Weapon secondary = attackingUnit.GetSecondaryWeapon();
+        // TODO: choose the weapon that does more damage to the defendingUnit
         if (primary != null && primary.HasAmmo() && primary.GetBaseDamageAgainstUnit(defendingUnit) != -1)
         {
             return primary;

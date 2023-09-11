@@ -13,5 +13,11 @@ public partial class MechInfantry : Node2D
         moveDef.SetMoveDistance(2);
         unit.SetMoveDefinition(moveDef);
         unit.SetUnitName("MechInfantry");
+
+        Weapon bazooka = (Weapon) GD.Load("res://Scenes/Weapons/MechInfantry/Bazooka.tres");
+        unit.SetPrimaryWeapon(bazooka);
+        Weapon machineGun = (Weapon) GD.Load("res://Scenes/Weapons/MechInfantry/MachineGun.tres"); 
+        unit.SetSecondaryWeapon(machineGun);
+        unit.SetDirectCombat(true);
     }
 }

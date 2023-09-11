@@ -13,5 +13,8 @@ public partial class BattleshipUnit : Node2D
         moveDef.SetMoveDistance(5);
         unit.SetMoveDefinition(moveDef);
         unit.SetUnitName("Battleship");
+        Weapon cannon = (Weapon) GD.Load("res://Scenes/Weapons/Battleship/Cannon.tres");
+        unit.SetPrimaryWeapon(cannon);
+        unit.SetDirectCombat(false, 2, 6);
     }
 }

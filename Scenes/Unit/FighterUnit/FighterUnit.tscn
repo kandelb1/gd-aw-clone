@@ -168,4 +168,3 @@ sprite_frames = SubResource("SpriteFrames_pe8pj")
 animation = &"idle"
 
 [node name="UnitStatusIcons" parent="." instance=ExtResource("8_7h2cl")]
-visible = false
