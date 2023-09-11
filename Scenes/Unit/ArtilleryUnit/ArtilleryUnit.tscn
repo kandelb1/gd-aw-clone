@@ -1,0 +1,39 @@
+[gd_scene load_steps=10 format=3 uid="uid://de3jqjmmccgj7"]
+
+[ext_resource type="Script" path="res://Scenes/Unit/ArtilleryUnit/ArtilleryUnit.cs" id="1_4ugh1"]
+[ext_resource type="PackedScene" uid="uid://c2i7g25ik8mcs" path="res://Scenes/Unit/Unit.tscn" id="2_e7ll3"]
+[ext_resource type="PackedScene" uid="uid://duhwlv31nw1fn" path="res://Scenes/UnitPathFollower/UnitPathFollower.tscn" id="3_e8uq1"]
+[ext_resource type="PackedScene" uid="uid://ofy82io2hwuj" path="res://Scenes/Unit/UnitAnimationPlayer/UnitAnimationPlayer.tscn" id="4_2vx0s"]
+[ext_resource type="Script" path="res://Scenes/Actions/MoveAction.cs" id="5_l0bpd"]
+[ext_resource type="Script" path="res://Scenes/Actions/ShootAction.cs" id="6_tvtxl"]
+[ext_resource type="Script" path="res://Scenes/Actions/LoadAction.cs" id="7_pp00w"]
+[ext_resource type="Script" path="res://Scenes/Actions/WaitAction.cs" id="8_x3mtx"]
+[ext_resource type="PackedScene" uid="uid://u7s36kyov32s" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.tscn" id="9_8o7ad"]
+
+[node name="ArtilleryUnit" type="Node2D"]
+script = ExtResource("1_4ugh1")
+
+[node name="Unit" parent="." instance=ExtResource("2_e7ll3")]
+
+[node name="UnitPathFollower" parent="." instance=ExtResource("3_e8uq1")]
+
+[node name="UnitAnimationPlayer" parent="." instance=ExtResource("4_2vx0s")]
+
+[node name="Actions" type="Node" parent="."]
+
+[node name="MoveAction" type="Node" parent="Actions"]
+script = ExtResource("5_l0bpd")
+
+[node name="ShootAction" type="Node" parent="Actions"]
+script = ExtResource("6_tvtxl")
+
+[node name="LoadAction" type="Node" parent="Actions"]
+script = ExtResource("7_pp00w")
+
+[node name="WaitAction" type="Node" parent="Actions"]
+script = ExtResource("8_x3mtx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+animation = &""
+
+[node name="UnitStatusIcons" parent="." instance=ExtResource("9_8o7ad")]

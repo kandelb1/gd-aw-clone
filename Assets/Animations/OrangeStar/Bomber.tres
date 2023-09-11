@@ -1,0 +1,136 @@
+[gd_resource type="SpriteFrames" load_steps=17 format=3 uid="uid://c5kykn3f5ylhp"]
+
+[ext_resource type="Texture2D" uid="uid://d3n3r8o1f0wx7" path="res://Assets/Game Boy Advance - Advance Wars 2 Black Hole Rising - Units Map.png" id="1_q02cu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a4swj"]
+atlas = ExtResource("1_q02cu")
+region = Rect2(339, 484, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86vj4"]
+atlas = ExtResource("1_q02cu")
+region = Rect2(356, 484, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dxxah"]
+atlas = ExtResource("1_q02cu")
+region = Rect2(373, 484, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsdsj"]
+atlas = ExtResource("1_q02cu")
+region = Rect2(3, 484, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sifih"]
+atlas = ExtResource("1_q02cu")
+region = Rect2(20, 484, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7mmg"]
+atlas = ExtResource("1_q02cu")
+region = Rect2(37, 484, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21m0s"]
+atlas = ExtResource("1_q02cu")
+region = Rect2(210, 206, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbaco"]
+atlas = ExtResource("1_q02cu")
+region = Rect2(235, 206, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k714u"]
+atlas = ExtResource("1_q02cu")
+region = Rect2(260, 206, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgyya"]
+atlas = ExtResource("1_q02cu")
+region = Rect2(210, 181, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bosjn"]
+atlas = ExtResource("1_q02cu")
+region = Rect2(235, 181, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lp7gs"]
+atlas = ExtResource("1_q02cu")
+region = Rect2(260, 181, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cabon"]
+atlas = ExtResource("1_q02cu")
+region = Rect2(210, 231, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ff0l5"]
+atlas = ExtResource("1_q02cu")
+region = Rect2(235, 231, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42yuj"]
+atlas = ExtResource("1_q02cu")
+region = Rect2(260, 231, 24, 24)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a4swj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86vj4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dxxah")
+}],
+"loop": true,
+"name": &"exhausted",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wsdsj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sifih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7mmg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21m0s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbaco")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k714u")
+}],
+"loop": true,
+"name": &"move_down",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgyya")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bosjn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lp7gs")
+}],
+"loop": true,
+"name": &"move_left",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cabon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ff0l5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42yuj")
+}],
+"loop": true,
+"name": &"move_up",
+"speed": 12.0
+}]

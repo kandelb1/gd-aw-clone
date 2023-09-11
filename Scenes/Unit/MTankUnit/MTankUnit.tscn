@@ -1,0 +1,39 @@
+[gd_scene load_steps=10 format=3 uid="uid://b3f7oo0wml0gg"]
+
+[ext_resource type="Script" path="res://Scenes/Unit/MTankUnit/MTankUnit.cs" id="1_bxxq2"]
+[ext_resource type="PackedScene" uid="uid://c2i7g25ik8mcs" path="res://Scenes/Unit/Unit.tscn" id="1_uv7ge"]
+[ext_resource type="PackedScene" uid="uid://duhwlv31nw1fn" path="res://Scenes/UnitPathFollower/UnitPathFollower.tscn" id="2_7o8mc"]
+[ext_resource type="PackedScene" uid="uid://ofy82io2hwuj" path="res://Scenes/Unit/UnitAnimationPlayer/UnitAnimationPlayer.tscn" id="3_wis07"]
+[ext_resource type="Script" path="res://Scenes/Actions/MoveAction.cs" id="4_rpsa3"]
+[ext_resource type="Script" path="res://Scenes/Actions/ShootAction.cs" id="5_3618u"]
+[ext_resource type="Script" path="res://Scenes/Actions/LoadAction.cs" id="6_bqw0k"]
+[ext_resource type="Script" path="res://Scenes/Actions/WaitAction.cs" id="7_nmwtb"]
+[ext_resource type="PackedScene" uid="uid://u7s36kyov32s" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.tscn" id="8_cnhbm"]
+
+[node name="MTankUnit" type="Node2D"]
+script = ExtResource("1_bxxq2")
+
+[node name="Unit" parent="." instance=ExtResource("1_uv7ge")]
+
+[node name="UnitPathFollower" parent="." instance=ExtResource("2_7o8mc")]
+
+[node name="UnitAnimationPlayer" parent="." instance=ExtResource("3_wis07")]
+
+[node name="Actions" type="Node" parent="."]
+
+[node name="MoveAction" type="Node" parent="Actions"]
+script = ExtResource("4_rpsa3")
+
+[node name="ShootAction" type="Node" parent="Actions"]
+script = ExtResource("5_3618u")
+
+[node name="LoadAction" type="Node" parent="Actions"]
+script = ExtResource("6_bqw0k")
+
+[node name="WaitAction" type="Node" parent="Actions"]
+script = ExtResource("7_nmwtb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+animation = &""
+
+[node name="UnitStatusIcons" parent="." instance=ExtResource("8_cnhbm")]

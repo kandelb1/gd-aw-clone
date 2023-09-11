@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dgmmabd1oa0qc"]
+[gd_scene load_steps=10 format=3 uid="uid://dgmmabd1oa0qc"]
 
 [ext_resource type="Script" path="res://Scenes/Unit/MechInfantryUnit/MechInfantry.cs" id="1_mga1l"]
 [ext_resource type="PackedScene" uid="uid://c2i7g25ik8mcs" path="res://Scenes/Unit/Unit.tscn" id="2_y8aw8"]
@@ -8,141 +8,7 @@
 [ext_resource type="Script" path="res://Scenes/Actions/ShootAction.cs" id="6_aavet"]
 [ext_resource type="Script" path="res://Scenes/Actions/LoadAction.cs" id="7_rp7f1"]
 [ext_resource type="Script" path="res://Scenes/Actions/WaitAction.cs" id="8_ycrnv"]
-[ext_resource type="Texture2D" uid="uid://d3n3r8o1f0wx7" path="res://Assets/Game Boy Advance - Advance Wars 2 Black Hole Rising - Units Map.png" id="9_p3yhx"]
 [ext_resource type="PackedScene" uid="uid://u7s36kyov32s" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.tscn" id="10_inlpm"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_phadk"]
-atlas = ExtResource("9_p3yhx")
-region = Rect2(339, 199, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_a7b35"]
-atlas = ExtResource("9_p3yhx")
-region = Rect2(356, 199, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1x0ek"]
-atlas = ExtResource("9_p3yhx")
-region = Rect2(373, 199, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8rltu"]
-atlas = ExtResource("9_p3yhx")
-region = Rect2(3, 199, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p33kf"]
-atlas = ExtResource("9_p3yhx")
-region = Rect2(20, 199, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b8c1f"]
-atlas = ExtResource("9_p3yhx")
-region = Rect2(37, 199, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dyfmw"]
-atlas = ExtResource("9_p3yhx")
-region = Rect2(133, 129, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rb7b4"]
-atlas = ExtResource("9_p3yhx")
-region = Rect2(158, 129, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1cdpk"]
-atlas = ExtResource("9_p3yhx")
-region = Rect2(183, 129, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pkwye"]
-atlas = ExtResource("9_p3yhx")
-region = Rect2(133, 104, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ldqt0"]
-atlas = ExtResource("9_p3yhx")
-region = Rect2(158, 104, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nf8kq"]
-atlas = ExtResource("9_p3yhx")
-region = Rect2(183, 104, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vl3pu"]
-atlas = ExtResource("9_p3yhx")
-region = Rect2(133, 154, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_posga"]
-atlas = ExtResource("9_p3yhx")
-region = Rect2(158, 154, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h1ebx"]
-atlas = ExtResource("9_p3yhx")
-region = Rect2(183, 154, 24, 24)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_esx06"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_phadk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_a7b35")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1x0ek")
-}],
-"loop": true,
-"name": &"exhausted",
-"speed": 4.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8rltu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p33kf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b8c1f")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 4.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dyfmw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rb7b4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1cdpk")
-}],
-"loop": true,
-"name": &"move_down",
-"speed": 12.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pkwye")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ldqt0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nf8kq")
-}],
-"loop": true,
-"name": &"move_left",
-"speed": 12.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vl3pu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_posga")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h1ebx")
-}],
-"loop": true,
-"name": &"move_up",
-"speed": 12.0
-}]
 
 [node name="MechInfantryUnit" type="Node2D"]
 script = ExtResource("1_mga1l")
@@ -168,7 +34,6 @@ script = ExtResource("7_rp7f1")
 script = ExtResource("8_ycrnv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_esx06")
 animation = &"idle"
 
 [node name="UnitStatusIcons" parent="." instance=ExtResource("10_inlpm")]

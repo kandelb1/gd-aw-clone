@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://nq703fywuays"]
+[gd_scene load_steps=23 format=3 uid="uid://nq703fywuays"]
 
 [ext_resource type="Script" path="res://Scenes/main.cs" id="1_g02d7"]
 [ext_resource type="PackedScene" uid="uid://cbhni8moq7jko" path="res://Scenes/Unit/InfantryUnit/InfantryUnit.tscn" id="3_tpagr"]
@@ -7,10 +7,21 @@
 [ext_resource type="PackedScene" uid="uid://drs23343vvuw0" path="res://Scenes/Unit/FighterUnit/FighterUnit.tscn" id="5_mkuhx"]
 [ext_resource type="PackedScene" uid="uid://51acpypeapbj" path="res://Scenes/Unit/ReconUnit/ReconUnit.tscn" id="6_a4exj"]
 [ext_resource type="PackedScene" uid="uid://cayyb28b28ejr" path="res://Scenes/Unit/LanderUnit/LanderUnit.tscn" id="7_3poqg"]
+[ext_resource type="PackedScene" uid="uid://keym4dimbd71" path="res://Scenes/Unit/NeoTankUnit/NeoTankUnit.tscn" id="8_os2vk"]
 [ext_resource type="PackedScene" uid="uid://d1nmyipydkujp" path="res://Scenes/Unit/TCopterUnit/TCopterUnit.tscn" id="8_srsul"]
 [ext_resource type="PackedScene" uid="uid://dgmmabd1oa0qc" path="res://Scenes/Unit/MechInfantryUnit/MechInfantryUnit.tscn" id="9_k4m4k"]
 [ext_resource type="PackedScene" uid="uid://dc2d66js70mhy" path="res://Scenes/Unit/APCUnit/APCUnit.tscn" id="10_e4afk"]
 [ext_resource type="PackedScene" uid="uid://c8dtqss3fomk1" path="res://Scenes/UI/NextTurnButton/NextTurnButton.tscn" id="11_8rs4n"]
+[ext_resource type="PackedScene" uid="uid://de3jqjmmccgj7" path="res://Scenes/Unit/ArtilleryUnit/ArtilleryUnit.tscn" id="11_lftmb"]
+[ext_resource type="PackedScene" uid="uid://bqir2ojo81wqc" path="res://Scenes/Unit/RocketsUnit/RocketsUnit.tscn" id="12_4x4kk"]
+[ext_resource type="PackedScene" uid="uid://3w8u821uqbks" path="res://Scenes/Unit/TankUnit/TankUnit.tscn" id="12_oxgox"]
+[ext_resource type="PackedScene" uid="uid://b3f7oo0wml0gg" path="res://Scenes/Unit/MTankUnit/MTankUnit.tscn" id="13_fj5qv"]
+[ext_resource type="PackedScene" uid="uid://c4il0f4oknu7n" path="res://Scenes/Unit/AntiAirUnit/AntiAirUnit.tscn" id="13_r7xr7"]
+[ext_resource type="PackedScene" uid="uid://1hlttvvlue7w" path="res://Scenes/Unit/MissilesUnit/MissilesUnit.tscn" id="14_w14s4"]
+[ext_resource type="PackedScene" uid="uid://f172o3rwyknt" path="res://Scenes/Unit/BomberUnit/BomberUnit.tscn" id="16_wptx4"]
+[ext_resource type="PackedScene" uid="uid://ciktunpr7laju" path="res://Scenes/Unit/BCopterUnit/BCopterUnit.tscn" id="17_5is3e"]
+[ext_resource type="PackedScene" uid="uid://jh1td6lwyuha" path="res://Scenes/Unit/CruiserUnit/CruiserUnit.tscn" id="20_xfmau"]
+[ext_resource type="PackedScene" uid="uid://cemyrtfak20vq" path="res://Scenes/Unit/SubmarineUnit/SubmarineUnit.tscn" id="22_nubkc"]
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_g02d7")
@@ -20,32 +31,62 @@ shootColor = Color(0.811765, 0.054902, 0.0980392, 1)
 genericColor = Color(0.831373, 0.266667, 0.92549, 1)
 
 [node name="InfantryUnit" parent="." instance=ExtResource("3_tpagr")]
-position = Vector2(120, 104)
-
-[node name="InfantryUnit2" parent="." instance=ExtResource("3_tpagr")]
-position = Vector2(120, 88)
-isEnemy = true
-
-[node name="BattleshipUnit" parent="." instance=ExtResource("4_lprp5")]
-position = Vector2(72, 8)
-
-[node name="FighterUnit" parent="." instance=ExtResource("5_mkuhx")]
-position = Vector2(120, 56)
+position = Vector2(56, 88)
+team = 1
 
 [node name="ReconUnit" parent="." instance=ExtResource("6_a4exj")]
-position = Vector2(152, 72)
-
-[node name="LanderUnit" parent="." instance=ExtResource("7_3poqg")]
-position = Vector2(184, 216)
-
-[node name="TCopterUnit" parent="." instance=ExtResource("8_srsul")]
-position = Vector2(104, 136)
-
-[node name="APCUnit" parent="." instance=ExtResource("10_e4afk")]
-position = Vector2(136, 120)
+position = Vector2(88, 88)
 
 [node name="MechInfantryUnit" parent="." instance=ExtResource("9_k4m4k")]
-position = Vector2(136, 104)
+position = Vector2(72, 88)
+
+[node name="TankUnit" parent="." instance=ExtResource("12_oxgox")]
+position = Vector2(104, 88)
+
+[node name="MTankUnit" parent="." instance=ExtResource("13_fj5qv")]
+position = Vector2(120, 88)
+
+[node name="NeoTankUnit" parent="." instance=ExtResource("8_os2vk")]
+position = Vector2(136, 88)
+
+[node name="APCUnit" parent="." instance=ExtResource("10_e4afk")]
+position = Vector2(152, 88)
+
+[node name="ArtilleryUnit" parent="." instance=ExtResource("11_lftmb")]
+position = Vector2(56, 104)
+
+[node name="RocketsUnit" parent="." instance=ExtResource("12_4x4kk")]
+position = Vector2(72, 104)
+
+[node name="AntiAirUnit" parent="." instance=ExtResource("13_r7xr7")]
+position = Vector2(168, 88)
+
+[node name="MissilesUnit" parent="." instance=ExtResource("14_w14s4")]
+position = Vector2(88, 104)
+
+[node name="FighterUnit" parent="." instance=ExtResource("5_mkuhx")]
+position = Vector2(56, 120)
+
+[node name="BomberUnit" parent="." instance=ExtResource("16_wptx4")]
+position = Vector2(72, 120)
+
+[node name="BCopterUnit" parent="." instance=ExtResource("17_5is3e")]
+position = Vector2(88, 120)
+
+[node name="TCopterUnit" parent="." instance=ExtResource("8_srsul")]
+position = Vector2(104, 120)
+
+[node name="BattleshipUnit" parent="." instance=ExtResource("4_lprp5")]
+position = Vector2(56, 8)
+
+[node name="CruiserUnit" parent="." instance=ExtResource("20_xfmau")]
+position = Vector2(72, 8)
+
+[node name="LanderUnit" parent="." instance=ExtResource("7_3poqg")]
+position = Vector2(88, 8)
+
+[node name="SubmarineUnit" parent="." instance=ExtResource("22_nubkc")]
+position = Vector2(104, 8)
 
 [node name="UI" type="Node" parent="."]
 

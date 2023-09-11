@@ -4,7 +4,12 @@ using System.Collections.Generic;
 
 public partial class Unit : Node
 {
-    
+    public enum Team
+    {
+        OrangeStar,
+        BlackHole,
+    }
+
     [Signal]
     public delegate void HealthChangedEventHandler(int newHealth);
 
@@ -31,6 +36,7 @@ public partial class Unit : Node
     [Export] private MoveDefinition moveDef;
 
     private string unitName;
+    private Team team;
 
     private int loadCapacity = 0;
     private List<Unit> unitsLoaded;
@@ -110,6 +116,10 @@ public partial class Unit : Node
     public string GetUnitName() => unitName;
 
     public void SetUnitName(string unitName) => this.unitName = unitName;
+
+    public Team GetTeam() => team;
+
+    public void SetTeam(Team team) => this.team = team;
 
     public int GetLoadCapacity() => loadCapacity;
 

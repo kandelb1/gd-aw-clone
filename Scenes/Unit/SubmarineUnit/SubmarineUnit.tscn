@@ -1,0 +1,36 @@
+[gd_scene load_steps=9 format=3 uid="uid://cemyrtfak20vq"]
+
+[ext_resource type="PackedScene" uid="uid://c2i7g25ik8mcs" path="res://Scenes/Unit/Unit.tscn" id="1_bwr38"]
+[ext_resource type="Script" path="res://Scenes/Unit/SubmarineUnit/SubmarineUnit.cs" id="1_g30o7"]
+[ext_resource type="PackedScene" uid="uid://duhwlv31nw1fn" path="res://Scenes/UnitPathFollower/UnitPathFollower.tscn" id="2_x2cuw"]
+[ext_resource type="PackedScene" uid="uid://ofy82io2hwuj" path="res://Scenes/Unit/UnitAnimationPlayer/UnitAnimationPlayer.tscn" id="3_h065s"]
+[ext_resource type="Script" path="res://Scenes/Actions/MoveAction.cs" id="4_76tiq"]
+[ext_resource type="Script" path="res://Scenes/Actions/ShootAction.cs" id="5_1dgjs"]
+[ext_resource type="Script" path="res://Scenes/Actions/WaitAction.cs" id="7_8c203"]
+[ext_resource type="PackedScene" uid="uid://u7s36kyov32s" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.tscn" id="8_qnqxm"]
+
+[node name="SubmarineUnit" type="Node2D"]
+position = Vector2(8, 8)
+script = ExtResource("1_g30o7")
+
+[node name="Unit" parent="." instance=ExtResource("1_bwr38")]
+
+[node name="UnitPathFollower" parent="." instance=ExtResource("2_x2cuw")]
+
+[node name="UnitAnimationPlayer" parent="." instance=ExtResource("3_h065s")]
+
+[node name="Actions" type="Node" parent="."]
+
+[node name="MoveAction" type="Node" parent="Actions"]
+script = ExtResource("4_76tiq")
+
+[node name="ShootAction" type="Node" parent="Actions"]
+script = ExtResource("5_1dgjs")
+
+[node name="WaitAction" type="Node" parent="Actions"]
+script = ExtResource("7_8c203")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+animation = &""
+
+[node name="UnitStatusIcons" parent="." instance=ExtResource("8_qnqxm")]

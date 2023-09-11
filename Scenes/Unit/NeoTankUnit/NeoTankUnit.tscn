@@ -1,0 +1,39 @@
+[gd_scene load_steps=10 format=3 uid="uid://keym4dimbd71"]
+
+[ext_resource type="Script" path="res://Scenes/Unit/NeoTankUnit/NeoTankUnit.cs" id="1_cy271"]
+[ext_resource type="PackedScene" uid="uid://c2i7g25ik8mcs" path="res://Scenes/Unit/Unit.tscn" id="2_cvr78"]
+[ext_resource type="PackedScene" uid="uid://duhwlv31nw1fn" path="res://Scenes/UnitPathFollower/UnitPathFollower.tscn" id="3_sunng"]
+[ext_resource type="PackedScene" uid="uid://ofy82io2hwuj" path="res://Scenes/Unit/UnitAnimationPlayer/UnitAnimationPlayer.tscn" id="4_3si2i"]
+[ext_resource type="Script" path="res://Scenes/Actions/MoveAction.cs" id="5_12kdr"]
+[ext_resource type="Script" path="res://Scenes/Actions/ShootAction.cs" id="6_f4tr2"]
+[ext_resource type="Script" path="res://Scenes/Actions/LoadAction.cs" id="7_176qy"]
+[ext_resource type="Script" path="res://Scenes/Actions/WaitAction.cs" id="8_2bsov"]
+[ext_resource type="PackedScene" uid="uid://u7s36kyov32s" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.tscn" id="9_xgmk8"]
+
+[node name="NeoTankUnit" type="Node2D"]
+script = ExtResource("1_cy271")
+
+[node name="Unit" parent="." instance=ExtResource("2_cvr78")]
+
+[node name="UnitPathFollower" parent="." instance=ExtResource("3_sunng")]
+
+[node name="UnitAnimationPlayer" parent="." instance=ExtResource("4_3si2i")]
+
+[node name="Actions" type="Node" parent="."]
+
+[node name="MoveAction" type="Node" parent="Actions"]
+script = ExtResource("5_12kdr")
+
+[node name="ShootAction" type="Node" parent="Actions"]
+script = ExtResource("6_f4tr2")
+
+[node name="LoadAction" type="Node" parent="Actions"]
+script = ExtResource("7_176qy")
+
+[node name="WaitAction" type="Node" parent="Actions"]
+script = ExtResource("8_2bsov")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+animation = &""
+
+[node name="UnitStatusIcons" parent="." instance=ExtResource("9_xgmk8")]

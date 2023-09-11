@@ -19,6 +19,7 @@ public partial class UnitAnimationPlayer : Node
         // UnitSystem.Instance.UnitDeselected += HandleUnitDeselected;
         
         animSprite = GetNode<AnimatedSprite2D>("../AnimatedSprite2D");
+        animSprite.SpriteFrames = GetSpriteFrames();
         animSprite.Play("idle");
         
         unit.ExhaustedChanged += HandleExhaustedChanged;
@@ -27,6 +28,12 @@ public partial class UnitAnimationPlayer : Node
     private void HandleExhaustedChanged()
     {
         animSprite.Play(unit.IsExhausted() ? "exhausted" : "idle");
+    }
+
+    private SpriteFrames GetSpriteFrames()
+    {
+        string path = $"res://Assets/Animations/{unit.GetTeam().ToString()}/{unit.GetUnitName()}.tres";
+        return (SpriteFrames) GD.Load(path);
     }
 
     // private void HandleActionSelected(BaseAction action)
