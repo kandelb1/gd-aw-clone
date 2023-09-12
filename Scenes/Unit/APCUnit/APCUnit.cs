@@ -19,6 +19,9 @@ public partial class APCUnit : Node2D
         moveDef.SetMoveDistance(6);
         unit.SetMoveDefinition(moveDef);
         
+        unit.SetLoadCapacity(1);
+        unit.SetLoadRules(x => x.GetUnitName() is "Infantry" or "MechInfantry");
+        
         // APCs have no weapons
     }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b3f7oo0wml0gg"]
+[gd_scene load_steps=11 format=3 uid="uid://b3f7oo0wml0gg"]
 
 [ext_resource type="Script" path="res://Scenes/Unit/MTankUnit/MTankUnit.cs" id="1_bxxq2"]
 [ext_resource type="PackedScene" uid="uid://c2i7g25ik8mcs" path="res://Scenes/Unit/Unit.tscn" id="1_uv7ge"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scenes/Actions/LoadAction.cs" id="6_bqw0k"]
 [ext_resource type="Script" path="res://Scenes/Actions/WaitAction.cs" id="7_nmwtb"]
 [ext_resource type="PackedScene" uid="uid://u7s36kyov32s" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.tscn" id="8_cnhbm"]
+[ext_resource type="SpriteFrames" uid="uid://d3dsc5k1k4kaw" path="res://Assets/Animations/OrangeStar/MTank.tres" id="9_jjilt"]
 
 [node name="MTankUnit" type="Node2D"]
 script = ExtResource("1_bxxq2")
@@ -34,6 +35,7 @@ script = ExtResource("6_bqw0k")
 script = ExtResource("7_nmwtb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-animation = &""
+sprite_frames = ExtResource("9_jjilt")
+animation = &"exhausted"
 
 [node name="UnitStatusIcons" parent="." instance=ExtResource("8_cnhbm")]

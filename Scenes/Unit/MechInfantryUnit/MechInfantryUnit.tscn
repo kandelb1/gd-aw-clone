@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dgmmabd1oa0qc"]
+[gd_scene load_steps=11 format=3 uid="uid://dgmmabd1oa0qc"]
 
 [ext_resource type="Script" path="res://Scenes/Unit/MechInfantryUnit/MechInfantry.cs" id="1_mga1l"]
 [ext_resource type="PackedScene" uid="uid://c2i7g25ik8mcs" path="res://Scenes/Unit/Unit.tscn" id="2_y8aw8"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scenes/Actions/ShootAction.cs" id="6_aavet"]
 [ext_resource type="Script" path="res://Scenes/Actions/LoadAction.cs" id="7_rp7f1"]
 [ext_resource type="Script" path="res://Scenes/Actions/WaitAction.cs" id="8_ycrnv"]
+[ext_resource type="SpriteFrames" uid="uid://p66deo0ih3lu" path="res://Assets/Animations/OrangeStar/MechInfantry.tres" id="9_l5267"]
 [ext_resource type="PackedScene" uid="uid://u7s36kyov32s" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.tscn" id="10_inlpm"]
 
 [node name="MechInfantryUnit" type="Node2D"]
@@ -34,6 +35,7 @@ script = ExtResource("7_rp7f1")
 script = ExtResource("8_ycrnv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-animation = &"idle"
+sprite_frames = ExtResource("9_l5267")
+animation = &"exhausted"
 
 [node name="UnitStatusIcons" parent="." instance=ExtResource("10_inlpm")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cemyrtfak20vq"]
+[gd_scene load_steps=10 format=3 uid="uid://cemyrtfak20vq"]
 
 [ext_resource type="PackedScene" uid="uid://c2i7g25ik8mcs" path="res://Scenes/Unit/Unit.tscn" id="1_bwr38"]
 [ext_resource type="Script" path="res://Scenes/Unit/SubmarineUnit/SubmarineUnit.cs" id="1_g30o7"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scenes/Actions/MoveAction.cs" id="4_76tiq"]
 [ext_resource type="Script" path="res://Scenes/Actions/ShootAction.cs" id="5_1dgjs"]
 [ext_resource type="Script" path="res://Scenes/Actions/WaitAction.cs" id="7_8c203"]
+[ext_resource type="SpriteFrames" uid="uid://cp8eybvhvmii5" path="res://Assets/Animations/OrangeStar/Submarine.tres" id="8_46dhl"]
 [ext_resource type="PackedScene" uid="uid://u7s36kyov32s" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.tscn" id="8_qnqxm"]
 
 [node name="SubmarineUnit" type="Node2D"]
@@ -31,6 +32,7 @@ script = ExtResource("5_1dgjs")
 script = ExtResource("7_8c203")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-animation = &""
+sprite_frames = ExtResource("8_46dhl")
+animation = &"exhausted"
 
 [node name="UnitStatusIcons" parent="." instance=ExtResource("8_qnqxm")]

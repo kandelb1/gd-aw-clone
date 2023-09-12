@@ -19,6 +19,9 @@ public partial class CruiserUnit : Node2D
         moveDef.SetMoveDistance(6);
         unit.SetMoveDefinition(moveDef);
         
+        unit.SetLoadCapacity(2);
+        unit.SetLoadRules(x => x.GetUnitName() is "BCopter" or "TCopter");
+        
         Weapon missiles = (Weapon) GD.Load("res://Scenes/Weapons/Cruiser/Missiles.tres");
         unit.SetPrimaryWeapon(missiles);
         Weapon antiAirGun = (Weapon) GD.Load("res://Scenes/Weapons/Cruiser/AAGun.tres");

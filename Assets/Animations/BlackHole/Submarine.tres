@@ -1,0 +1,115 @@
+[gd_resource type="SpriteFrames" load_steps=14 format=3 uid="uid://07yoxyw1t4m8"]
+
+[ext_resource type="Texture2D" uid="uid://d3n3r8o1f0wx7" path="res://Assets/Game Boy Advance - Advance Wars 2 Black Hole Rising - Units Map.png" id="1_4w7ny"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbhj3"]
+atlas = ExtResource("1_4w7ny")
+region = Rect2(339, 1734, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0ssd"]
+atlas = ExtResource("1_4w7ny")
+region = Rect2(356, 1734, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3hpn"]
+atlas = ExtResource("1_4w7ny")
+region = Rect2(373, 1734, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34b0t"]
+atlas = ExtResource("1_4w7ny")
+region = Rect2(3, 1734, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hywhu"]
+atlas = ExtResource("1_4w7ny")
+region = Rect2(20, 1734, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lti3w"]
+atlas = ExtResource("1_4w7ny")
+region = Rect2(37, 1734, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7g1k"]
+atlas = ExtResource("1_4w7ny")
+region = Rect2(287, 1650, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ec01"]
+atlas = ExtResource("1_4w7ny")
+region = Rect2(312, 1650, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mr83"]
+atlas = ExtResource("1_4w7ny")
+region = Rect2(287, 1625, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tim1x"]
+atlas = ExtResource("1_4w7ny")
+region = Rect2(312, 1625, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0gq6"]
+atlas = ExtResource("1_4w7ny")
+region = Rect2(287, 1675, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xg30s"]
+atlas = ExtResource("1_4w7ny")
+region = Rect2(312, 1675, 24, 24)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbhj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0ssd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3hpn")
+}],
+"loop": true,
+"name": &"exhausted",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34b0t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hywhu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lti3w")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s7g1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ec01")
+}],
+"loop": true,
+"name": &"move_down",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7mr83")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tim1x")
+}],
+"loop": true,
+"name": &"move_left",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0gq6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xg30s")
+}],
+"loop": true,
+"name": &"move_up",
+"speed": 8.0
+}]

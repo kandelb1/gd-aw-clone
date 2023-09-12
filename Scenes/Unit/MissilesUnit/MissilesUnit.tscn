@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://1hlttvvlue7w"]
+[gd_scene load_steps=11 format=3 uid="uid://1hlttvvlue7w"]
 
 [ext_resource type="Script" path="res://Scenes/Unit/MissilesUnit/MissilesUnit.cs" id="1_lne4u"]
 [ext_resource type="PackedScene" uid="uid://c2i7g25ik8mcs" path="res://Scenes/Unit/Unit.tscn" id="1_x8vlj"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scenes/Actions/LoadAction.cs" id="6_yngab"]
 [ext_resource type="Script" path="res://Scenes/Actions/WaitAction.cs" id="7_k6xq5"]
 [ext_resource type="PackedScene" uid="uid://u7s36kyov32s" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.tscn" id="8_f8g26"]
+[ext_resource type="SpriteFrames" uid="uid://bwmurxx5xhtv5" path="res://Assets/Animations/OrangeStar/Missiles.tres" id="9_thb5w"]
 
 [node name="MissilesUnit" type="Node2D"]
 script = ExtResource("1_lne4u")
@@ -34,6 +35,7 @@ script = ExtResource("6_yngab")
 script = ExtResource("7_k6xq5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-animation = &""
+sprite_frames = ExtResource("9_thb5w")
+animation = &"exhausted"
 
 [node name="UnitStatusIcons" parent="." instance=ExtResource("8_f8g26")]

@@ -36,9 +36,11 @@ team = 1
 
 [node name="ReconUnit" parent="." instance=ExtResource("6_a4exj")]
 position = Vector2(88, 88)
+team = 1
 
 [node name="MechInfantryUnit" parent="." instance=ExtResource("9_k4m4k")]
 position = Vector2(72, 88)
+team = 1
 
 [node name="TankUnit" parent="." instance=ExtResource("12_oxgox")]
 position = Vector2(104, 88)

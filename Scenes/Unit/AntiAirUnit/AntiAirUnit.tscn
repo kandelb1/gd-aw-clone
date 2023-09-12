@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c4il0f4oknu7n"]
+[gd_scene load_steps=11 format=3 uid="uid://c4il0f4oknu7n"]
 
 [ext_resource type="Script" path="res://Scenes/Unit/AntiAirUnit/AntiAirUnit.cs" id="1_tybsd"]
 [ext_resource type="PackedScene" uid="uid://c2i7g25ik8mcs" path="res://Scenes/Unit/Unit.tscn" id="2_2smh4"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scenes/Actions/ShootAction.cs" id="6_d4r4i"]
 [ext_resource type="Script" path="res://Scenes/Actions/LoadAction.cs" id="7_3ahfa"]
 [ext_resource type="Script" path="res://Scenes/Actions/WaitAction.cs" id="8_i0hsj"]
+[ext_resource type="SpriteFrames" uid="uid://msw1ksxvin71" path="res://Assets/Animations/OrangeStar/AntiAir.tres" id="9_sgyn6"]
 [ext_resource type="PackedScene" uid="uid://u7s36kyov32s" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.tscn" id="9_tn8jw"]
 
 [node name="AntiAirUnit" type="Node2D"]
@@ -34,6 +35,7 @@ script = ExtResource("7_3ahfa")
 script = ExtResource("8_i0hsj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-animation = &""
+sprite_frames = ExtResource("9_sgyn6")
+animation = &"exhausted"
 
 [node name="UnitStatusIcons" parent="." instance=ExtResource("9_tn8jw")]

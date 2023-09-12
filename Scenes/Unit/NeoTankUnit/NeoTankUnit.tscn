@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://keym4dimbd71"]
+[gd_scene load_steps=11 format=3 uid="uid://keym4dimbd71"]
 
 [ext_resource type="Script" path="res://Scenes/Unit/NeoTankUnit/NeoTankUnit.cs" id="1_cy271"]
 [ext_resource type="PackedScene" uid="uid://c2i7g25ik8mcs" path="res://Scenes/Unit/Unit.tscn" id="2_cvr78"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scenes/Actions/ShootAction.cs" id="6_f4tr2"]
 [ext_resource type="Script" path="res://Scenes/Actions/LoadAction.cs" id="7_176qy"]
 [ext_resource type="Script" path="res://Scenes/Actions/WaitAction.cs" id="8_2bsov"]
+[ext_resource type="SpriteFrames" uid="uid://c6eu4yho4emx7" path="res://Assets/Animations/OrangeStar/NeoTank.tres" id="9_1o615"]
 [ext_resource type="PackedScene" uid="uid://u7s36kyov32s" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.tscn" id="9_xgmk8"]
 
 [node name="NeoTankUnit" type="Node2D"]
@@ -34,6 +35,7 @@ script = ExtResource("7_176qy")
 script = ExtResource("8_2bsov")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-animation = &""
+sprite_frames = ExtResource("9_1o615")
+animation = &"exhausted"
 
 [node name="UnitStatusIcons" parent="." instance=ExtResource("9_xgmk8")]
