@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Godot.Collections;
-using Array = System.Array;
 
 public partial class Level : TileMap
 {
@@ -11,8 +10,11 @@ public partial class Level : TileMap
     
     public static Level Instance { get; private set; }
 
-    public static readonly int HIGHLIGHT_LAYER = 1;
-    public static readonly int ARROW_LAYER = 2;
+    public const int LEVEL_LAYER = 0;
+    public const int BUILDINGS_LAYER = 1;
+    public const int HIGHLIGHT_LAYER = 2;
+    public const int ARROW_LAYER = 3;
+    
     public static readonly Vector2I[] dirs = {new(1, 0), new(-1, 0), new(0, 1), new(0, -1)};
 
     private Vector2I prevPos;
@@ -41,7 +43,7 @@ public partial class Level : TileMap
 
     public bool IsValid(Vector2I position)
     {
-        return GetUsedCells(0).Contains(position);
+        return GetUsedCells(LEVEL_LAYER).Contains(position);
     }
 
     public Vector2I GetGridPosition(Vector2 globalPos) => LocalToMap(globalPos);
@@ -60,8 +62,8 @@ public partial class Level : TileMap
     // TODO: remember that the tilemap's arrow layer has a z-index of 1, so it will automatically be drawn on top of everything else
     public void DrawArrowAlongPath(Array<Vector2I> path, bool deleteStart = false)
     {
-        ClearLayer(2);
-        SetCellsTerrainPath(2, path, 1, 0);
+        ClearLayer(ARROW_LAYER);
+        SetCellsTerrainPath(ARROW_LAYER, path, 1, 0);
         if (deleteStart)
         {
             // the autotiling system can't tell the difference between the start and end of the path, so it will put the arrow on both ends
@@ -72,11 +74,11 @@ public partial class Level : TileMap
 
     public void HighlightTiles(List<Vector2I> positions, Color color)
     {
-        ClearLayer(1);
+        ClearLayer(HIGHLIGHT_LAYER);
         foreach (Vector2I pos in positions)
         {
-            SetCell(1, pos, 2, Vector2I.Zero);
-            GetCellTileData(1, pos).Modulate = color;
+            SetCell(HIGHLIGHT_LAYER, pos, 2, Vector2I.Zero);
+            GetCellTileData(HIGHLIGHT_LAYER, pos).Modulate = color;
         }
     }
     
@@ -156,5 +158,22 @@ public partial class Level : TileMap
     {
         return GetMovementCost(pos, moveDef) == 0;
     }
+
+    private bool BuildingExists(Vector2I pos)
+    {
+        return GetUsedCells(BUILDINGS_LAYER).Contains(pos);
+    }
     
+    public int GetDefense(Vector2I pos)
+    {
+        if (BuildingExists(pos))
+        {
+            GD.Print($"There is a building at {pos}, using that defense value");    
+        }
+        int layer = BuildingExists(pos) ? BUILDINGS_LAYER : LEVEL_LAYER;
+        TileData tileData = GetCellTileData(layer, pos);
+        int defense = (int)tileData.GetCustomData("defense");
+        GD.Print($"{pos} has defense {defense}");
+        return defense;
+    }
 }

@@ -14,10 +14,16 @@ public partial class DamageCalculator : Node
             return 0;
         }
 
+        int visualHealth = GetVisualHealth(attackingUnit);
         int baseDamage = weaponInUse.GetBaseDamageAgainstUnit(defendingUnit);
-        float healthModifier = GetVisualHealth(attackingUnit) / 10f;
-        int answer = Mathf.FloorToInt(baseDamage * healthModifier);
-        GD.Print($"{attackingUnit.GetUnitName()} with {attackingUnit.GetHealth()} health attacking {defendingUnit.GetUnitName()} ---- {answer} damage.");
+        
+        float healthModifier = visualHealth / 10f;
+        
+        int defense = Level.Instance.GetDefense(defendingUnit.GetGridPosition());
+        float defenseModifier = 1 - (defense * visualHealth / 100f);
+        
+        int answer = Mathf.FloorToInt(baseDamage * healthModifier * defenseModifier);
+        GD.Print($"{attackingUnit.GetUnitName()} with {attackingUnit.GetHealth()} health attacking {defendingUnit.GetUnitName()} on a {defense}-star tile ---- {answer} damage.");
         return answer;
     }
 
