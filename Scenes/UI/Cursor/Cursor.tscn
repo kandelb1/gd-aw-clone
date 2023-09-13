@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxfkyvqv8rgi5"]
+
+[ext_resource type="Texture2D" uid="uid://dta8e8s5av0b3" path="res://Assets/aw2-cursor.png" id="1_8jve2"]
+[ext_resource type="Script" path="res://Scenes/UI/Cursor/Cursor.cs" id="2_6vh8h"]
+
+[node name="Cursor" type="Sprite2D"]
+texture = ExtResource("1_8jve2")
+script = ExtResource("2_6vh8h")
