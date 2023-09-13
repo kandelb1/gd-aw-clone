@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhnpui6rjmi73"]
+
+[ext_resource type="Script" path="res://Scenes/UI/PurchaseUnitScreen/PurchaseUnitButton.cs" id="1_7qwfg"]
+[ext_resource type="SpriteFrames" uid="uid://do1u1fu4g3dvc" path="res://Assets/Animations/OrangeStar/Infantry.tres" id="1_ldyhf"]
+
+[node name="PurchaseUnitButton" type="Button"]
+custom_minimum_size = Vector2(400, 18)
+focus_mode = 0
+script = ExtResource("1_7qwfg")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Image" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/Image"]
+unique_name_in_owner = true
+sprite_frames = ExtResource("1_ldyhf")
+animation = &"exhausted"
+centered = false
+offset = Vector2(0, -2)
+
+[node name="Name" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Infantry"
+vertical_alignment = 1
+
+[node name="Spacer" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "1000
+"
+vertical_alignment = 1

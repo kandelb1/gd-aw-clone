@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvt6aw2dinnkx"]
+
+[ext_resource type="Script" path="res://Scenes/UI/PurchaseUnitScreen/PurchaseUnitScreen.cs" id="1_d225f"]
+[ext_resource type="PackedScene" uid="uid://dhnpui6rjmi73" path="res://Scenes/UI/PurchaseUnitScreen/PurchaseUnitButton.tscn" id="2_1k7a6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vh3l3"]
+bg_color = Color(0.556863, 0.607843, 0.658824, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.34902, 0, 0.160784, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="PurchaseUnitScreen" type="PanelContainer"]
+custom_minimum_size = Vector2(400, 150)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -75.0
+offset_right = 200.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vh3l3")
+script = ExtResource("1_d225f")
+listEntry = ExtResource("2_1k7a6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 1
