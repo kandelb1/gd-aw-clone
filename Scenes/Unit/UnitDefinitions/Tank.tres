@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="UnitDefinition" load_steps=6 format=3 uid="uid://bjkeob6op06b5"]
+
+[ext_resource type="Script" path="res://Scenes/Unit/MoveDefinition.cs" id="1_8lhqr"]
+[ext_resource type="Script" path="res://Scenes/Unit/UnitDefinitions/UnitDefinition.cs" id="1_b28vk"]
+[ext_resource type="Resource" uid="uid://du3pcm2gknvf1" path="res://Scenes/Weapons/Tank/Cannon.tres" id="2_nxgie"]
+[ext_resource type="Resource" uid="uid://bnbe6hvym5c0i" path="res://Scenes/Weapons/Tank/MachineGun.tres" id="4_faldq"]
+
+[sub_resource type="Resource" id="Resource_wx4j4"]
+script = ExtResource("1_8lhqr")
+moveDistance = 6
+terrainMoveCosts = {
+"beach": 1,
+"plains": 1,
+"road": 1,
+"woods": 2
+}
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_b28vk")
+name = "Tank"
+cost = 7000
+type = 1
+team = 0
+enemy = false
+loadCapacity = 0
+loadRules = PackedStringArray()
+moveDef = SubResource("Resource_wx4j4")
+primaryWeap = ExtResource("2_nxgie")
+secondaryWeap = ExtResource("4_faldq")
+directCombat = true
+minRange = 1
+maxRange = 1

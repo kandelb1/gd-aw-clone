@@ -124,7 +124,8 @@ public partial class Level : TileMap
 
     public string GetTerrainName(Vector2I pos)
     {
-        TileData tileData = GetCellTileData(0, pos);
+        // TODO: check if the buildings layer contains a building and use that terrain name instead
+        TileData tileData = GetCellTileData(LEVEL_LAYER, pos);
         string terrainName = (string)tileData.GetCustomData("name");
         return terrainName;
     }

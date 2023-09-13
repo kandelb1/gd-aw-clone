@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="UnitDefinition" load_steps=6 format=3 uid="uid://hy172yomf5tl"]
+
+[ext_resource type="Script" path="res://Scenes/Unit/MoveDefinition.cs" id="1_fg637"]
+[ext_resource type="Script" path="res://Scenes/Unit/UnitDefinitions/UnitDefinition.cs" id="1_sw45x"]
+[ext_resource type="Resource" uid="uid://birliqmwkof7a" path="res://Scenes/Weapons/BCopter/AirToSurfaceMissiles.tres" id="2_sqlav"]
+[ext_resource type="Resource" uid="uid://iefryrfdrt15" path="res://Scenes/Weapons/BCopter/MachineGun.tres" id="4_e240q"]
+
+[sub_resource type="Resource" id="Resource_hqr8h"]
+script = ExtResource("1_fg637")
+moveDistance = 6
+terrainMoveCosts = {
+"beach": 1,
+"mountains": 1,
+"plains": 1,
+"reef": 1,
+"river": 1,
+"road": 1,
+"sea": 1,
+"woods": 1
+}
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_sw45x")
+name = "BCopter"
+cost = 9000
+type = 3
+team = 0
+enemy = false
+loadCapacity = 0
+loadRules = PackedStringArray()
+moveDef = SubResource("Resource_hqr8h")
+primaryWeap = ExtResource("2_sqlav")
+secondaryWeap = ExtResource("4_e240q")
+directCombat = true
+minRange = 1
+maxRange = 1

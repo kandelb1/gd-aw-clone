@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="UnitDefinition" load_steps=5 format=3 uid="uid://bp2ep3mgtemkm"]
+
+[ext_resource type="Script" path="res://Scenes/Unit/UnitDefinitions/UnitDefinition.cs" id="1_e27bb"]
+[ext_resource type="Script" path="res://Scenes/Unit/MoveDefinition.cs" id="1_tcxt6"]
+[ext_resource type="Resource" uid="uid://dxml53o4u3k32" path="res://Scenes/Weapons/AntiAir/VulcanCannon.tres" id="2_ck015"]
+
+[sub_resource type="Resource" id="Resource_s07f7"]
+script = ExtResource("1_tcxt6")
+moveDistance = 6
+terrainMoveCosts = {
+"beach": 1,
+"plains": 1,
+"road": 1,
+"woods": 2
+}
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_e27bb")
+name = "AntiAir"
+cost = 8000
+type = 1
+team = 0
+enemy = false
+loadCapacity = 0
+loadRules = PackedStringArray()
+moveDef = SubResource("Resource_s07f7")
+primaryWeap = ExtResource("2_ck015")
+directCombat = true
+minRange = 1
+maxRange = 1

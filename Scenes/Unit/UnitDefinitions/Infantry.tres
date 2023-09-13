@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="UnitDefinition" load_steps=5 format=3 uid="uid://ch07whlfrq635"]
+
+[ext_resource type="Script" path="res://Scenes/Unit/UnitDefinitions/UnitDefinition.cs" id="1_7xlgy"]
+[ext_resource type="Script" path="res://Scenes/Unit/MoveDefinition.cs" id="1_wakso"]
+[ext_resource type="Resource" uid="uid://d4gwput3v8vle" path="res://Scenes/Weapons/Infantry/MachineGun.tres" id="3_n6rsm"]
+
+[sub_resource type="Resource" id="Resource_xu5x3"]
+script = ExtResource("1_wakso")
+moveDistance = 3
+terrainMoveCosts = {
+"beach": 1,
+"mountains": 2,
+"plains": 1,
+"river": 2,
+"road": 1,
+"sea": 0,
+"woods": 1
+}
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_7xlgy")
+name = "Infantry"
+cost = 1000
+type = 0
+team = 0
+enemy = false
+loadCapacity = 0
+loadRules = PackedStringArray()
+moveDef = SubResource("Resource_xu5x3")
+secondaryWeap = ExtResource("3_n6rsm")
+directCombat = true
+minRange = 1
+maxRange = 1

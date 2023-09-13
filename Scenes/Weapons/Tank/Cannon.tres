@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/Weapons/Weapon.cs" id="1_45keh"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_45keh")
 weaponName = "Cannon"
 maxAmmo = 9
