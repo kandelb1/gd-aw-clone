@@ -5,6 +5,8 @@ public partial class UnitAnimationPlayer : Node
 {
     private Unit unit;
     private UnitPathFollower pathFollower;
+    
+    private SpriteFrames spriteFrames;
     private AnimatedSprite2D animSprite;
 
     public override void _Ready()
@@ -19,9 +21,8 @@ public partial class UnitAnimationPlayer : Node
         // UnitSystem.Instance.UnitDeselected += HandleUnitDeselected;
         
         animSprite = GetNode<AnimatedSprite2D>("../AnimatedSprite2D");
-        animSprite.SpriteFrames = GetSpriteFrames();
-        animSprite.Play("idle");
-        
+        animSprite.SpriteFrames = spriteFrames;
+
         unit.ExhaustedChanged += HandleExhaustedChanged;
     }
 
@@ -30,10 +31,11 @@ public partial class UnitAnimationPlayer : Node
         animSprite.Play(unit.IsExhausted() ? "exhausted" : "idle");
     }
 
-    private SpriteFrames GetSpriteFrames()
+    public void SetSpriteFrames(SpriteFrames spriteFrames)
     {
-        string path = $"res://Assets/Animations/{unit.GetTeam().ToString()}/{unit.GetUnitName()}.tres";
-        return (SpriteFrames) GD.Load(path);
+        this.spriteFrames = spriteFrames;
+        animSprite.SpriteFrames = spriteFrames;
+        animSprite.Play("idle");
     }
 
     // private void HandleActionSelected(BaseAction action)
@@ -79,7 +81,7 @@ public partial class UnitAnimationPlayer : Node
         PlayAnimation("idle");
     }
 
-    private void PlayAnimation(string name)
+    public void PlayAnimation(string name)
     {
         switch (name)
         {

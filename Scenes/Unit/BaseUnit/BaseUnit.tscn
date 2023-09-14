@@ -1,0 +1,41 @@
+[gd_scene load_steps=11 format=3 uid="uid://0alf815vibmf"]
+
+[ext_resource type="Script" path="res://Scenes/Unit/BaseUnit/BaseUnit.cs" id="1_2a4o1"]
+[ext_resource type="PackedScene" uid="uid://c2i7g25ik8mcs" path="res://Scenes/Unit/Unit.tscn" id="1_jjdaa"]
+[ext_resource type="PackedScene" uid="uid://duhwlv31nw1fn" path="res://Scenes/UnitPathFollower/UnitPathFollower.tscn" id="2_23dbd"]
+[ext_resource type="PackedScene" uid="uid://ofy82io2hwuj" path="res://Scenes/Unit/UnitAnimationPlayer/UnitAnimationPlayer.tscn" id="3_k0cxy"]
+[ext_resource type="Script" path="res://Scenes/Actions/MoveAction.cs" id="4_6n7fb"]
+[ext_resource type="Script" path="res://Scenes/Actions/ShootAction.cs" id="5_3mpx7"]
+[ext_resource type="Script" path="res://Scenes/Actions/LoadAction.cs" id="6_e1l24"]
+[ext_resource type="Script" path="res://Scenes/Actions/WaitAction.cs" id="7_g5f4s"]
+[ext_resource type="SpriteFrames" uid="uid://do1u1fu4g3dvc" path="res://Assets/Animations/OrangeStar/Infantry.tres" id="8_kggjj"]
+[ext_resource type="PackedScene" uid="uid://u7s36kyov32s" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.tscn" id="9_dbebb"]
+
+[node name="BaseUnit" type="Node2D"]
+script = ExtResource("1_2a4o1")
+
+[node name="Unit" parent="." instance=ExtResource("1_jjdaa")]
+
+[node name="UnitPathFollower" parent="." instance=ExtResource("2_23dbd")]
+
+[node name="UnitAnimationPlayer" parent="." instance=ExtResource("3_k0cxy")]
+
+[node name="Actions" type="Node" parent="."]
+
+[node name="MoveAction" type="Node" parent="Actions"]
+script = ExtResource("4_6n7fb")
+
+[node name="ShootAction" type="Node" parent="Actions"]
+script = ExtResource("5_3mpx7")
+
+[node name="LoadAction" type="Node" parent="Actions"]
+script = ExtResource("6_e1l24")
+
+[node name="WaitAction" type="Node" parent="Actions"]
+script = ExtResource("7_g5f4s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("8_kggjj")
+animation = &"idle"
+
+[node name="UnitStatusIcons" parent="." instance=ExtResource("9_dbebb")]

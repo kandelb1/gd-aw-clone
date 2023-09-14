@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
@@ -14,8 +15,11 @@ public partial class Level : TileMap
     public const int BUILDINGS_LAYER = 1;
     public const int HIGHLIGHT_LAYER = 2;
     public const int ARROW_LAYER = 3;
+    public const int UNIT_PLACEMENT_LAYER = 4;
     
     public static readonly Vector2I[] dirs = {new(1, 0), new(-1, 0), new(0, 1), new(0, -1)};
+
+    [Export] private PackedScene baseUnitScene;
 
     private Vector2I prevPos;
     
@@ -37,6 +41,8 @@ public partial class Level : TileMap
         astarGrid.DiagonalMode = AStarGrid2D.DiagonalModeEnum.Never;
         astarGrid.Update();
         
+        ConvertUnits();
+
         prevPos = Vector2I.Zero;
         GD.Print("Level ready()");
     }
@@ -82,7 +88,7 @@ public partial class Level : TileMap
         }
     }
     
-    public override void _Input(InputEvent @event)
+    public override void _UnhandledInput(InputEvent @event)
     {
         if (@event is InputEventMouseMotion mouseMotion)
         {
@@ -198,5 +204,33 @@ public partial class Level : TileMap
         texture.Atlas = atlasSource.Texture;
         texture.Region = region;
         return texture;
+    }
+
+    // converts tiles on the unit_placement layer to actual units in the scene tree
+    private void ConvertUnits()
+    {
+        Node unitsNode = GetNode("../main/Units"); // TODO: are relative paths bad?
+        foreach (Vector2I pos in GetUsedCells(UNIT_PLACEMENT_LAYER))
+        {
+            if (!IsValid(pos)) continue;
+            
+            TileData tileData = GetCellTileData(UNIT_PLACEMENT_LAYER, pos);
+            string team = (string) tileData.GetCustomData("team");
+            string name = (string) tileData.GetCustomData("unit");
+            Unit.Team unitTeam;
+            SetCell(UNIT_PLACEMENT_LAYER, pos); // clear the cell
+            
+            if (!Enum.TryParse<Unit.Team>(team, out unitTeam)) return;
+            if (!Globals.Instance.DoesUnitExist(name)) return;
+            
+            GD.Print($"Spawning {unitTeam} {name} on position {pos}!");
+            UnitDefinition unitDef = (UnitDefinition) Globals.Instance.GetUnitDefinition(name).Duplicate();
+            // change default values on the UnitDefinition
+            unitDef.SetTeam(unitTeam);
+            BaseUnit baseUnit = baseUnitScene.Instantiate<BaseUnit>();
+            baseUnit.SetUnitDefinition(unitDef);
+            baseUnit.SetStartPosition(pos);
+            unitsNode.AddChild(baseUnit);
+        }
     }
 }

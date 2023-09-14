@@ -16,10 +16,10 @@ public partial class PurchaseUnitScreen : PanelContainer
         // set this manually for now
         typesAllowed = new[]
         {
-            UnitDefinition.UnitType.Infantry,
-            UnitDefinition.UnitType.Vehicle,
+            UnitDefinition.UnitType.Plane,
+            UnitDefinition.UnitType.Copter,
         };
-        LoadUnits();
+        GetPurchasableUnits();
         VBoxContainer list = GetNode<VBoxContainer>("VBoxContainer");
         foreach (UnitDefinition unitDef in purchasableUnits)
         {
@@ -34,36 +34,14 @@ public partial class PurchaseUnitScreen : PanelContainer
 
     private void HandleButtonPressed(UnitDefinition unitDef)
     {
-        GD.Print($"Purchasing {unitDef.GetName()}");
+        GD.Print($"Purchasing {unitDef.GetName()}"); // TODO: spawn a unit on the factory/port/airport position
     }
 
-    private void LoadUnits()
+    private void GetPurchasableUnits()
     {
-        purchasableUnits = new List<UnitDefinition>();
-        const string path = "res://Scenes/Unit/UnitDefinitions";
-        DirAccess dir = DirAccess.Open(path);
-        if (dir == null) return;
-        dir.ListDirBegin();
-        string fileName = dir.GetNext();
-        while (fileName != "")
-        {
-            if (fileName.EndsWith(".tres"))
-            {
-                UnitDefinition unit = ResourceLoader.Load<UnitDefinition>(Path.Join(path, fileName));
-                if (typesAllowed.Contains(unit.GetType()))
-                {
-                    purchasableUnits.Add(unit);    
-                }
-            }
-            fileName = dir.GetNext();
-        }
-        purchasableUnits.Sort((a, b) =>
-        {
-            int aCost = a.GetCost();
-            int bCost = b.GetCost();
-            if (aCost < bCost) return -1;
-            if (aCost > bCost) return 1;
-            return 0;
-        });
+        purchasableUnits = Globals.Instance.GetAllUnits()
+            .Where(x => typesAllowed.Contains(x.GetType()))
+            .OrderBy(x => x.GetCost())
+            .ToList();
     }
 }

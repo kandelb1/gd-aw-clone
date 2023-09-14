@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dhfxwouwaw87m"]
+[gd_scene load_steps=10 format=3 uid="uid://dhfxwouwaw87m"]
 
 [ext_resource type="Texture2D" uid="uid://d3n3r8o1f0wx7" path="res://Assets/Game Boy Advance - Advance Wars 2 Black Hole Rising - Units Map.png" id="1_aggmv"]
-[ext_resource type="Texture2D" uid="uid://dpfc2hknk12f4" path="res://Assets/tilehighlight.png" id="3_h3kku"]
+[ext_resource type="Texture2D" uid="uid://dpfc2hknk12f4" path="res://Assets/UI/tilehighlight.png" id="2_cdwhi"]
 [ext_resource type="Script" path="res://Scenes/Level/Level.cs" id="3_ltaf5"]
 [ext_resource type="Texture2D" uid="uid://dakrsfv3obynd" path="res://Assets/level-tileset.png" id="4_n2xgb"]
+[ext_resource type="PackedScene" uid="uid://0alf815vibmf" path="res://Scenes/Unit/BaseUnit/BaseUnit.tscn" id="5_geuc5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4ave5"]
 texture = ExtResource("1_aggmv")
@@ -65,7 +66,7 @@ separation = Vector2i(1, 1)
 38:77/0/terrains_peering_bit/left_side = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jg0uu"]
-texture = ExtResource("3_h3kku")
+texture = ExtResource("2_cdwhi")
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jjd4v"]
@@ -792,6 +793,120 @@ texture = ExtResource("4_n2xgb")
 1:27/animation_frame_2/duration = 1.0
 1:27/animation_frame_3/duration = 1.0
 1:27/0 = 0
+0:33/0 = 0
+0:33/0/custom_data_4 = "OrangeStar"
+0:33/0/custom_data_5 = "Infantry"
+0:34/0 = 0
+0:34/0/custom_data_4 = "BlackHole"
+0:34/0/custom_data_5 = "Infantry"
+1:34/0 = 0
+1:34/0/custom_data_4 = "BlackHole"
+1:34/0/custom_data_5 = "MechInfantry"
+2:33/0 = 0
+2:33/0/custom_data_4 = "OrangeStar"
+2:33/0/custom_data_5 = "Recon"
+2:34/0 = 0
+2:34/0/custom_data_4 = "BlackHole"
+2:34/0/custom_data_5 = "Recon"
+3:34/0 = 0
+3:34/0/custom_data_4 = "BlackHole"
+3:34/0/custom_data_5 = "Tank"
+3:33/0 = 0
+3:33/0/custom_data_4 = "OrangeStar"
+3:33/0/custom_data_5 = "Tank"
+4:34/0 = 0
+4:34/0/custom_data_4 = "BlackHole"
+4:34/0/custom_data_5 = "MTank"
+4:33/0 = 0
+4:33/0/custom_data_4 = "OrangeStar"
+4:33/0/custom_data_5 = "MTank"
+5:33/0 = 0
+5:33/0/custom_data_4 = "OrangeStar"
+5:33/0/custom_data_5 = "NeoTank"
+5:34/0 = 0
+5:34/0/custom_data_4 = "BlackHole"
+5:34/0/custom_data_5 = "NeoTank"
+6:34/0 = 0
+6:34/0/custom_data_4 = "BlackHole"
+6:34/0/custom_data_5 = "APC"
+6:33/0 = 0
+6:33/0/custom_data_4 = "OrangeStar"
+6:33/0/custom_data_5 = "APC"
+7:33/0 = 0
+7:33/0/custom_data_4 = "OrangeStar"
+7:33/0/custom_data_5 = "AntiAir"
+7:34/0 = 0
+7:34/0/custom_data_4 = "BlackHole"
+7:34/0/custom_data_5 = "AntiAir"
+8:34/0 = 0
+8:34/0/custom_data_4 = "BlackHole"
+8:34/0/custom_data_5 = "Artillery"
+8:33/0 = 0
+8:33/0/custom_data_4 = "OrangeStar"
+8:33/0/custom_data_5 = "Artillery"
+9:33/0 = 0
+9:33/0/custom_data_4 = "OrangeStar"
+9:33/0/custom_data_5 = "Rockets"
+9:34/0 = 0
+9:34/0/custom_data_4 = "BlackHole"
+9:34/0/custom_data_5 = "Rockets"
+10:33/0 = 0
+10:33/0/custom_data_4 = "OrangeStar"
+10:33/0/custom_data_5 = "Missiles"
+10:34/0 = 0
+10:34/0/custom_data_4 = "BlackHole"
+10:34/0/custom_data_5 = "Missiles"
+11:34/0 = 0
+11:34/0/custom_data_4 = "BlackHole"
+11:34/0/custom_data_5 = "Fighter"
+11:33/0 = 0
+11:33/0/custom_data_4 = "OrangeStar"
+11:33/0/custom_data_5 = "Fighter"
+12:33/0 = 0
+12:33/0/custom_data_4 = "OrangeStar"
+12:33/0/custom_data_5 = "Bomber"
+12:34/0 = 0
+12:34/0/custom_data_4 = "BlackHole"
+12:34/0/custom_data_5 = "Bomber"
+13:33/0 = 0
+13:33/0/custom_data_4 = "OrangeStar"
+13:33/0/custom_data_5 = "BCopter"
+13:34/0 = 0
+13:34/0/custom_data_4 = "BlackHole"
+13:34/0/custom_data_5 = "BCopter"
+14:34/0 = 0
+14:34/0/custom_data_4 = "BlackHole"
+14:34/0/custom_data_5 = "TCopter"
+14:33/0 = 0
+14:33/0/custom_data_4 = "OrangeStar"
+14:33/0/custom_data_5 = "TCopter"
+15:33/0 = 0
+15:33/0/custom_data_4 = "OrangeStar"
+15:33/0/custom_data_5 = "Battleship"
+15:34/0 = 0
+15:34/0/custom_data_4 = "BlackHole"
+15:34/0/custom_data_5 = "Battleship"
+16:34/0 = 0
+16:34/0/custom_data_4 = "BlackHole"
+16:34/0/custom_data_5 = "Cruiser"
+16:33/0 = 0
+16:33/0/custom_data_4 = "OrangeStar"
+16:33/0/custom_data_5 = "Cruiser"
+17:33/0 = 0
+17:33/0/custom_data_4 = "OrangeStar"
+17:33/0/custom_data_5 = "Lander"
+17:34/0 = 0
+17:34/0/custom_data_4 = "BlackHole"
+17:34/0/custom_data_5 = "Lander"
+18:33/0 = 0
+18:33/0/custom_data_4 = "OrangeStar"
+18:33/0/custom_data_5 = "Submarine"
+18:34/0 = 0
+18:34/0/custom_data_4 = "BlackHole"
+18:34/0/custom_data_5 = "Submarine"
+1:33/0 = 0
+1:33/0/custom_data_4 = "OrangeStar"
+1:33/0/custom_data_5 = "MechInfantry"
 
 [sub_resource type="TileSet" id="TileSet_gku7k"]
 terrain_set_0/mode = 0
@@ -817,6 +932,10 @@ custom_data_layer_2/name = "hasTop"
 custom_data_layer_2/type = 1
 custom_data_layer_3/name = "isBuildingBase"
 custom_data_layer_3/type = 1
+custom_data_layer_4/name = "team"
+custom_data_layer_4/type = 4
+custom_data_layer_5/name = "unit"
+custom_data_layer_5/type = 4
 sources/0 = SubResource("TileSetAtlasSource_4ave5")
 sources/2 = SubResource("TileSetAtlasSource_jg0uu")
 sources/3 = SubResource("TileSetAtlasSource_jjd4v")
@@ -847,4 +966,12 @@ layer_3/y_sort_enabled = false
 layer_3/y_sort_origin = 0
 layer_3/z_index = 1
 layer_3/tile_data = PackedInt32Array()
+layer_4/name = "unit_placement"
+layer_4/enabled = true
+layer_4/modulate = Color(1, 1, 1, 1)
+layer_4/y_sort_enabled = false
+layer_4/y_sort_origin = 0
+layer_4/z_index = 0
+layer_4/tile_data = PackedInt32Array(327691, 3, 33, 393227, 65539, 33, 458763, 131075, 33, 524299, 196611, 33, 524295, 786435, 34, 393223, 786435, 33)
 script = ExtResource("3_ltaf5")
+baseUnitScene = ExtResource("5_geuc5")

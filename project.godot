@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Globals="*res://Scenes/autoload/Globals.cs"
 Level="*res://Scenes/Level/Level.tscn"
 UnitSystem="*res://Scenes/UnitSystem/UnitSystem.tscn"
 ValidActionPositionsCache="*res://Scenes/ValidActionPositionsCache/ValidActionPositionsCache.tscn"

@@ -41,11 +41,23 @@ public partial class UnitDefinition : Resource
 
     public Unit.Team GetTeam() => team;
 
+    public void SetTeam(Unit.Team team) => this.team = team; 
+
     public bool IsEnemy() => enemy;
+
+    public int GetLoadCapacity() => loadCapacity;
+
+    public string[] GetLoadRules() => loadRules;
 
     public MoveDefinition GetMoveDefinition() => moveDef;
 
     public Weapon GetPrimaryWeapon() => primaryWeap;
 
     public Weapon GetSecondaryWeapon() => secondaryWeap;
+
+    public bool IsDirectCombat() => directCombat;
+
+    public int GetMinWeaponRange() => minRange;
+
+    public int GetMaxWeaponRange() => maxRange;
 }

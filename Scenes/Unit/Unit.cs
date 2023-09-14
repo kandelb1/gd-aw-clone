@@ -52,6 +52,8 @@ public partial class Unit : Node
     // if this unit is a direct combat unit, minRange and maxRange will be the same value (1)
     private int minWeaponRange;
     private int maxWeaponRange;
+
+    private UnitDefinition unitDef;
     
     public override void _Ready()
     {
@@ -67,7 +69,7 @@ public partial class Unit : Node
         }
 
         gridPos = Level.Instance.GetGridPosition(baseUnit.Position);
-        GD.Print($"set gridPos to {gridPos}");
+        // GD.Print($"set gridPos to {gridPos}");
         unitsLoaded = new List<Unit>();
 
         exhausted = false;
@@ -234,4 +236,8 @@ public partial class Unit : Node
     public int GetMinWeaponRange() => minWeaponRange;
 
     public int GetMaxWeaponRange() => maxWeaponRange;
+
+    public void SetUnitDefinition(UnitDefinition unitDef) => this.unitDef = unitDef;
+
+    public UnitDefinition GetUnitDefinition() => unitDef;
 }
