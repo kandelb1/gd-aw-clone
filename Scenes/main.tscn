@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://nq703fywuays"]
+[gd_scene load_steps=26 format=3 uid="uid://nq703fywuays"]
 
 [ext_resource type="Script" path="res://Scenes/main.cs" id="1_g02d7"]
 [ext_resource type="PackedScene" uid="uid://cbhni8moq7jko" path="res://Scenes/Unit/InfantryUnit/InfantryUnit.tscn" id="3_tpagr"]
@@ -23,6 +23,8 @@
 [ext_resource type="PackedScene" uid="uid://jh1td6lwyuha" path="res://Scenes/Unit/CruiserUnit/CruiserUnit.tscn" id="20_xfmau"]
 [ext_resource type="PackedScene" uid="uid://cemyrtfak20vq" path="res://Scenes/Unit/SubmarineUnit/SubmarineUnit.tscn" id="22_nubkc"]
 [ext_resource type="PackedScene" uid="uid://dvt6aw2dinnkx" path="res://Scenes/UI/PurchaseUnitScreen/PurchaseUnitScreen.tscn" id="23_aploa"]
+[ext_resource type="PackedScene" uid="uid://nwuc6vfsd2yb" path="res://Scenes/UI/TerrainInfo/TerrainInfo.tscn" id="24_kmuud"]
+[ext_resource type="PackedScene" uid="uid://dxfkyvqv8rgi5" path="res://Scenes/UI/Cursor/Cursor.tscn" id="24_r1iet"]
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_g02d7")
@@ -95,4 +97,10 @@ position = Vector2(104, 8)
 
 [node name="NextTurnButton" parent="UI" instance=ExtResource("11_8rs4n")]
 
+[node name="Cursor" parent="UI" instance=ExtResource("24_r1iet")]
+
+[node name="TerrainInfo" parent="UI" instance=ExtResource("24_kmuud")]
+offset_top = -72.0
+
 [node name="PurchaseUnitScreen" parent="UI" instance=ExtResource("23_aploa")]
+visible = false

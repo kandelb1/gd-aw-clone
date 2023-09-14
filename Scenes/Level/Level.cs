@@ -124,8 +124,8 @@ public partial class Level : TileMap
 
     public string GetTerrainName(Vector2I pos)
     {
-        // TODO: check if the buildings layer contains a building and use that terrain name instead
-        TileData tileData = GetCellTileData(LEVEL_LAYER, pos);
+        int layer = BuildingExists(pos) ? BUILDINGS_LAYER : LEVEL_LAYER;
+        TileData tileData = GetCellTileData(layer, pos);
         string terrainName = (string)tileData.GetCustomData("name");
         return terrainName;
     }
@@ -162,19 +162,41 @@ public partial class Level : TileMap
 
     private bool BuildingExists(Vector2I pos)
     {
-        return GetUsedCells(BUILDINGS_LAYER).Contains(pos);
+        if(!GetUsedCells(BUILDINGS_LAYER).Contains(pos)) return false;
+        TileData tileData = GetCellTileData(BUILDINGS_LAYER, pos);
+        bool isBase = (bool) tileData.GetCustomData("isBuildingBase");
+        return isBase;
     }
     
     public int GetDefense(Vector2I pos)
     {
-        if (BuildingExists(pos))
-        {
-            GD.Print($"There is a building at {pos}, using that defense value");    
-        }
         int layer = BuildingExists(pos) ? BUILDINGS_LAYER : LEVEL_LAYER;
         TileData tileData = GetCellTileData(layer, pos);
         int defense = (int)tileData.GetCustomData("defense");
-        GD.Print($"{pos} has defense {defense}");
         return defense;
+    }
+
+    public AtlasTexture GetTexture(Vector2I pos)
+    {
+        int layer = BuildingExists(pos) ? BUILDINGS_LAYER : LEVEL_LAYER;
+        int sourceId = GetCellSourceId(layer, pos);
+        if (sourceId == -1) return null;
+
+        TileSetAtlasSource atlasSource = (TileSetAtlasSource) TileSet.GetSource(sourceId);
+        Vector2I atlasCoords = GetCellAtlasCoords(layer, pos);
+        Rect2I region = atlasSource.GetTileTextureRegion(atlasCoords);
+        
+        TileData tileData = GetCellTileData(layer, pos);
+        bool hasTop = (bool) tileData.GetCustomData("hasTop");
+        if (hasTop)
+        {
+            region.Position += new Vector2I(0, -16);
+            region.Size += new Vector2I(0, 16);    
+        }
+        
+        AtlasTexture texture = new AtlasTexture();
+        texture.Atlas = atlasSource.Texture;
+        texture.Region = region;
+        return texture;
     }
 }

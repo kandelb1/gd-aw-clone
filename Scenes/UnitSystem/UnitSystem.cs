@@ -37,10 +37,10 @@ public partial class UnitSystem : Node
 
         unitActionMenu = (PackedScene) GD.Load("res://Scenes/UI/UnitActionMenu/UnitActionMenu.tscn");
         baseUI = GetNode<Node>("/root/main/UI"); // TODO: should I really be doing this?
-        GD.Print($"Base ui: {baseUI.Name}");
     }
 
-    public override void _Input(InputEvent @event)
+    // use UnhandledInput so that any GUI showing on top of the level can consume the input first
+    public override void _UnhandledInput(InputEvent @event)
     {
         if (@event.IsActionPressed("left click"))
         {
