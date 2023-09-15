@@ -4,6 +4,13 @@ using System.Linq;
 using Godot;
 using Godot.Collections;
 
+
+// in the first campaign mission, the map takes up the entire screen (with no scrolling required)
+// it is 15x10 tiles. each tile is 16x16 pixels
+// so at normal resolution, it would take up 240x160 pixels
+// scaling it up by 2x, it would take up 480x320 pixels
+// 4x would be 960x640
+
 public partial class Level : TileMap
 {
     [Signal]
