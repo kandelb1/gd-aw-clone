@@ -7,6 +7,7 @@ resource_local_to_scene = true
 script = ExtResource("1_vm53x")
 weaponName = "Bazooka"
 maxAmmo = 3
+currentAmmo = 3
 damageTable = {
 "APC": 75,
 "AntiAir": 65,

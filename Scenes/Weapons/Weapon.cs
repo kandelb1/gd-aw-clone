@@ -8,7 +8,7 @@ public partial class Weapon : Resource
 {
     [Export] private string weaponName;
     [Export] private int maxAmmo; // max ammo of 0 means infinite ammo
-    private int currentAmmo;
+    [Export] private int currentAmmo;
 
     // https://warswiki.org/wiki/Damage/Advance_Wars_2_chart
     [Export] private Dictionary<string, int> damageTable;

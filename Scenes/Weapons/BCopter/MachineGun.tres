@@ -7,6 +7,7 @@ resource_local_to_scene = true
 script = ExtResource("1_68lfq")
 weaponName = "Machine Gun"
 maxAmmo = 0
+currentAmmo = 0
 damageTable = {
 "APC": 20,
 "AntiAir": 6,

@@ -7,6 +7,7 @@ resource_local_to_scene = true
 script = ExtResource("1_ir31i")
 weaponName = "Rockets"
 maxAmmo = 6
+currentAmmo = 6
 damageTable = {
 "APC": 80,
 "AntiAir": 85,

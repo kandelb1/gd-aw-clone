@@ -7,6 +7,7 @@ resource_local_to_scene = true
 script = ExtResource("1_l1ldw")
 weaponName = "Air to Surface Missiles"
 maxAmmo = 6
+currentAmmo = 6
 damageTable = {
 "APC": 60,
 "AntiAir": 25,
