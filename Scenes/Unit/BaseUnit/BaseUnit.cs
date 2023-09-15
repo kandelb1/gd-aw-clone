@@ -5,7 +5,7 @@ using System.Linq;
 public partial class BaseUnit : Node2D
 {
     private UnitDefinition unitDef;
-    private Unit unit; // unit component
+    private Unit unit; // Unit component
     private UnitAnimationPlayer animPlayer; // UnitAnimationPlayer component
 
     private Vector2I startPos;
@@ -37,18 +37,11 @@ public partial class BaseUnit : Node2D
         
         // set up the animation player component
         animPlayer = GetNode<UnitAnimationPlayer>("UnitAnimationPlayer");
-        animPlayer.SetSpriteFrames(GetSpriteFrames());
+        animPlayer.SetSpriteFrames(unitDef.GetSpriteFrames());
         // animPlayer.PlayAnimation("idle");
     }
 
     public void SetUnitDefinition(UnitDefinition unitDef) => this.unitDef = unitDef;
 
     public void SetStartPosition(Vector2I startPos) => this.startPos = startPos;
-    
-    private SpriteFrames GetSpriteFrames()
-    {
-        string path = $"res://Assets/Animations/{unitDef.GetTeam().ToString()}/{unitDef.GetName()}.tres";
-        GD.Print($"Loading sprite frames at {path}");
-        return (SpriteFrames) GD.Load(path);
-    }
 }

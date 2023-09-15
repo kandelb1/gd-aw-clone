@@ -60,4 +60,11 @@ public partial class UnitDefinition : Resource
     public int GetMinWeaponRange() => minRange;
 
     public int GetMaxWeaponRange() => maxRange;
+    
+    public SpriteFrames GetSpriteFrames()
+    {
+        string path = $"res://Assets/Animations/{GetTeam().ToString()}/{GetName()}.tres";
+        return (SpriteFrames) GD.Load(path);
+    }
+    
 }

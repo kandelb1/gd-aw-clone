@@ -19,6 +19,7 @@ public partial class DamageCalculator : Node
         
         float healthModifier = visualHealth / 10f;
         
+        // TODO: prevent copters and planes from getting the terrain defense bonus
         int defense = Level.Instance.GetDefense(defendingUnit.GetGridPosition());
         float defenseModifier = 1 - (defense * visualHealth / 100f);
         

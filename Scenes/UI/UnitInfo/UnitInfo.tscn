@@ -1,0 +1,79 @@
+[gd_scene load_steps=4 format=3 uid="uid://4mfe55nnqare"]
+
+[ext_resource type="Script" path="res://Scenes/UI/UnitInfo/UnitInfo.cs" id="1_0nmrw"]
+[ext_resource type="Texture2D" uid="uid://dtpisg4v2w3ce" path="res://Assets/UI/heart-icon.png" id="2_ovpl2"]
+[ext_resource type="Texture2D" uid="uid://bdt0svs30wk85" path="res://Assets/UI/ammo-icon.png" id="3_u7ece"]
+
+[node name="UnitInfo" type="PanelContainer"]
+custom_minimum_size = Vector2(30, 50)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -74.0
+offset_top = -62.0
+offset_right = -44.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("1_0nmrw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Tank"
+horizontal_alignment = 1
+
+[node name="Image" type="TextureRect" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HealthContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HealthContainer"]
+custom_minimum_size = Vector2(7, 6)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_ovpl2")
+stretch_mode = 2
+
+[node name="Health" type="Label" parent="VBoxContainer/HealthContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="AmmoContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="AmmoIcon" type="TextureRect" parent="VBoxContainer/AmmoContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_u7ece")
+stretch_mode = 2
+
+[node name="Ammo" type="Label" parent="VBoxContainer/AmmoContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 2
