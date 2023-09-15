@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BuildingDefinition" load_steps=2 format=3 uid="uid://cn1q307opuw0"]
+
+[ext_resource type="Script" path="res://Scenes/Buildings/BuildingDefinition.cs" id="1_4lioj"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_4lioj")
+name = "Airport"
+incomePerTurn = 0
+capturePoints = 20
+controllingTeam = 0
+canBuild = true
+allowedTypes = Array[int]([2, 3])

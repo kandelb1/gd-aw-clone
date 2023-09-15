@@ -4,7 +4,9 @@
 [ext_resource type="SpriteFrames" uid="uid://do1u1fu4g3dvc" path="res://Assets/Animations/OrangeStar/Infantry.tres" id="1_ldyhf"]
 
 [node name="PurchaseUnitButton" type="Button"]
-custom_minimum_size = Vector2(400, 18)
+custom_minimum_size = Vector2(200, 18)
+offset_right = 100.0
+offset_bottom = 18.0
 focus_mode = 0
 script = ExtResource("1_7qwfg")
 

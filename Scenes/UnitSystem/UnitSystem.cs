@@ -10,6 +10,9 @@ public partial class UnitSystem : Node
 
     [Signal]
     public delegate void ActionSelectedEventHandler(BaseAction action);
+
+    [Signal]
+    public delegate void BuildingSelectedEventHandler(BuildingDefinition buildingDef);
     
     [Signal]
     public delegate void ActionTakenEventHandler();
@@ -65,20 +68,28 @@ public partial class UnitSystem : Node
             }
             else
             {
-                // otherwise try to select the unit on the grid position we clicked
-                if (!Level.Instance.IsOccupied(clickPos)) return;
-                Unit unit = Level.Instance.GetUnit(clickPos);
-                if (unit == selectedUnit) return;
-                if (unit.IsExhausted()) return;
+                // otherwise try to select the unit or building on the grid position we clicked
+                if (Level.Instance.IsOccupied(clickPos))
+                {
+                    Unit unit = Level.Instance.GetUnit(clickPos);
+                    if (unit == selectedUnit) return;
+                    if (unit.IsExhausted()) return;
                 
-                GD.Print($"clicked on {unit.Name}");
-                selectedUnit = unit;
-                UnitActionMenu menu = unitActionMenu.Instantiate() as UnitActionMenu;
-                menu.Position = unit.GetPosition() + new Vector2(10, 0);
-                menu.SetActions(unit.GetActions());
-                menu.ActionSelected += HandleActionSelected;
-                menu.MenuClosed += DeselectUnit;
-                baseUI.AddChild(menu);
+                    GD.Print($"clicked on {unit.Name}");
+                    selectedUnit = unit;
+                    UnitActionMenu menu = unitActionMenu.Instantiate() as UnitActionMenu;
+                    menu.Position = unit.GetPosition() + new Vector2(10, 0);
+                    menu.SetActions(unit.GetActions());
+                    menu.ActionSelected += HandleActionSelected;
+                    menu.MenuClosed += DeselectUnit;
+                    baseUI.AddChild(menu);                    
+                }
+                else if(Level.Instance.BuildingDefinitionExists(clickPos))
+                {
+                    BuildingDefinition buildingDef = Level.Instance.GetBuildingDefinition(clickPos);
+                    GD.Print($"clicked on {buildingDef.GetControllingTeam()} {buildingDef.GetBuildingName()}");
+                    EmitSignal(SignalName.BuildingSelected, buildingDef);
+                }
             }
         }else if (@event.IsActionPressed("right click")) // lets use right click to cancel for now
         {

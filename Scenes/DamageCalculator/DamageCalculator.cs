@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using static UnitDefinition;
 
 public partial class DamageCalculator : Node
 {
@@ -14,14 +15,17 @@ public partial class DamageCalculator : Node
             return 0;
         }
 
-        int visualHealth = GetVisualHealth(attackingUnit);
+        int visualHealth = attackingUnit.GetVisualHealth();
         int baseDamage = weaponInUse.GetBaseDamageAgainstUnit(defendingUnit);
         
         float healthModifier = visualHealth / 10f;
         
-        // TODO: prevent copters and planes from getting the terrain defense bonus
         int defense = Level.Instance.GetDefense(defendingUnit.GetGridPosition());
         float defenseModifier = 1 - (defense * visualHealth / 100f);
+        if (defendingUnit.GetUnitType() is UnitType.Copter or UnitType.Plane)
+        {
+            defenseModifier = 1f;
+        }
         
         int answer = Mathf.FloorToInt(baseDamage * healthModifier * defenseModifier);
         GD.Print($"{attackingUnit.GetName()} with {attackingUnit.GetHealth()} health attacking {defendingUnit.GetName()} on a {defense}-star tile ---- {answer} damage.");
@@ -47,32 +51,5 @@ public partial class DamageCalculator : Node
         return null;
     }
 
-    public static int GetVisualHealth(Unit unit)
-    {
-        switch (unit.GetHealth())
-        {
-            case <= 100 and >= 91:
-                return 10;
-            case <= 90 and >= 81:
-                return 9;
-            case <= 80 and >= 71:
-                return 8;
-            case <= 70 and >= 61:
-                return 7;
-            case <= 60 and >= 51:
-                return 6;
-            case <= 50 and >= 41:
-                return 5;
-            case <= 40 and >= 31:
-                return 4;
-            case <= 30 and >= 21:
-                return 3;
-            case <= 20 and >= 11:
-                return 2;
-            case <= 10 and >= 1:
-                return 1;
-            default:
-                return 0;
-        }
-    }
+
 }

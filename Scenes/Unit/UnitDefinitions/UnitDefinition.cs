@@ -14,11 +14,12 @@ public partial class UnitDefinition : Resource
         Plane,
         Copter,
         Ship,
-        Submarine,
+        Submarine, // TODO: do we really need a separate entry for submarines?
     }
     
     public enum Team
     {
+        Neutral,
         OrangeStar,
         BlackHole,
     }
@@ -54,11 +55,11 @@ public partial class UnitDefinition : Resource
     [Export] private int minRange = 1;
     [Export] private int maxRange = 1;
 
-    public string GetName() => name;
+    public string GetUnitName() => name;
 
     public int GetCost() => cost;
 
-    public UnitType GetType() => type;
+    public UnitType GetUnitType() => type;
 
     public int GetHealth() => health;
     
@@ -66,7 +67,7 @@ public partial class UnitDefinition : Resource
     {
         health -= amount;
         if (health < 0) health = 0;
-        GD.Print($"{GetName()} took {amount} damage. Health is now at {health}");
+        GD.Print($"{GetUnitName()} took {amount} damage. Health is now at {health}");
         EmitSignal(SignalName.HealthChanged, health);
     }
 
@@ -152,9 +153,37 @@ public partial class UnitDefinition : Resource
     
     public SpriteFrames GetSpriteFrames()
     {
-        string path = $"res://Assets/Animations/{GetTeam().ToString()}/{GetName()}.tres";
+        string path = $"res://Assets/Animations/{GetTeam().ToString()}/{GetUnitName()}.tres";
         // GD.Print($"fetching sprite frames at {path}");
         return (SpriteFrames) GD.Load(path);
     }
     
+    public int GetVisualHealth()
+    {
+        switch (GetHealth())
+        {
+            case <= 100 and >= 91:
+                return 10;
+            case <= 90 and >= 81:
+                return 9;
+            case <= 80 and >= 71:
+                return 8;
+            case <= 70 and >= 61:
+                return 7;
+            case <= 60 and >= 51:
+                return 6;
+            case <= 50 and >= 41:
+                return 5;
+            case <= 40 and >= 31:
+                return 4;
+            case <= 30 and >= 21:
+                return 3;
+            case <= 20 and >= 11:
+                return 2;
+            case <= 10 and >= 1:
+                return 1;
+            default:
+                return 0;
+        }
+    }
 }

@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using static UnitDefinition;
 
 // Unit is basically a wrapper around UnitDefinition that extends from Node so it can exist in the nodetree
 public partial class Unit : Node
@@ -72,11 +73,14 @@ public partial class Unit : Node
 
     // public Node2D GetBaseUnit() => baseUnit;
 
-    public string GetName() => unitDef.GetName();
+    public string GetName() => unitDef.GetUnitName();
 
     // public void SetUnitName(string unitName) => this.unitName = unitName;
+    
+    // calling it GetType() would hide another function
+    public UnitType GetUnitType() => unitDef.GetUnitType();
 
-    public UnitDefinition.Team GetTeam() => unitDef.GetTeam();
+    public Team GetTeam() => unitDef.GetTeam();
 
     // public void SetTeam(UnitDefinition.Team team) => this.team = team;
 
@@ -162,4 +166,6 @@ public partial class Unit : Node
     public void SetUnitDefinition(UnitDefinition unitDef) => this.unitDef = unitDef;
 
     public UnitDefinition GetUnitDefinition() => unitDef;
+
+    public int GetVisualHealth() => unitDef.GetVisualHealth();
 }

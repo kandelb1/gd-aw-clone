@@ -32,6 +32,8 @@ public partial class Level : TileMap
     
     private CustomAStarGrid astarGrid;
 
+    private List<BuildingDefinition> buildings;
+
     public override void _Ready()
     {
         if (Instance != null)
@@ -49,6 +51,7 @@ public partial class Level : TileMap
         astarGrid.Update();
         
         ConvertUnits();
+        SetupBuildings();
 
         prevPos = Vector2I.Zero;
         GD.Print("Level ready()");
@@ -180,7 +183,11 @@ public partial class Level : TileMap
         bool isBase = (bool) tileData.GetCustomData("isBuildingBase");
         return isBase;
     }
-    
+
+    public bool BuildingDefinitionExists(Vector2I pos) => buildings.Any(x => x.GetGridPosition() == pos);
+
+    public BuildingDefinition GetBuildingDefinition(Vector2I pos) => buildings.Find(x => x.GetGridPosition() == pos);
+
     public int GetDefense(Vector2I pos)
     {
         int layer = BuildingExists(pos) ? BUILDINGS_LAYER : LEVEL_LAYER;
@@ -237,6 +244,36 @@ public partial class Level : TileMap
             baseUnit.SetUnitDefinition(unitDef);
             baseUnit.SetStartPosition(pos);
             unitsNode.AddChild(baseUnit);
+        }
+    }
+
+    // \creates BuildingDefinitions for every building on the tilemap
+    private void SetupBuildings()
+    {
+        buildings = new List<BuildingDefinition>();
+        foreach (Vector2I pos in GetUsedCells(BUILDINGS_LAYER))
+        {
+            if (!IsValid(pos)) continue;
+            // GD.Print($"There is something on the BUILDINGS_LAYER at {pos}");
+            
+            TileData tileData = GetCellTileData(BUILDINGS_LAYER, pos);
+            // bool isBuildingBase = (bool) tileData.GetCustomData("isBuildingBase");
+            string name = ((string) tileData.GetCustomData("name")).Capitalize();
+            string team = (string) tileData.GetCustomData("team");
+            // if (!isBuildingBase) continue;
+            if (!Globals.Instance.DoesBuildingExist(name)) continue;
+            if (!Enum.TryParse(team, out UnitDefinition.Team buildingTeam)) return;
+            GD.Print($"{buildingTeam} {name} exists at {pos}");
+            
+            BuildingDefinition building = Globals.Instance.GetBuildingDefinition(name);
+            building.SetGridPosition(pos);
+            building.SetControllingTeam(buildingTeam);
+            buildings.Add(building);
+        }
+        GD.Print("----PRINTING BUILDINGS LIST----");
+        foreach (BuildingDefinition def in buildings)
+        {
+            GD.Print($"{def.GetControllingTeam().ToString()} {def.GetBuildingName()} at position {def.GetGridPosition()}");
         }
     }
 }

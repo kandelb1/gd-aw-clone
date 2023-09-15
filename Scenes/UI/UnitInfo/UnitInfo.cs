@@ -30,7 +30,7 @@ public partial class UnitInfo : PanelContainer
             Unit unit = Level.Instance.GetUnit(pos);
             name.Text = unit.GetName();
             image.Texture = unit.GetUnitDefinition().GetSpriteFrames().GetFrameTexture("idle", 0);
-            health.Text = DamageCalculator.GetVisualHealth(unit).ToString(); // I think it's fine for GetVisualHealth() to live in DamageCalculator
+            health.Text = unit.GetVisualHealth().ToString();
             if (unit.GetPrimaryWeapon() != null)
             {
                 ammo.Text = unit.GetPrimaryWeapon().GetCurrentAmmo().ToString();

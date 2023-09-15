@@ -6,42 +6,54 @@ using System.Linq;
 
 public partial class PurchaseUnitScreen : PanelContainer
 {
-    private UnitDefinition.UnitType[] typesAllowed; // list of unit types we are allowed to purchase
+    // private UnitDefinition.UnitType[] typesAllowed; // list of unit types we are allowed to purchase
     [Export] private PackedScene listEntry;
-    
-    private List<UnitDefinition> purchasableUnits;
-    
+
+    private VBoxContainer list;
+
     public override void _Ready()
     {
-        // set this manually for now
-        typesAllowed = new[]
-        {
-            UnitDefinition.UnitType.Plane,
-            UnitDefinition.UnitType.Copter,
-        };
-        GetPurchasableUnits();
-        VBoxContainer list = GetNode<VBoxContainer>("VBoxContainer");
+        list = GetNode<VBoxContainer>("VBoxContainer");
+        UnitSystem.Instance.BuildingSelected += HandleBuildingSelected;
+        
+        Hide();
+    }
+
+    private void HandleBuildingSelected(BuildingDefinition buildingDef)
+    {
+        if (!buildingDef.CanBuild()) return;
+        ClearList();
+        GD.Print("PurchaseUnitScreen.HandleBuildingSelected()");
+        List<UnitDefinition> purchasableUnits = Globals.Instance.GetAllUnits()
+            .Where(x => buildingDef.GetAllowedTypes().Contains(x.GetUnitType()))
+            .OrderBy(x => x.GetCost())
+            .ToList();
+
+        GD.Print($"BUILDING {buildingDef.GetBuildingName()} IS ALLOWED TO PRODUCE: ");
         foreach (UnitDefinition unitDef in purchasableUnits)
         {
+            GD.Print(unitDef.GetUnitName());
             PurchaseUnitButton entry = listEntry.Instantiate<PurchaseUnitButton>();
             entry.SetUnitDefinition(unitDef);
             entry.PurchasePressed += HandleButtonPressed;
             list.AddChild(entry);
         }
+        
+        Show();
     }
 
-    public void SetTypesAllowed(UnitDefinition.UnitType[] typesAllowed) => this.typesAllowed = typesAllowed;
-
+    private void ClearList()
+    {
+        foreach (Node child in list.GetChildren())
+        {
+            child.QueueFree();
+        }
+    }
+    
     private void HandleButtonPressed(UnitDefinition unitDef)
     {
-        GD.Print($"Purchasing {unitDef.GetName()}"); // TODO: spawn a unit on the factory/port/airport position
+        GD.Print($"Purchasing {unitDef.GetUnitName()}"); // TODO: spawn a unit on the factory/port/airport position
+        Hide();
     }
 
-    private void GetPurchasableUnits()
-    {
-        purchasableUnits = Globals.Instance.GetAllUnits()
-            .Where(x => typesAllowed.Contains(x.GetType()))
-            .OrderBy(x => x.GetCost())
-            .ToList();
-    }
 }

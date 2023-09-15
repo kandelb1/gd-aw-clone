@@ -16,7 +16,7 @@ public partial class PurchaseUnitButton : Button
         sprite.Play("idle");
 
         Label name = GetNode<Label>("%Name");
-        name.Text = unitDef.GetName();
+        name.Text = unitDef.GetUnitName();
 
         Label cost = GetNode<Label>("%Cost");
         cost.Text = unitDef.GetCost().ToString();

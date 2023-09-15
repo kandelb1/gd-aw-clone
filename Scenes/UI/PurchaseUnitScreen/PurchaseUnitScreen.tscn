@@ -16,16 +16,16 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [node name="PurchaseUnitScreen" type="PanelContainer"]
-custom_minimum_size = Vector2(400, 150)
+custom_minimum_size = Vector2(200, 50)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -75.0
-offset_right = 200.0
-offset_bottom = 75.0
+offset_left = -50.0
+offset_top = -25.0
+offset_right = 50.0
+offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_vh3l3")
