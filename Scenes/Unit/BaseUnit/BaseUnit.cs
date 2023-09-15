@@ -29,5 +29,7 @@ public partial class BaseUnit : Node2D
 
     public void SetUnitDefinition(UnitDefinition unitDef) => this.unitDef = unitDef;
 
+    public UnitDefinition GetUnitDefinition() => this.unitDef;
+
     public void SetStartPosition(Vector2I startPos) => this.startPos = startPos;
 }

@@ -3,10 +3,6 @@ using System;
 
 public partial class PurchaseUnitButton : Button
 {
-
-    [Signal]
-    public delegate void PurchasePressedEventHandler(UnitDefinition unitDef);
-
     private UnitDefinition unitDef;
 
     public override void _Ready()
@@ -20,8 +16,6 @@ public partial class PurchaseUnitButton : Button
 
         Label cost = GetNode<Label>("%Cost");
         cost.Text = unitDef.GetCost().ToString();
-
-        Pressed += () => EmitSignal(SignalName.PurchasePressed, unitDef);
     }
 
     public void SetUnitDefinition(UnitDefinition unitDef) => this.unitDef = unitDef;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Godot.Collections;
+using static UnitDefinition;
 
 
 // in the first campaign mission, the map takes up the entire screen (with no scrolling required)
@@ -28,6 +29,8 @@ public partial class Level : TileMap
 
     [Export] private PackedScene baseUnitScene;
 
+    private Node unitsNode;
+
     private Vector2I prevPos;
     
     private CustomAStarGrid astarGrid;
@@ -50,6 +53,7 @@ public partial class Level : TileMap
         astarGrid.DiagonalMode = AStarGrid2D.DiagonalModeEnum.Never;
         astarGrid.Update();
         
+        unitsNode = GetNode("../main/Units"); // TODO: are relative paths bad?
         ConvertUnits();
         SetupBuildings();
 
@@ -223,7 +227,6 @@ public partial class Level : TileMap
     // converts tiles on the unit_placement layer to actual units in the scene tree
     private void ConvertUnits()
     {
-        Node unitsNode = GetNode("../main/Units"); // TODO: are relative paths bad?
         foreach (Vector2I pos in GetUsedCells(UNIT_PLACEMENT_LAYER))
         {
             if (!IsValid(pos)) continue;
@@ -233,18 +236,34 @@ public partial class Level : TileMap
             string name = (string) tileData.GetCustomData("unit");
             SetCell(UNIT_PLACEMENT_LAYER, pos); // clear the cell
             
-            if (!Enum.TryParse(team, out UnitDefinition.Team unitTeam)) return;
+            if (!Enum.TryParse(team, out Team unitTeam)) return;
             if (!Globals.Instance.DoesUnitExist(name)) return;
             
             GD.Print($"Spawning {unitTeam} {name} on position {pos}!");
-            UnitDefinition unitDef = (UnitDefinition) Globals.Instance.GetUnitDefinition(name).Duplicate();
-            // change default values on the UnitDefinition
-            unitDef.SetTeam(unitTeam);
-            BaseUnit baseUnit = baseUnitScene.Instantiate<BaseUnit>();
-            baseUnit.SetUnitDefinition(unitDef);
-            baseUnit.SetStartPosition(pos);
-            unitsNode.AddChild(baseUnit);
+            SpawnUnit(name, unitTeam, pos);
         }
+    }
+
+    public BaseUnit SpawnUnit(string unitName, Team team, Vector2I pos)
+    {
+        UnitDefinition unitDef = (UnitDefinition) Globals.Instance.GetUnitDefinition(unitName).Duplicate();
+        unitDef.SetTeam(team);
+        BaseUnit baseUnit = baseUnitScene.Instantiate<BaseUnit>();
+        baseUnit.SetUnitDefinition(unitDef);
+        baseUnit.SetStartPosition(pos);
+        unitsNode.AddChild(baseUnit);
+        return baseUnit;
+    }
+
+    public BaseUnit SpawnUnit(UnitDefinition unitDef, Team team, Vector2I pos)
+    {
+        UnitDefinition copy = (UnitDefinition) unitDef.Duplicate();
+        copy.SetTeam(team);
+        BaseUnit baseUnit = baseUnitScene.Instantiate<BaseUnit>();
+        baseUnit.SetUnitDefinition(copy);
+        baseUnit.SetStartPosition(pos);
+        unitsNode.AddChild(baseUnit);
+        return baseUnit;
     }
 
     // \creates BuildingDefinitions for every building on the tilemap
@@ -262,7 +281,7 @@ public partial class Level : TileMap
             string team = (string) tileData.GetCustomData("team");
             // if (!isBuildingBase) continue;
             if (!Globals.Instance.DoesBuildingExist(name)) continue;
-            if (!Enum.TryParse(team, out UnitDefinition.Team buildingTeam)) return;
+            if (!Enum.TryParse(team, out Team buildingTeam)) return;
             GD.Print($"{buildingTeam} {name} exists at {pos}");
             
             BuildingDefinition building = Globals.Instance.GetBuildingDefinition(name);

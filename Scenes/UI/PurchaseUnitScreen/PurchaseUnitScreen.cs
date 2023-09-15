@@ -35,7 +35,8 @@ public partial class PurchaseUnitScreen : PanelContainer
             GD.Print(unitDef.GetUnitName());
             PurchaseUnitButton entry = listEntry.Instantiate<PurchaseUnitButton>();
             entry.SetUnitDefinition(unitDef);
-            entry.PurchasePressed += HandleButtonPressed;
+            // entry.PurchasePressed += HandleButtonPressed;
+            entry.Pressed += () => HandleButtonPressed(unitDef, buildingDef);
             list.AddChild(entry);
         }
         
@@ -50,9 +51,12 @@ public partial class PurchaseUnitScreen : PanelContainer
         }
     }
     
-    private void HandleButtonPressed(UnitDefinition unitDef)
+    private void HandleButtonPressed(UnitDefinition unitDef, BuildingDefinition buildingDef)
     {
-        GD.Print($"Purchasing {unitDef.GetUnitName()}"); // TODO: spawn a unit on the factory/port/airport position
+        GD.Print($"Purchasing {unitDef.GetUnitName()}");
+        // TODO: subtract cost from Player
+        BaseUnit baseUnit = Level.Instance.SpawnUnit(unitDef, buildingDef.GetControllingTeam(), buildingDef.GetGridPosition());
+        baseUnit.GetUnitDefinition().SetExhausted(true);
         Hide();
     }
 
