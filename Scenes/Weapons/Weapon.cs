@@ -25,9 +25,9 @@ public partial class Weapon : Resource
 
     public int GetBaseDamageAgainstUnit(Unit unit)
     {
-        if (damageTable.ContainsKey(unit.GetUnitName()))
+        if (damageTable.ContainsKey(unit.GetName()))
         {
-            return damageTable[unit.GetUnitName()];
+            return damageTable[unit.GetName()];
         }
         
         return -1;

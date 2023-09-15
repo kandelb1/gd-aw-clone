@@ -51,6 +51,7 @@ public partial class Globals : Node
                 {
                     UnitDefinition unit = ResourceLoader.Load<UnitDefinition>(fullPath);
                     allUnits.Add(unit);
+                    GD.Print($"Loaded UnitDefinition with name {unit.GetName()}");
                 }
                 catch (InvalidCastException e)
                 {

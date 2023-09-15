@@ -10,7 +10,7 @@ public partial class DamageCalculator : Node
         Weapon weaponInUse = GetWeaponToUse(attackingUnit, defendingUnit);
         if (weaponInUse == null) // this shouldn't happen, but doesn't hurt to check
         {
-            GD.PrintErr($"Error in CalculateDamage(): {attackingUnit.GetUnitName()} cannot shoot at {defendingUnit.GetUnitName()}");
+            GD.PrintErr($"Error in CalculateDamage(): {attackingUnit.GetName()} cannot shoot at {defendingUnit.GetName()}");
             return 0;
         }
 
@@ -24,7 +24,7 @@ public partial class DamageCalculator : Node
         float defenseModifier = 1 - (defense * visualHealth / 100f);
         
         int answer = Mathf.FloorToInt(baseDamage * healthModifier * defenseModifier);
-        GD.Print($"{attackingUnit.GetUnitName()} with {attackingUnit.GetHealth()} health attacking {defendingUnit.GetUnitName()} on a {defense}-star tile ---- {answer} damage.");
+        GD.Print($"{attackingUnit.GetName()} with {attackingUnit.GetHealth()} health attacking {defendingUnit.GetName()} on a {defense}-star tile ---- {answer} damage.");
         return answer;
     }
 

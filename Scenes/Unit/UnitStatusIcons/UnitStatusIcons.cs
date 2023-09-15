@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public partial class UnitStatusIcons : Node2D
 {
-    private Unit unit;
+    
+    [Export] private Unit unit;
     
     private Sprite2D healthSprite;
     private static readonly Vector2 HEALTH_SPRITE_SIZE = new Vector2(8, 7);
@@ -25,7 +26,6 @@ public partial class UnitStatusIcons : Node2D
 
     public override void _Ready()
     {
-        unit = GetNode<Unit>("../Unit");
         healthSprite = GetNode<Sprite2D>("HealthSprite");
         unit.HealthChanged += UpdateHealth;
         UpdateHealth(unit.GetHealth());

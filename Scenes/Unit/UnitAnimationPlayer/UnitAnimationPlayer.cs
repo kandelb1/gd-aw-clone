@@ -3,17 +3,14 @@ using System;
 
 public partial class UnitAnimationPlayer : Node
 {
-    private Unit unit;
-    private UnitPathFollower pathFollower;
+    [Export] private Unit unit;
+    [Export] private UnitPathFollower pathFollower;
     
     private SpriteFrames spriteFrames;
     private AnimatedSprite2D animSprite;
 
     public override void _Ready()
     {
-        unit = GetNode<Unit>("../Unit");
-        
-        pathFollower = GetNode<UnitPathFollower>("../UnitPathFollower");
         pathFollower.UnitMoving += HandleUnitMoving;
         pathFollower.UnitStopped += HandleUnitStopped;
 

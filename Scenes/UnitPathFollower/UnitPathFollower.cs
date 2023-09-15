@@ -14,7 +14,7 @@ public partial class UnitPathFollower : Node
     private const int MOVE_SPEED = 100;
     private const float STOP_DIST = 0.01f;
 
-    private Unit unit;
+    [Export] private Unit unit;
 
     private bool moving;
     private Vector2I[] path;
@@ -24,7 +24,6 @@ public partial class UnitPathFollower : Node
 
     public override void _Ready()
     {
-        unit = GetNode<Unit>("../Unit");
         moving = false;
         // prevMoveDir = Vector2I.Zero;
     }

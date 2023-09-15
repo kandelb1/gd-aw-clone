@@ -16,20 +16,25 @@ script = ExtResource("1_2a4o1")
 
 [node name="Unit" parent="." instance=ExtResource("1_jjdaa")]
 
-[node name="UnitPathFollower" parent="." instance=ExtResource("2_23dbd")]
+[node name="UnitPathFollower" parent="." node_paths=PackedStringArray("unit") instance=ExtResource("2_23dbd")]
+unit = NodePath("../Unit")
 
-[node name="UnitAnimationPlayer" parent="." instance=ExtResource("3_k0cxy")]
+[node name="UnitAnimationPlayer" parent="." node_paths=PackedStringArray("unit", "pathFollower") instance=ExtResource("3_k0cxy")]
+unit = NodePath("../Unit")
+pathFollower = NodePath("../UnitPathFollower")
 
 [node name="Actions" type="Node" parent="."]
 
-[node name="MoveAction" type="Node" parent="Actions"]
+[node name="MoveAction" type="Node" parent="Actions" node_paths=PackedStringArray("pathFollower")]
 script = ExtResource("4_6n7fb")
+pathFollower = NodePath("../../UnitPathFollower")
 
 [node name="ShootAction" type="Node" parent="Actions"]
 script = ExtResource("5_3mpx7")
 
-[node name="LoadAction" type="Node" parent="Actions"]
+[node name="LoadAction" type="Node" parent="Actions" node_paths=PackedStringArray("pathFollower")]
 script = ExtResource("6_e1l24")
+pathFollower = NodePath("../../UnitPathFollower")
 
 [node name="WaitAction" type="Node" parent="Actions"]
 script = ExtResource("7_g5f4s")
@@ -38,4 +43,5 @@ script = ExtResource("7_g5f4s")
 sprite_frames = ExtResource("8_kggjj")
 animation = &"idle"
 
-[node name="UnitStatusIcons" parent="." instance=ExtResource("9_dbebb")]
+[node name="UnitStatusIcons" parent="." node_paths=PackedStringArray("unit") instance=ExtResource("9_dbebb")]
+unit = NodePath("../Unit")

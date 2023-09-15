@@ -6,11 +6,10 @@ using System.Collections.Generic;
 public partial class MoveAction : BaseAction
 {
 
-    private UnitPathFollower pathFollower;
+    [Export] private UnitPathFollower pathFollower;
 
     public override void _Ready()
     {
-        pathFollower = unit.GetNode<UnitPathFollower>("../UnitPathFollower");
         pathFollower.UnitStopped += HandleUnitStopped;
     }
 
@@ -25,7 +24,7 @@ public partial class MoveAction : BaseAction
         // TODO: this is duplicate code from UnloadAction, maybe we can move it to BaseAction.CompleteAction()?
         if (unit.HasUnitsLoaded())
         {
-            GD.Print($"{unit.GetUnitName()} has more units loaded, forcing them to unload or wait");
+            GD.Print($"{unit.GetName()} has more units loaded, forcing them to unload or wait");
             // disable every action except Unload and Wait
             foreach (BaseAction action in unit.GetActions())
             {

@@ -7,13 +7,12 @@ using System.Linq;
 public partial class LoadAction : BaseAction
 {
     
-    private UnitPathFollower pathFollower;
+    [Export] private UnitPathFollower pathFollower;
 
     private Unit loaderUnit;
     
     public override void _Ready()
     {
-        pathFollower = unit.GetNode<UnitPathFollower>("../UnitPathFollower");
         pathFollower.UnitStopped += HandleUnitStopped; // TODO: is it better to pass in a callback to pathFollower.MoveAlongPath() ?
     }
 

@@ -22,7 +22,7 @@ public partial class UnloadAction : BaseAction
 
         if (unit.HasUnitsLoaded())
         {
-            GD.Print($"{unit.GetUnitName()} has more units loaded, forcing them to unload or wait");
+            GD.Print($"{unit.GetName()} has more units loaded, forcing them to unload or wait");
             // disable every action except Unload and Wait
             foreach (BaseAction action in unit.GetActions())
             {
@@ -94,7 +94,7 @@ public partial class UnloadAction : BaseAction
             };
             actionList.AddChild(button);
             // manually set the button's text
-            button.Text = "Unload " + loadedUnit.GetUnitName();
+            button.Text = "Unload " + loadedUnit.GetName();
         }
     }
 }

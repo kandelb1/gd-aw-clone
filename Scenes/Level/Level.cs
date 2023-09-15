@@ -217,10 +217,9 @@ public partial class Level : TileMap
             TileData tileData = GetCellTileData(UNIT_PLACEMENT_LAYER, pos);
             string team = (string) tileData.GetCustomData("team");
             string name = (string) tileData.GetCustomData("unit");
-            Unit.Team unitTeam;
             SetCell(UNIT_PLACEMENT_LAYER, pos); // clear the cell
             
-            if (!Enum.TryParse<Unit.Team>(team, out unitTeam)) return;
+            if (!Enum.TryParse(team, out UnitDefinition.Team unitTeam)) return;
             if (!Globals.Instance.DoesUnitExist(name)) return;
             
             GD.Print($"Spawning {unitTeam} {name} on position {pos}!");
