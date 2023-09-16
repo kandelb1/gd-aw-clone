@@ -38,7 +38,7 @@ project/assembly_name="test-csharp"
 
 [gui]
 
-theme/custom_font="res://Assets/Fonts/Minecraftia-Regular.ttf"
+theme/custom_font="res://Assets/Fonts/Berkelium1541.ttf"
 
 [input]
 

@@ -1,15 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8dtqss3fomk1"]
+[gd_scene load_steps=2 format=3 uid="uid://c8dtqss3fomk1"]
 
-[ext_resource type="FontFile" uid="uid://ihio4qvs2kay" path="res://Assets/Fonts/Minecraftia-Regular.ttf" id="1_jbsi7"]
 [ext_resource type="Script" path="res://Scenes/UI/NextTurnButton/NextTurnButton.cs" id="1_rkkt5"]
 
 [node name="NextTurnButton" type="Panel"]
-custom_minimum_size = Vector2(56, 22)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -56.0
-offset_bottom = 22.0
+offset_left = -43.0
+offset_bottom = 14.0
 grow_horizontal = 0
 script = ExtResource("1_rkkt5")
 
@@ -18,6 +16,5 @@ layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
 focus_mode = 0
-theme_override_fonts/font = ExtResource("1_jbsi7")
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 6
 text = "Next Turn"

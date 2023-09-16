@@ -11,9 +11,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -74.0
+offset_left = -70.0
 offset_top = -62.0
-offset_right = -44.0
+offset_right = -40.0
 offset_bottom = -4.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -25,9 +25,10 @@ layout_mode = 2
 [node name="Name" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 6
 text = "Tank"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Image" type="TextureRect" parent="VBoxContainer"]
 unique_name_in_owner = true
@@ -51,10 +52,10 @@ stretch_mode = 2
 [node name="Health" type="Label" parent="VBoxContainer/HealthContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 6
 text = "10"
 horizontal_alignment = 1
-vertical_alignment = 2
+vertical_alignment = 1
 
 [node name="AmmoContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -73,7 +74,7 @@ stretch_mode = 2
 [node name="Ammo" type="Label" parent="VBoxContainer/AmmoContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 6
 text = "10"
 horizontal_alignment = 1
-vertical_alignment = 2
+vertical_alignment = 1
