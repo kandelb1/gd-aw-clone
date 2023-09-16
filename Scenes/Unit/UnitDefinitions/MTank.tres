@@ -5,12 +5,17 @@
 [ext_resource type="Resource" uid="uid://opi0thcpv24k" path="res://Scenes/Weapons/MTank/Cannon.tres" id="2_k041i"]
 [ext_resource type="Resource" uid="uid://bikqgcje2mq50" path="res://Scenes/Weapons/MTank/MachineGun.tres" id="4_o5o3j"]
 
-[sub_resource type="Resource" id="Resource_y1elv"]
+[sub_resource type="Resource" id="Resource_r0dbe"]
 script = ExtResource("1_b4jws")
 moveDistance = 5
 terrainMoveCosts = {
+"airport": 1,
 "beach": 1,
+"city": 1,
+"factory": 1,
+"hq": 1,
 "plains": 1,
+"port": 1,
 "road": 1,
 "woods": 2
 }
@@ -25,7 +30,7 @@ team = 1
 enemy = false
 loadCapacity = 0
 loadRules = PackedStringArray()
-moveDef = SubResource("Resource_y1elv")
+moveDef = SubResource("Resource_r0dbe")
 primaryWeap = ExtResource("2_k041i")
 secondaryWeap = ExtResource("4_o5o3j")
 directCombat = true

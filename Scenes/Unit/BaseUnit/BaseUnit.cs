@@ -14,6 +14,9 @@ public partial class BaseUnit : Node2D
     {
         unit = GetNode<Unit>("Unit");
         unit.SetUnitDefinition(unitDef); // need to do this right away
+        GD.Print($"{unit.GetName()} has a move distance of {unitDef.GetMoveDefinition().GetMoveDistance()} these move costs for buildings:");
+        GD.Print($"city: {unitDef.GetMoveDefinition().GetMoveCostForTerrain("city")}");
+        GD.Print($"factory: {unitDef.GetMoveDefinition().GetMoveCostForTerrain("factory")}");
         animPlayer = GetNode<UnitAnimationPlayer>("UnitAnimationPlayer");
     }
 

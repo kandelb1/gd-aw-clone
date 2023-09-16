@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scenes/Unit/MoveDefinition.cs" id="1_udp5d"]
 [ext_resource type="Resource" uid="uid://biag4fe7qqak6" path="res://Scenes/Weapons/Submarine/Torpedoes.tres" id="2_owm1q"]
 
-[sub_resource type="Resource" id="Resource_keone"]
+[sub_resource type="Resource" id="Resource_dqlmo"]
 script = ExtResource("1_udp5d")
 moveDistance = 5
 terrainMoveCosts = {
@@ -23,7 +23,7 @@ team = 1
 enemy = false
 loadCapacity = 0
 loadRules = PackedStringArray()
-moveDef = SubResource("Resource_keone")
+moveDef = SubResource("Resource_dqlmo")
 primaryWeap = ExtResource("2_owm1q")
 directCombat = true
 minRange = 1

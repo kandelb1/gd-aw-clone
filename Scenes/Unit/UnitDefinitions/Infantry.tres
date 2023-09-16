@@ -4,13 +4,18 @@
 [ext_resource type="Script" path="res://Scenes/Unit/MoveDefinition.cs" id="1_wakso"]
 [ext_resource type="Resource" uid="uid://d4gwput3v8vle" path="res://Scenes/Weapons/Infantry/MachineGun.tres" id="3_n6rsm"]
 
-[sub_resource type="Resource" id="Resource_xu5x3"]
+[sub_resource type="Resource" id="Resource_mv4qp"]
 script = ExtResource("1_wakso")
 moveDistance = 3
 terrainMoveCosts = {
+"airport": 1,
 "beach": 1,
+"city": 1,
+"factory": 1,
+"hq": 1,
 "mountains": 2,
 "plains": 1,
+"port": 1,
 "river": 2,
 "road": 1,
 "sea": 0,
@@ -27,7 +32,7 @@ team = 1
 enemy = false
 loadCapacity = 0
 loadRules = PackedStringArray()
-moveDef = SubResource("Resource_xu5x3")
+moveDef = SubResource("Resource_mv4qp")
 secondaryWeap = ExtResource("3_n6rsm")
 directCombat = true
 minRange = 1

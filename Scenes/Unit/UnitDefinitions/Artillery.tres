@@ -4,12 +4,17 @@
 [ext_resource type="Script" path="res://Scenes/Unit/UnitDefinitions/UnitDefinition.cs" id="1_3803l"]
 [ext_resource type="Resource" uid="uid://nlbck8tgbftd" path="res://Scenes/Weapons/Artillery/Cannon.tres" id="2_bnw1b"]
 
-[sub_resource type="Resource" id="Resource_f7bx8"]
+[sub_resource type="Resource" id="Resource_01ynb"]
 script = ExtResource("1_2nnk1")
 moveDistance = 5
 terrainMoveCosts = {
+"airport": 1,
 "beach": 1,
+"city": 1,
+"factory": 1,
+"hq": 1,
 "plains": 1,
+"port": 1,
 "road": 1,
 "woods": 2
 }
@@ -24,7 +29,7 @@ team = 1
 enemy = false
 loadCapacity = 0
 loadRules = PackedStringArray()
-moveDef = SubResource("Resource_f7bx8")
+moveDef = SubResource("Resource_01ynb")
 primaryWeap = ExtResource("2_bnw1b")
 directCombat = false
 minRange = 2

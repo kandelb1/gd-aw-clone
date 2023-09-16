@@ -5,12 +5,17 @@
 [ext_resource type="Resource" uid="uid://gxiv8bykg8la" path="res://Scenes/Weapons/NeoTank/NeoCannon.tres" id="2_giybs"]
 [ext_resource type="Resource" uid="uid://c5xie8jvld8xl" path="res://Scenes/Weapons/NeoTank/MachineGun.tres" id="4_4itot"]
 
-[sub_resource type="Resource" id="Resource_iq8r8"]
+[sub_resource type="Resource" id="Resource_t1qri"]
 script = ExtResource("1_ix1nw")
 moveDistance = 6
 terrainMoveCosts = {
+"airport": 1,
 "beach": 1,
+"city": 1,
+"factory": 1,
+"hq": 1,
 "plains": 1,
+"port": 1,
 "road": 1,
 "woods": 2
 }
@@ -25,7 +30,7 @@ team = 1
 enemy = false
 loadCapacity = 0
 loadRules = PackedStringArray()
-moveDef = SubResource("Resource_iq8r8")
+moveDef = SubResource("Resource_t1qri")
 primaryWeap = ExtResource("2_giybs")
 secondaryWeap = ExtResource("4_4itot")
 directCombat = true

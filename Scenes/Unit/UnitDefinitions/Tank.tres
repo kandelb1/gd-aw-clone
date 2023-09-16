@@ -5,12 +5,17 @@
 [ext_resource type="Resource" uid="uid://du3pcm2gknvf1" path="res://Scenes/Weapons/Tank/Cannon.tres" id="2_nxgie"]
 [ext_resource type="Resource" uid="uid://bnbe6hvym5c0i" path="res://Scenes/Weapons/Tank/MachineGun.tres" id="4_faldq"]
 
-[sub_resource type="Resource" id="Resource_wx4j4"]
+[sub_resource type="Resource" id="Resource_naagf"]
 script = ExtResource("1_8lhqr")
 moveDistance = 6
 terrainMoveCosts = {
+"airport": 1,
 "beach": 1,
+"city": 1,
+"factory": 1,
+"hq": 1,
 "plains": 1,
+"port": 1,
 "road": 1,
 "woods": 2
 }
@@ -25,7 +30,7 @@ team = 1
 enemy = false
 loadCapacity = 0
 loadRules = PackedStringArray()
-moveDef = SubResource("Resource_wx4j4")
+moveDef = SubResource("Resource_naagf")
 primaryWeap = ExtResource("2_nxgie")
 secondaryWeap = ExtResource("4_faldq")
 directCombat = true

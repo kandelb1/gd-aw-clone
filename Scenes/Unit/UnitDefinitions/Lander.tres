@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/Unit/UnitDefinitions/UnitDefinition.cs" id="1_2p5qj"]
 [ext_resource type="Script" path="res://Scenes/Unit/MoveDefinition.cs" id="1_xn5j8"]
 
-[sub_resource type="Resource" id="Resource_0pl7i"]
+[sub_resource type="Resource" id="Resource_ilrgt"]
 script = ExtResource("1_xn5j8")
 moveDistance = 6
 terrainMoveCosts = {
@@ -23,7 +23,7 @@ team = 1
 enemy = false
 loadCapacity = 2
 loadRules = PackedStringArray("Infantry", "MechInfantry")
-moveDef = SubResource("Resource_0pl7i")
+moveDef = SubResource("Resource_ilrgt")
 directCombat = true
 minRange = 1
 maxRange = 1

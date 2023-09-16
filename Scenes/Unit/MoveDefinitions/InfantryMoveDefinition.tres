@@ -6,9 +6,14 @@
 script = ExtResource("1_b2qct")
 moveDistance = 0
 terrainMoveCosts = {
+"airport": 1,
 "beach": 1,
+"city": 1,
+"factory": 1,
+"hq": 1,
 "mountains": 2,
 "plains": 1,
+"port": 1,
 "river": 2,
 "road": 1,
 "sea": 0,
