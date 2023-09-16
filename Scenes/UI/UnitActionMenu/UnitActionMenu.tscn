@@ -9,9 +9,10 @@ script = ExtResource("1_d6ls5")
 actionMenuButton = ExtResource("2_v4vlf")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(42, 22)
-offset_right = 42.0
-offset_bottom = 22.0
+custom_minimum_size = Vector2(32, 14)
+offset_right = 32.0
+offset_bottom = 14.0
 
 [node name="List" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
+theme_override_constants/separation = 1
