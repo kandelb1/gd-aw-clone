@@ -71,7 +71,7 @@ public partial class UnitPathFollower : Node
     private void FinishMove()
     {
         moving = false;
-        unit.SetGridPosition(Level.Instance.LocalToMap(unit.GetPosition()));
+        unit.SetGridPosition(Level.Instance.LocalToMap(unit.GetPosition())); // TODO: don't set the grid position just yet
         EmitSignal(SignalName.UnitStopped);
     }
 

@@ -16,16 +16,34 @@ public partial class CustomAStarGrid : AStarGrid2D
         return moveCost;
     }
     
-    public void SetMoveDefinition(MoveDefinition moveDef, bool ignoreUnits)
+    // public void SetMoveDefinition(MoveDefinition moveDef, bool ignoreUnits)
+    // {
+    //     this.moveDef = moveDef;
+    //     // block out all tiles that are not reachable with this move def
+    //     foreach (Vector2I pos in Level.Instance.GetUsedCells(0))
+    //     {
+    //         int moveCost = moveDef.GetMoveCostForTerrain(Level.Instance.GetTerrainName(pos));
+    //         // bool hasUnit = Level.Instance.IsOccupied(pos);
+    //         // if (ignoreUnits) hasUnit = false;
+    //         // SetPointSolid(pos, moveCost == 0 || hasUnit);
+    //         SetPointSolid(pos, moveCost == 0);
+    //     }
+    // }
+    
+    // block any tiles that are not reachable with the given move def, or have a unit of a different team occupying them
+    public void ConfigureGrid(UnitDefinition.Team team, MoveDefinition moveDef)
     {
         this.moveDef = moveDef;
-        // block out all tiles that are not reachable with this move def
-        foreach (Vector2I pos in Level.Instance.GetUsedCells(0))
+        foreach (Vector2I pos in Level.Instance.GetUsedCells(Level.LEVEL_LAYER))
         {
             int moveCost = moveDef.GetMoveCostForTerrain(Level.Instance.GetTerrainName(pos));
-            bool hasUnit = Level.Instance.IsOccupied(pos);
-            if (ignoreUnits) hasUnit = false;
-            SetPointSolid(pos, moveCost == 0 || hasUnit);
+            bool occupied = false;
+            if (Level.Instance.IsOccupied(pos))
+            {
+                Unit otherUnit = Level.Instance.GetUnit(pos);
+                occupied = otherUnit.GetTeam() != team;
+            }
+            SetPointSolid(pos, moveCost == 0 || occupied);
         }
     }
 }

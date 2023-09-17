@@ -1,9 +1,13 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 public partial class UnitSystem : Node
 {
+
+    [Signal]
+    public delegate void UnitSelectedEventHandler(Unit unit);
 
     [Signal]
     public delegate void UnitDeselectedEventHandler();
@@ -12,24 +16,28 @@ public partial class UnitSystem : Node
     public delegate void ActionSelectedEventHandler(BaseAction action);
 
     [Signal]
-    public delegate void BuildingSelectedEventHandler(BuildingDefinition buildingDef);
+    public delegate void ActionDeselectedEventHandler();
+
+    // [Signal]
+    // public delegate void ActionCompletedEventHandler();
     
     [Signal]
-    public delegate void ActionTakenEventHandler();
+    public delegate void BuildingSelectedEventHandler(BuildingDefinition buildingDef);
 
     public static UnitSystem Instance { get; private set; }
 
-    private PackedScene unitActionMenu;
+    [Export] private PackedScene unitActionMenu;
     
     
     private Unit selectedUnit;
+    private Vector2I originalPosition;
     private BaseAction selectedAction;
 
     private Node baseUI;
+    private AudioStreamPlayer audioPlayer;
 
     public override void _Ready()
     {
-        GD.Print("UnitSystem _Ready()");
         if (Instance != null)
         {
             GD.Print("There is already an instance of UnitSystem??");
@@ -37,9 +45,93 @@ public partial class UnitSystem : Node
             return;
         }
         Instance = this;
-
-        unitActionMenu = (PackedScene) GD.Load("res://Scenes/UI/UnitActionMenu/UnitActionMenu.tscn");
+        
         baseUI = GetNode<Node>("/root/main/UI"); // TODO: should I really be doing this?
+        audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+        audioPlayer.Stream = ResourceLoader.Load<AudioStreamWav>("res://Assets/Sounds/error.wav");
+
+        ActionEventBus.Instance.ActionCompleted += HandleActionCompleted;
+        GD.Print("UnitSystem._Ready()");
+    }
+
+    public bool IsUnitSelected() => selectedUnit != null;
+
+    private void SetSelectedUnit(Unit unit)
+    {
+        selectedUnit = unit;
+        originalPosition = unit.GetGridPosition();
+        // emit UnitSelected BEFORE ActionSelected so the action has a chance...
+        // ...to calculate its valid positions BEFORE TileHighlighter asks for them
+        EmitSignal(SignalName.UnitSelected, unit);
+        SetSelectedAction(unit.GetAction<MoveAction>());
+    }
+
+    public bool IsActionSelected() => selectedAction != null;
+
+    public BaseAction GetSelectedAction() => selectedAction;
+
+    public void SetSelectedAction(BaseAction action)
+    {
+        GD.Print($"Setting selected action to {action.Name}");
+        selectedAction = action;
+        EmitSignal(SignalName.ActionSelected, selectedAction);
+    }
+
+    private void DeselectAction()
+    {
+        selectedAction = null;
+        EmitSignal(SignalName.ActionDeselected);
+    }
+    
+    private void TrySelectUnit(Vector2I pos)
+    {
+        if (!Level.Instance.IsOccupied(pos)) return;
+        Unit unit = Level.Instance.GetUnit(pos);
+        if (unit.IsExhausted()) return;
+        SetSelectedUnit(unit);
+    }
+
+    private void DeselectUnit(bool resetPosition = false)
+    {
+        // move the unit back to its starting position
+        if (resetPosition)
+        {
+            selectedUnit.SetGridPosition(originalPosition);
+            selectedUnit.SetMoved(false);
+        }
+        selectedUnit = null;
+        selectedAction = null;
+        EmitSignal(SignalName.UnitDeselected);
+    }
+
+    private void HandleActionCompleted()
+    {
+        DeselectAction();
+        if (selectedUnit.IsExhausted())
+        {
+            DeselectUnit();
+            return;
+        }
+        // show the menu again
+        Vector2 position = Level.Instance.MapToLocal(selectedUnit.GetGridPosition());
+        List<BaseAction> availableActions = selectedUnit.GetActions().Where(x => x.IsActionAvailable()).ToList();
+        CreateActionMenuUI(position, availableActions);
+    }
+
+    private void CreateActionMenuUI(Vector2 position, List<BaseAction> availableActions)
+    {
+        UnitActionMenu menu = unitActionMenu.Instantiate<UnitActionMenu>();
+        menu.Position = position;
+        menu.SetActions(availableActions);
+        menu.ActionSelected += SetSelectedAction;
+        menu.MenuClosed += HandleMenuClosed;
+        baseUI.AddChild(menu);
+    }
+
+    private void HandleMenuClosed()
+    {
+        // the menu was closed without choosing an action, so reset the selectedUnit's position
+        DeselectUnit(true);
     }
 
     // use UnhandledInput so that any GUI showing on top of the level can consume the input first
@@ -47,78 +139,27 @@ public partial class UnitSystem : Node
     {
         if (@event.IsActionPressed("left click"))
         {
-            // GD.Print("left click");
             InputEventMouseButton e = (InputEventMouseButton) @event;
             Vector2I clickPos = Level.Instance.GetGridPosition(e.Position);
 
-            if (selectedUnit != null)
+            if (!IsUnitSelected()) // try selecting a unit
             {
-                if (selectedAction == null) return;
-                if (ValidActionPositionsCache.Instance.GetCachedPositions().Contains(clickPos))
-                {
-                    // take the action
-                    selectedAction.TakeAction(clickPos);
-                    DeselectUnit();
-                }
-                else
-                {
-                    // deselect unit
-                    DeselectUnit();
-                }
+                TrySelectUnit(clickPos);
             }
-            else
+            else // see if wherever we clicked is valid
             {
-                // otherwise try to select the unit or building on the grid position we clicked
-                if (Level.Instance.IsOccupied(clickPos))
+                if (!IsActionSelected()) return;
+                if (!selectedAction.IsValidPosition(clickPos))
                 {
-                    Unit unit = Level.Instance.GetUnit(clickPos);
-                    if (unit == selectedUnit) return;
-                    if (unit.IsExhausted()) return;
-                
-                    GD.Print($"clicked on {unit.Name}");
-                    selectedUnit = unit;
-                    UnitActionMenu menu = unitActionMenu.Instantiate() as UnitActionMenu;
-                    menu.Position = unit.GetPosition() + new Vector2(10, 0);
-                    menu.SetActions(unit.GetActions());
-                    menu.ActionSelected += HandleActionSelected;
-                    menu.MenuClosed += DeselectUnit;
-                    baseUI.AddChild(menu);                    
+                    audioPlayer.Play(); // TODO: UnitSystem shouldn't be responsible for playing audio
+                    return;
                 }
-                else if(Level.Instance.BuildingDefinitionExists(clickPos))
-                {
-                    BuildingDefinition buildingDef = Level.Instance.GetBuildingDefinition(clickPos);
-                    GD.Print($"clicked on {buildingDef.GetControllingTeam()} {buildingDef.GetBuildingName()}");
-                    EmitSignal(SignalName.BuildingSelected, buildingDef);
-                }
+                selectedAction.TakeAction(clickPos);
             }
-        }else if (@event.IsActionPressed("right click")) // lets use right click to cancel for now
+        }else if (@event.IsActionPressed("right click"))
         {
-            DeselectUnit();
+            if (!IsUnitSelected()) return;
+            DeselectUnit(true);
         }
     }
-
-    public override void _Process(double delta)
-    {
-        selectedAction?.Update(delta);
-    }
-
-    private void HandleActionSelected(BaseAction action)
-    {
-        GD.Print($"action selected: {action.GetActionName()}");
-        selectedAction = action;
-        EmitSignal(SignalName.ActionSelected, action);
-    }
-
-    public void DeselectUnit()
-    {
-        selectedUnit = null;
-        selectedAction = null;
-        EmitSignal(SignalName.UnitDeselected);
-    }
-
-    public bool IsUnitSelected() => selectedUnit != null;
-
-    public Unit GetSelectedUnit() => selectedUnit;
-
-    public BaseAction GetSelectedAction() => selectedAction;
 }

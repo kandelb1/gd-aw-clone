@@ -20,8 +20,9 @@ public partial class Unit : Node
     private UnitDefinition unitDef;
 
     private UnitPathFollower pathFollower;
-    
-    private List<BaseAction> unitActions; // TODO: refactor the Action system
+
+    [Export] private Node actionsNode;
+    private List<BaseAction> unitActions;
 
     public override void _Ready()
     {
@@ -34,14 +35,13 @@ public partial class Unit : Node
         pathFollower = baseUnit.GetNode<UnitPathFollower>("UnitPathFollower"); // TODO: move this to BaseUnit
         
         unitActions = new List<BaseAction>();
-        foreach (Node child in baseUnit.GetNode("Actions").GetChildren())
+        foreach (Node child in actionsNode.GetChildren())
         {
             BaseAction action = child as BaseAction;
             action.SetUnit(this);
             unitActions.Add(action);
         }
-        
-        
+
         TurnSystem.Instance.TurnChanged += HandleTurnChanged;
     }
 
@@ -57,7 +57,7 @@ public partial class Unit : Node
 
     public void SetPosition(Vector2 pos) => baseUnit.Position = pos;
 
-    public List<BaseAction> GetActions() => unitActions;
+    // public List<BaseAction> GetActions() => unitActions;
 
     public bool IsEnemy() => unitDef.IsEnemy();
 
@@ -98,20 +98,6 @@ public partial class Unit : Node
 
     public bool CanLoadUnit(Unit unit) => unitDef.CanLoadUnit(unit);
 
-    public T GetAction<T>() where T : BaseAction
-    {
-        foreach (BaseAction action in unitActions)
-        {
-            if (action is T theAction) return theAction;
-            // could also do it like
-            // if (action is T) return (T) action;
-            // or this
-            // if (action is T) return action as T;
-
-        }
-        return null;
-    }
-
     public void SetHidden(bool hidden)
     {
         baseUnit.Visible = !hidden;
@@ -129,10 +115,10 @@ public partial class Unit : Node
     {
         SetExhausted(false);
         SetMoved(false);
-        foreach (BaseAction action in GetActions())
-        {
-            action.SetDisabled(false);
-        }
+        // foreach (BaseAction action in GetActions())
+        // {
+        //     action.SetDisabled(false);
+        // }
     }
 
     public Weapon GetPrimaryWeapon() => unitDef.GetPrimaryWeapon();
@@ -168,4 +154,17 @@ public partial class Unit : Node
     public UnitDefinition GetUnitDefinition() => unitDef;
 
     public int GetVisualHealth() => unitDef.GetVisualHealth();
+
+    public BaseUnit GetBaseUnit() => baseUnit;
+    
+    public T GetAction<T>() where T : BaseAction
+    {
+        foreach (BaseAction action in unitActions)
+        {
+            if (action is T theAction) return theAction;
+        }
+        return null;
+    }
+
+    public List<BaseAction> GetActions() => unitActions;
 }

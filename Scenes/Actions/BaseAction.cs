@@ -5,60 +5,41 @@ using System.Collections.Generic;
 [GlobalClass]
 public abstract partial class BaseAction : Node
 {
-
+    protected static PackedScene ACTION_BUTTON = ResourceLoader.Load<PackedScene>("res://Scenes/UI/UnitActionMenu/UnitActionMenuButton.tscn");
+    
     protected Unit unit;
-    protected bool targeting;
-    protected bool active;
-    private bool disabled = false;
+    protected List<Vector2I> validPositions;
 
-    public static PackedScene ACTION_BUTTON = ResourceLoader.Load<PackedScene>("res://Scenes/UI/UnitActionMenu/UnitActionMenuButton.tscn");
-
-    public void SetUnit(Unit unit)
+    public override void _Ready()
     {
-        this.unit = unit;
+        UnitSystem.Instance.UnitSelected += HandleUnitSelected;
     }
+
+    public void SetUnit(Unit unit) => this.unit = unit;
 
     public Unit GetUnit() => unit;
-
-    public bool IsTargeting() => targeting;
-
-    public bool IsActive() => active;
-
+    
     public abstract string GetActionName();
 
-    public virtual void Update(double delta) {}
+    protected abstract void CalculateValidPositions();
 
-    protected void StartAction()
-    {
-        active = true;
-    }
+    public virtual List<Vector2I> GetValidPositions() => validPositions;
+    
+    public abstract bool IsValidPosition(Vector2I pos);
 
-    protected void CompleteAction()
-    {
-        active = false;
-    }
+    public abstract bool IsActionAvailable();
 
-    public abstract void TakeAction(Vector2I gridPos);
+    protected abstract void HandleUnitSelected(Unit otherUnit);
 
-    public abstract List<Vector2I> GetValidPositions();
+    public abstract void TakeAction(Vector2I pos);
 
-    public virtual bool IsActionAvailable() => !IsActionDisabled() && GetValidPositions().Count > 0;
-
-    public bool IsValidPosition(Vector2I gridPos)
-    {
-        return GetValidPositions().Contains(gridPos);
-    }
-
+    public abstract bool WillExhaustUnit(); // will this action exhaust the unit when it's done?
+    
     public virtual void AddActionToUI(VBoxContainer actionList, Action actionClickedCallback)
     {
         UnitActionMenuButton button = ACTION_BUTTON.Instantiate() as UnitActionMenuButton;
-        button.SetAction(this);
+        button.SetButtonText(GetActionName());
         button.Pressed += actionClickedCallback;
         actionList.AddChild(button);
     }
-
-    public bool IsActionDisabled() => disabled;
-
-    public void SetDisabled(bool disabled) => this.disabled = disabled;
-
 }

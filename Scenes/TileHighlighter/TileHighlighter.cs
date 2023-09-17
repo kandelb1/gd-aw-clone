@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Godot.Collections;
 
 public partial class TileHighlighter : Node
@@ -12,76 +13,54 @@ public partial class TileHighlighter : Node
 
     private AttackCursor attackCursor;
 
+    private List<Vector2I> movementRange;
+
     public override void _Ready()
     {
 
         attackCursor = GetNode<AttackCursor>("AttackCursor");
-
-        Level.Instance.MouseChangedPosition += HandleMouseMove;
+        
         UnitSystem.Instance.ActionSelected += HandleActionSelected;
-        UnitSystem.Instance.ActionTaken += HandleActionTaken;
-        UnitSystem.Instance.UnitDeselected += HandleUnitDeselected;
-    }
-    
-    private void HandleUnitDeselected()
-    {
-        ClearEverything();
-    }
-    
-    private void HandleMouseMove(Vector2I gridPos)
-    {
-        Unit unit = UnitSystem.Instance.GetSelectedUnit();
-        if (unit == null) return;
-
-        Vector2I[] path;
-        switch (UnitSystem.Instance.GetSelectedAction())
-        {
-            // Level.GetPath() is an expensive call
-            case MoveAction moveAction:
-                if (!ValidActionPositionsCache.Instance.GetCachedPositions().Contains(gridPos))
-                {
-                    Level.Instance.ClearLayer(Level.ARROW_LAYER);
-                    return;
-                }
-                path = Level.Instance.GetPath(unit.GetGridPosition(), gridPos, unit.GetMoveDefinition());
-                Level.Instance.DrawArrowAlongPath(new Array<Vector2I>(path), true);
-                break;
-            case ShootAction shootAction:
-                if (!shootAction.GetValidPositions().Contains(gridPos)) return; // TODO: shouldnt this use ValidActionPositionsCache?
-                attackCursor.ShowCursorAt(gridPos);
-                break;
-            case LoadAction loadAction:
-                if (!ValidActionPositionsCache.Instance.GetCachedPositions().Contains(gridPos))
-                {
-                    Level.Instance.ClearLayer(Level.ARROW_LAYER);
-                    return;
-                }
-                path = Level.Instance.GetPath(unit.GetGridPosition(), gridPos, unit.GetMoveDefinition(), true);
-                Level.Instance.DrawArrowAlongPath(new Array<Vector2I>(path), true);
-                break;
-        }
+        UnitSystem.Instance.ActionDeselected += HandleActionDeselected;
+        UnitSystem.Instance.UnitDeselected += ClearEverything;
+        // UnitSystem.Instance.ActionCompleted += ClearEverything;
+        
+        Level.Instance.MouseChangedPosition += HandleMouseMove;
     }
 
     private void HandleActionSelected(BaseAction action)
     {
-        GD.Print("TileHighlighter HandleActionSelected()");
+        ClearEverything();
+        List<Vector2I> validPositions = action.GetValidPositions();
         switch (action)
         {
-            case ShootAction shootAction:
-                Level.Instance.HighlightTiles(ValidActionPositionsCache.Instance.GetCachedPositions(), shootColor);
-                break;
-            case MoveAction moveAction:
-                Level.Instance.HighlightTiles(ValidActionPositionsCache.Instance.GetCachedPositions(), moveColor);
-                break;
-            default:
-                Level.Instance.HighlightTiles(ValidActionPositionsCache.Instance.GetCachedPositions(), genericColor);
+            case MoveAction:
+                Level.Instance.HighlightTiles(validPositions, moveColor);
                 break;
         }
     }
 
-    private void HandleActionTaken()
+    private void HandleActionDeselected()
     {
         ClearEverything();
+    }
+
+    private void HandleMouseMove(Vector2I pos)
+    {
+        BaseAction selectedAction = UnitSystem.Instance.GetSelectedAction();
+        switch (selectedAction)
+        {
+            case MoveAction moveAction:
+                List<Vector2I> validPositions = selectedAction.GetValidPositions();
+                if (!validPositions.Contains(pos))
+                {
+                    Level.Instance.ClearLayer(Level.ARROW_LAYER);
+                    return;
+                }
+                Array<Vector2I> path = Level.Instance.GetPath(selectedAction.GetUnit().GetGridPosition(), pos);
+                Level.Instance.DrawArrowAlongPath(path, true);
+                break;
+        }
     }
 
     private void ClearEverything()

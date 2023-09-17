@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxu76v0nfgjlg"]
+[gd_scene load_steps=3 format=3 uid="uid://bxu76v0nfgjlg"]
 
 [ext_resource type="Script" path="res://Scenes/UnitSystem/UnitSystem.cs" id="1_8f2u1"]
+[ext_resource type="PackedScene" uid="uid://cawnuvjjrqche" path="res://Scenes/UI/UnitActionMenu/UnitActionMenu.tscn" id="2_bpyn8"]
 
 [node name="UnitSystem" type="Node"]
 script = ExtResource("1_8f2u1")
+unitActionMenu = ExtResource("2_bpyn8")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

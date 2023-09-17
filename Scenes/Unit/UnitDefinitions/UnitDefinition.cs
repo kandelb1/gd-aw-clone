@@ -141,7 +141,7 @@ public partial class UnitDefinition : Resource
         
         if (primaryWeap != null)
         {
-            return primaryWeap.GetBaseDamageAgainstUnit(defendingUnit) != -1;
+            return primaryWeap.GetCurrentAmmo() != 0 && primaryWeap.GetBaseDamageAgainstUnit(defendingUnit) != -1;
         }
         if (secondaryWeap != null)
         {

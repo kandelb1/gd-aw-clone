@@ -70,13 +70,19 @@ public partial class Level : TileMap
 
     public Vector2 GetWorldPosition(Vector2I gridPos) => MapToLocal(gridPos);
 
-    public Vector2I[] GetPath(Vector2I start, Vector2I end, MoveDefinition moveDef, bool ignoreUnits = false)
+    public void ConfigureAstarGrid(UnitDefinition unitDef)
     {
-        // TODO: change ignoreUnits to ignoreEnemies.
-        // units can walk through friendly units, but not enemies.
-        astarGrid.SetMoveDefinition(moveDef, ignoreUnits);
-        Array<Vector2I> path = astarGrid.GetIdPath(start, end);
-        return path.ToArray();
+        astarGrid.ConfigureGrid(unitDef.GetTeam(), unitDef.GetMoveDefinition());
+    }
+
+    public Array<Vector2I> GetPath(Vector2I startPos, Vector2I endPos)
+    {
+        // astarGrid.ConfigureGrid(unitDef.GetTeam(), unitDef.GetMoveDefinition());
+        Array<Vector2I> path = astarGrid.GetIdPath(startPos, endPos);
+        return path;
+        // astarGrid.SetMoveDefinition(moveDef, ignoreUnits);
+        // Array<Vector2I> path = astarGrid.GetIdPath(start, end);
+        // return path.ToArray();
     }
 
     // TODO: remember that the tilemap's arrow layer has a z-index of 1, so it will automatically be drawn on top of everything else
@@ -123,6 +129,20 @@ public partial class Level : TileMap
             .Any(x => x.GetGridPosition() == gridPos);
     }
 
+    public bool IsOccupiedByOtherTeam(Team team, Vector2I gridPos)
+    {
+        return GetTree().GetNodesInGroup("units").ToList()
+            .ConvertAll(x => x as Unit)
+            .Any(x => x.GetGridPosition() == gridPos && x.GetTeam() != team);
+    }
+
+    public bool IsOccupiedBySameTeam(Team team, Vector2I gridPos)
+    {
+        return GetTree().GetNodesInGroup("units").ToList()
+            .ConvertAll(x => x as Unit)
+            .Any(x => x.GetGridPosition() == gridPos && x.GetTeam() == team);
+    }
+
     public Unit GetUnit(Vector2I gridPos)
     {
         foreach (Node n in GetTree().GetNodesInGroup("units"))
@@ -150,13 +170,13 @@ public partial class Level : TileMap
         return terrainName;
     }
 
-    public bool IsReachable(Vector2I start, Vector2I end, MoveDefinition moveDef)
-    {
-        string terrain = GetTerrainName(end);
-        if (moveDef.GetMoveCostForTerrain(terrain) == 0) return false;
-        Vector2I[] path = GetPath(start, end, moveDef);
-        return path.Length - 1 <= moveDef.GetMoveDistance();
-    }
+    // public bool IsReachable(Vector2I start, Vector2I end, MoveDefinition moveDef)
+    // {
+    //     string terrain = GetTerrainName(end);
+    //     if (moveDef.GetMoveCostForTerrain(terrain) == 0) return false;
+    //     Vector2I[] path = GetPath(start, end, moveDef);
+    //     return path.Length - 1 <= moveDef.GetMoveDistance();
+    // }
     
     public List<Vector2I> GetNeighbors(Vector2I pos)
     {
@@ -188,7 +208,7 @@ public partial class Level : TileMap
         return isBase;
     }
 
-    public bool BuildingDefinitionExists(Vector2I pos) => buildings.Any(x => x.GetGridPosition() == pos);
+    public bool BuildingExistsAt(Vector2I pos) => buildings.Any(x => x.GetGridPosition() == pos);
 
     public BuildingDefinition GetBuildingDefinition(Vector2I pos) => buildings.Find(x => x.GetGridPosition() == pos);
 

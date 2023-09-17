@@ -1,20 +1,19 @@
-[gd_scene load_steps=11 format=3 uid="uid://0alf815vibmf"]
+[gd_scene load_steps=9 format=3 uid="uid://0alf815vibmf"]
 
 [ext_resource type="Script" path="res://Scenes/Unit/BaseUnit/BaseUnit.cs" id="1_2a4o1"]
 [ext_resource type="PackedScene" uid="uid://c2i7g25ik8mcs" path="res://Scenes/Unit/Unit.tscn" id="1_jjdaa"]
 [ext_resource type="PackedScene" uid="uid://duhwlv31nw1fn" path="res://Scenes/UnitPathFollower/UnitPathFollower.tscn" id="2_23dbd"]
 [ext_resource type="PackedScene" uid="uid://ofy82io2hwuj" path="res://Scenes/Unit/UnitAnimationPlayer/UnitAnimationPlayer.tscn" id="3_k0cxy"]
 [ext_resource type="Script" path="res://Scenes/Actions/MoveAction.cs" id="4_6n7fb"]
-[ext_resource type="Script" path="res://Scenes/Actions/ShootAction.cs" id="5_3mpx7"]
-[ext_resource type="Script" path="res://Scenes/Actions/LoadAction.cs" id="6_e1l24"]
-[ext_resource type="Script" path="res://Scenes/Actions/WaitAction.cs" id="7_g5f4s"]
+[ext_resource type="Script" path="res://Scenes/Actions/WaitAction.cs" id="6_nhne4"]
 [ext_resource type="SpriteFrames" uid="uid://do1u1fu4g3dvc" path="res://Assets/Animations/OrangeStar/Infantry.tres" id="8_kggjj"]
 [ext_resource type="PackedScene" uid="uid://u7s36kyov32s" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.tscn" id="9_dbebb"]
 
 [node name="BaseUnit" type="Node2D"]
 script = ExtResource("1_2a4o1")
 
-[node name="Unit" parent="." instance=ExtResource("1_jjdaa")]
+[node name="Unit" parent="." node_paths=PackedStringArray("actionsNode") instance=ExtResource("1_jjdaa")]
+actionsNode = NodePath("../Actions")
 
 [node name="UnitPathFollower" parent="." node_paths=PackedStringArray("unit") instance=ExtResource("2_23dbd")]
 unit = NodePath("../Unit")
@@ -25,19 +24,11 @@ pathFollower = NodePath("../UnitPathFollower")
 
 [node name="Actions" type="Node" parent="."]
 
-[node name="MoveAction" type="Node" parent="Actions" node_paths=PackedStringArray("pathFollower")]
+[node name="MoveAction" type="Node" parent="Actions"]
 script = ExtResource("4_6n7fb")
-pathFollower = NodePath("../../UnitPathFollower")
-
-[node name="ShootAction" type="Node" parent="Actions"]
-script = ExtResource("5_3mpx7")
-
-[node name="LoadAction" type="Node" parent="Actions" node_paths=PackedStringArray("pathFollower")]
-script = ExtResource("6_e1l24")
-pathFollower = NodePath("../../UnitPathFollower")
 
 [node name="WaitAction" type="Node" parent="Actions"]
-script = ExtResource("7_g5f4s")
+script = ExtResource("6_nhne4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("8_kggjj")

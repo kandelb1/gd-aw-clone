@@ -31,3 +31,5 @@ offset_top = -63.0
 
 [node name="PurchaseUnitScreen" parent="UI" instance=ExtResource("23_aploa")]
 visible = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
