@@ -27,14 +27,17 @@ public partial class MoveAction : BaseAction
     {
         unit.SetMoved(true);
         SetActive(false);
+        unit.GetAction<ShootAction>().UpdateValidPositions();
         ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ActionCompleted, this); // I will admit this is quite ugly
     }
 
     public override void TakeAction(Vector2I pos)
     {
+        unit.GetAction<ShootAction>().UpdateValidPositions();
         if (pos == unit.GetGridPosition())
         {
             unit.SetMoved(true);
+            unit.GetAction<ShootAction>().SetUnitMoved(false); // this unit didn't actually move anywhere. allow indirect-combat units to shoot
             ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ActionCompleted, this);
             return;
         }
@@ -49,6 +52,7 @@ public partial class MoveAction : BaseAction
         Vector2I[] path = Level.Instance.GetPath(unit.GetGridPosition(), pos).ToArray();
         pathFollower.MoveAlongPath(path[1..]);
         SetActive(true);
+        unit.GetAction<ShootAction>().SetUnitMoved(true);
         ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ActionTaken);
     }
 

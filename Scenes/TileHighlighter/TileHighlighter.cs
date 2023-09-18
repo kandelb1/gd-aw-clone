@@ -26,6 +26,7 @@ public partial class TileHighlighter : Node
         ActionEventBus.Instance.ActionTaken += ClearEverything;
         
         Level.Instance.MouseChangedPosition += HandleMouseMove;
+        GD.Print("TileHighlighter._Ready()");
     }
 
     private void HandleActionSelected(BaseAction action)
@@ -39,6 +40,9 @@ public partial class TileHighlighter : Node
                 break;
             case UnloadAction:
                 Level.Instance.HighlightTiles(validPositions, genericColor);
+                break;
+            case ShootAction:
+                Level.Instance.HighlightTiles(validPositions, shootColor);
                 break;
         }
     }

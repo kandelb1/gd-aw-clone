@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://0alf815vibmf"]
+[gd_scene load_steps=12 format=3 uid="uid://0alf815vibmf"]
 
 [ext_resource type="Script" path="res://Scenes/Unit/BaseUnit/BaseUnit.cs" id="1_2a4o1"]
 [ext_resource type="PackedScene" uid="uid://c2i7g25ik8mcs" path="res://Scenes/Unit/Unit.tscn" id="1_jjdaa"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Scenes/Actions/UnloadAction.cs" id="8_jt24f"]
 [ext_resource type="SpriteFrames" uid="uid://do1u1fu4g3dvc" path="res://Assets/Animations/OrangeStar/Infantry.tres" id="8_kggjj"]
 [ext_resource type="PackedScene" uid="uid://u7s36kyov32s" path="res://Scenes/Unit/UnitStatusIcons/UnitStatusIcons.tscn" id="9_dbebb"]
+[ext_resource type="Script" path="res://Scenes/Actions/ShootAction.cs" id="9_masci"]
 
 [node name="BaseUnit" type="Node2D"]
 script = ExtResource("1_2a4o1")
@@ -38,6 +39,9 @@ script = ExtResource("7_u0mp5")
 
 [node name="UnloadAction" type="Node" parent="Actions"]
 script = ExtResource("8_jt24f")
+
+[node name="ShootAction" type="Node" parent="Actions"]
+script = ExtResource("9_masci")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("8_kggjj")
