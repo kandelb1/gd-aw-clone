@@ -17,13 +17,13 @@ public partial class TileHighlighter : Node
 
     public override void _Ready()
     {
-
         attackCursor = GetNode<AttackCursor>("AttackCursor");
         
         UnitSystem.Instance.ActionSelected += HandleActionSelected;
-        UnitSystem.Instance.ActionDeselected += HandleActionDeselected;
+        UnitSystem.Instance.ActionDeselected += ClearEverything;
         UnitSystem.Instance.UnitDeselected += ClearEverything;
-        // UnitSystem.Instance.ActionCompleted += ClearEverything;
+        
+        ActionEventBus.Instance.ActionTaken += ClearEverything;
         
         Level.Instance.MouseChangedPosition += HandleMouseMove;
     }
@@ -37,16 +37,15 @@ public partial class TileHighlighter : Node
             case MoveAction:
                 Level.Instance.HighlightTiles(validPositions, moveColor);
                 break;
+            case UnloadAction:
+                Level.Instance.HighlightTiles(validPositions, genericColor);
+                break;
         }
     }
-
-    private void HandleActionDeselected()
-    {
-        ClearEverything();
-    }
-
+    
     private void HandleMouseMove(Vector2I pos)
     {
+        if (ActionEventBus.Instance.IsActionActive()) return;
         BaseAction selectedAction = UnitSystem.Instance.GetSelectedAction();
         switch (selectedAction)
         {

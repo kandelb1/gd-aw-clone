@@ -77,12 +77,8 @@ public partial class Level : TileMap
 
     public Array<Vector2I> GetPath(Vector2I startPos, Vector2I endPos)
     {
-        // astarGrid.ConfigureGrid(unitDef.GetTeam(), unitDef.GetMoveDefinition());
         Array<Vector2I> path = astarGrid.GetIdPath(startPos, endPos);
         return path;
-        // astarGrid.SetMoveDefinition(moveDef, ignoreUnits);
-        // Array<Vector2I> path = astarGrid.GetIdPath(start, end);
-        // return path.ToArray();
     }
 
     // TODO: remember that the tilemap's arrow layer has a z-index of 1, so it will automatically be drawn on top of everything else

@@ -18,6 +18,8 @@ public abstract partial class BaseAction : Node
     public void SetUnit(Unit unit) => this.unit = unit;
 
     public Unit GetUnit() => unit;
+
+    public void SetActive(bool active) => ActionEventBus.Instance.SetActionActive(active);
     
     public abstract string GetActionName();
 
@@ -33,8 +35,6 @@ public abstract partial class BaseAction : Node
 
     public abstract void TakeAction(Vector2I pos);
 
-    public abstract bool WillExhaustUnit(); // will this action exhaust the unit when it's done?
-    
     public virtual void AddActionToUI(VBoxContainer actionList, Action actionClickedCallback)
     {
         UnitActionMenuButton button = ACTION_BUTTON.Instantiate() as UnitActionMenuButton;

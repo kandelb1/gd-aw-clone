@@ -1,13 +1,20 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 [GlobalClass]
 public partial class MoveAction : BaseAction
 {
-    public override string GetActionName() => "Move";
+    [Export] private UnitPathFollower pathFollower;
+    
+    public override void _Ready()
+    {
+        base._Ready();
+        pathFollower.UnitStopped += HandleUnitStopped;
+    }
 
-    public override bool WillExhaustUnit() => false;
+    public override string GetActionName() => "Move";
 
     protected override void HandleUnitSelected(Unit otherUnit)
     {
@@ -16,11 +23,33 @@ public partial class MoveAction : BaseAction
         Level.Instance.ConfigureAstarGrid(unit.GetUnitDefinition());
     }
 
+    private void HandleUnitStopped()
+    {
+        unit.SetMoved(true);
+        SetActive(false);
+        ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ActionCompleted); // I will admit this is quite ugly
+    }
+
     public override void TakeAction(Vector2I pos)
     {
-        unit.SetGridPosition(pos);
-        unit.SetMoved(true);
-        ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ActionCompleted); // I will admit this is quite ugly
+        if (pos == unit.GetGridPosition())
+        {
+            unit.SetMoved(true);
+            ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ActionCompleted);
+            return;
+        }
+
+        if (Level.Instance.IsOccupiedBySameTeam(unit.GetTeam(), pos))
+        {
+            // configure the LoadAction
+            LoadAction loadAction = unit.GetAction<LoadAction>();
+            loadAction.SetLoaderUnit(Level.Instance.GetUnit(pos));
+        }
+        
+        Vector2I[] path = Level.Instance.GetPath(unit.GetGridPosition(), pos).ToArray();
+        pathFollower.MoveAlongPath(path[1..]);
+        SetActive(true);
+        ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ActionTaken);
     }
 
     public override bool IsActionAvailable() => !unit.HasAlreadyMoved();
@@ -71,6 +100,7 @@ public partial class MoveAction : BaseAction
                 queue.Enqueue(new TileInfo(neighbor, remainingDistance));
             }
         }
+        // ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ActionPositionsCalculated);
     }
 
     private struct TileInfo

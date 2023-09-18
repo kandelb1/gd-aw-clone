@@ -72,13 +72,12 @@ public partial class UnitSystem : Node
 
     public void SetSelectedAction(BaseAction action)
     {
-        GD.Print($"Setting selected action to {action.Name}");
         selectedAction = action;
         EmitSignal(SignalName.ActionSelected, selectedAction);
     }
 
     private void DeselectAction()
-    {
+    {        
         selectedAction = null;
         EmitSignal(SignalName.ActionDeselected);
     }
@@ -99,6 +98,7 @@ public partial class UnitSystem : Node
             selectedUnit.SetGridPosition(originalPosition);
             selectedUnit.SetMoved(false);
         }
+        selectedUnit.GetAction<LoadAction>().SetLoaderUnit(null);
         selectedUnit = null;
         selectedAction = null;
         EmitSignal(SignalName.UnitDeselected);
@@ -139,8 +139,10 @@ public partial class UnitSystem : Node
     {
         if (@event.IsActionPressed("left click"))
         {
+            if (ActionEventBus.Instance.IsActionActive()) return;
             InputEventMouseButton e = (InputEventMouseButton) @event;
             Vector2I clickPos = Level.Instance.GetGridPosition(e.Position);
+            
 
             if (!IsUnitSelected()) // try selecting a unit
             {
@@ -158,6 +160,7 @@ public partial class UnitSystem : Node
             }
         }else if (@event.IsActionPressed("right click"))
         {
+            if (ActionEventBus.Instance.IsActionActive()) return;
             if (!IsUnitSelected()) return;
             DeselectUnit(true);
         }

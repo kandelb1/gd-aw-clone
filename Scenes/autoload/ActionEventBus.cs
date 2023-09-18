@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class ActionEventBus : Node
 {
@@ -8,6 +7,11 @@ public partial class ActionEventBus : Node
     
     [Signal]
     public delegate void ActionCompletedEventHandler();
+
+    [Signal]
+    public delegate void ActionTakenEventHandler();
+
+    private bool actionActive;
 
     public override void _Ready()
     {
@@ -18,6 +22,10 @@ public partial class ActionEventBus : Node
             return;
         }
         Instance = this;
-        GD.Print("ActionEventBus._Ready()");
     }
+
+    public bool IsActionActive() => actionActive;
+
+    public void SetActionActive(bool active) => actionActive = active;
+
 }
