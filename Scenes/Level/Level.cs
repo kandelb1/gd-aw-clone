@@ -303,6 +303,7 @@ public partial class Level : TileMap
             BuildingDefinition building = Globals.Instance.GetBuildingDefinition(name);
             building.SetGridPosition(pos);
             building.SetControllingTeam(buildingTeam);
+            building.BuildingCaptured += () => { HandleBuildingCaptured(building); };
             buildings.Add(building);
         }
         GD.Print("----PRINTING BUILDINGS LIST----");
@@ -310,5 +311,46 @@ public partial class Level : TileMap
         {
             GD.Print($"{def.GetControllingTeam().ToString()} {def.GetBuildingName()} at position {def.GetGridPosition()}");
         }
+    }
+
+    private void HandleBuildingCaptured(BuildingDefinition buildingDef)
+    {
+        UpdateBuildingSprite(buildingDef.GetGridPosition(), buildingDef.GetBuildingName(), buildingDef.GetControllingTeam());
+    }
+
+    private void UpdateBuildingSprite(Vector2I pos, string buildingName, Team team)
+    {
+        Vector2I atlasCoords = GetAtlasCoordsForBuilding(buildingName.ToLower(), team);
+        SetCell(BUILDINGS_LAYER, pos, 3, atlasCoords);
+        
+        TileData tileData = GetCellTileData(BUILDINGS_LAYER, pos);
+        bool hasTop = (bool) tileData.GetCustomData("hasTop");
+        if (hasTop)
+        {
+            SetCell(BUILDINGS_LAYER, new Vector2I(pos.X, pos.Y - 1), 3, new Vector2I(atlasCoords.X, atlasCoords.Y - 1));
+        }
+    }
+
+    // this function will break if the buildings ever get moved around in level-tileset.png
+    private Vector2I GetAtlasCoordsForBuilding(string buildingName, Team team)
+    {
+        int x = 0;
+        int xOffset = (team == Team.OrangeStar) ? 0 : 8;
+        switch (buildingName)
+        {
+            case "city":
+                x = 0;
+                break;
+            case "factory":
+                x = 2;
+                break;
+            case "airport":
+                x = 4;
+                break;
+            case "port":
+                x = 6;
+                break;
+        }
+        return new Vector2I(x + xOffset, 31);
     }
 }

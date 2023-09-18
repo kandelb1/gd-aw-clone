@@ -39,7 +39,9 @@ public partial class BuildingDefinition : Resource
 
     public Vector2I GetGridPosition() => gridPos;
 
-    public void SetGridPosition(Vector2I gridPos) => this.gridPos = gridPos; 
+    public void SetGridPosition(Vector2I gridPos) => this.gridPos = gridPos;
+
+    public bool CanUnitCapture(UnitDefinition unitDef) => unitDef.GetUnitType() == UnitType.Infantry && unitDef.GetTeam() != GetControllingTeam();
 
     public void Capture(Unit unit)
     {
