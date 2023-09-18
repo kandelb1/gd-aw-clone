@@ -17,7 +17,7 @@ public partial class WaitAction : BaseAction
     public override void TakeAction(Vector2I pos)
     {
         unit.SetExhausted(true);
-        ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ActionCompleted);
+        ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ActionCompleted, this);
     }
 
     public override void AddActionToUI(VBoxContainer actionList, Action actionClickedCallback)

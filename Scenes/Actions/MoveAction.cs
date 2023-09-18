@@ -27,7 +27,7 @@ public partial class MoveAction : BaseAction
     {
         unit.SetMoved(true);
         SetActive(false);
-        ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ActionCompleted); // I will admit this is quite ugly
+        ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ActionCompleted, this); // I will admit this is quite ugly
     }
 
     public override void TakeAction(Vector2I pos)
@@ -35,7 +35,7 @@ public partial class MoveAction : BaseAction
         if (pos == unit.GetGridPosition())
         {
             unit.SetMoved(true);
-            ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ActionCompleted);
+            ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ActionCompleted, this);
             return;
         }
 

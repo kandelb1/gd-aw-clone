@@ -32,6 +32,7 @@ public partial class UnitSystem : Node
     private Unit selectedUnit;
     private Vector2I originalPosition;
     private BaseAction selectedAction;
+    private bool shouldResetPosition;
 
     private Node baseUI;
     private AudioStreamPlayer audioPlayer;
@@ -63,7 +64,20 @@ public partial class UnitSystem : Node
         // emit UnitSelected BEFORE ActionSelected so the action has a chance...
         // ...to calculate its valid positions BEFORE TileHighlighter asks for them
         EmitSignal(SignalName.UnitSelected, unit);
-        SetSelectedAction(unit.GetAction<MoveAction>());
+        if (unit.HasAlreadyMoved())
+        {
+            // this unit isn't exhausted, but they've already moved this turn. show the ActionMenuUI
+            Vector2 position = Level.Instance.MapToLocal(selectedUnit.GetGridPosition());
+            List<BaseAction> availableActions = selectedUnit.GetActions().Where(x => x.IsActionAvailable()).ToList();
+            CreateActionMenuUI(position, availableActions);
+            shouldResetPosition = false; // we don't need to set this, but lets stay consistent
+        }
+        else
+        {
+            // select the move action by default
+            SetSelectedAction(unit.GetAction<MoveAction>());
+            shouldResetPosition = true;
+        }
     }
 
     public bool IsActionSelected() => selectedAction != null;
@@ -90,10 +104,9 @@ public partial class UnitSystem : Node
         SetSelectedUnit(unit);
     }
 
-    private void DeselectUnit(bool resetPosition = false)
+    private void DeselectUnit()
     {
-        // move the unit back to its starting position
-        if (resetPosition)
+        if (shouldResetPosition) // move the unit back to its starting position
         {
             selectedUnit.SetGridPosition(originalPosition);
             selectedUnit.SetMoved(false);
@@ -104,8 +117,12 @@ public partial class UnitSystem : Node
         EmitSignal(SignalName.UnitDeselected);
     }
 
-    private void HandleActionCompleted()
+    private void HandleActionCompleted(BaseAction action)
     {
+        if (action is not MoveAction)
+        {
+            shouldResetPosition = false;
+        }
         DeselectAction();
         if (selectedUnit.IsExhausted())
         {
@@ -130,8 +147,7 @@ public partial class UnitSystem : Node
 
     private void HandleMenuClosed()
     {
-        // the menu was closed without choosing an action, so reset the selectedUnit's position
-        DeselectUnit(true);
+        DeselectUnit();
     }
 
     // use UnhandledInput so that any GUI showing on top of the level can consume the input first
@@ -162,7 +178,7 @@ public partial class UnitSystem : Node
         {
             if (ActionEventBus.Instance.IsActionActive()) return;
             if (!IsUnitSelected()) return;
-            DeselectUnit(true);
+            DeselectUnit();
         }
     }
 }

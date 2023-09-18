@@ -24,7 +24,7 @@ public partial class LoadAction : BaseAction
         unit.SetGridPosition(new Vector2I(-1, -1));
         loaderUnit.LoadUnit(unit);
         unit.SetExhausted(true);
-        ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ActionCompleted);
+        ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ActionCompleted, this);
     }
 
     public override void AddActionToUI(VBoxContainer actionList, Action actionClickedCallback)

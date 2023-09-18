@@ -31,10 +31,16 @@ public partial class UnloadAction : BaseAction
     public override bool IsActionAvailable()
     {
         if (!unit.HasUnitsLoaded()) return false;
-        if (unit.GetUnitType() == UnitDefinition.UnitType.Copter &&
-            Level.Instance.GetTerrainName(unit.GetGridPosition()) == "sea")
+        string terrain = Level.Instance.GetTerrainName(unit.GetGridPosition());
+        if (unit.GetUnitType() == UnitDefinition.UnitType.Copter && terrain == "sea")
         {
             GD.Print("Copter over sea cannot unload units");
+            return false;
+        }
+
+        if (unit.GetName() == "Lander" && terrain is not ("beach" or "port"))
+        {
+            GD.Print("Lander not on beach or port cannot unload units");
             return false;
         }
         foreach (Vector2I neighbor in Level.Instance.GetNeighbors(unit.GetGridPosition()))
@@ -63,7 +69,7 @@ public partial class UnloadAction : BaseAction
         {
             unit.SetExhausted(true);
         }
-        ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ActionCompleted);
+        ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ActionCompleted, this);
     }
     
     public override void AddActionToUI(VBoxContainer actionList, Action actionClickedCallback)

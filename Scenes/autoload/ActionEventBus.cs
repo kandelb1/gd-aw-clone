@@ -6,7 +6,7 @@ public partial class ActionEventBus : Node
     public static ActionEventBus Instance { get; private set; }
     
     [Signal]
-    public delegate void ActionCompletedEventHandler();
+    public delegate void ActionCompletedEventHandler(BaseAction action);
 
     [Signal]
     public delegate void ActionTakenEventHandler();
