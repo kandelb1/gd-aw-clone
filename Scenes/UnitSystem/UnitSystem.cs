@@ -119,6 +119,7 @@ public partial class UnitSystem : Node2D
 
     private void HandleActionCompleted(BaseAction action)
     {
+        if (TurnSystem.Instance.IsEnemyTurn()) return;
         if (action is not MoveAction)
         {
             shouldResetPosition = false;

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwmkl82hbd7c4"]
+
+[ext_resource type="Script" path="res://Scenes/AIPlayer/AIPlayer.cs" id="1_6kah2"]
+
+[node name="AIPlayer" type="Node"]
+script = ExtResource("1_6kah2")

@@ -107,6 +107,16 @@ public partial class MoveAction : BaseAction
         // ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ActionPositionsCalculated);
     }
 
+    // need to override this for the AI
+    public override List<Vector2I> GetValidPositions()
+    {
+        if (validPositions == null)
+        {
+            CalculateValidPositions();
+        }
+        return validPositions;
+    }
+
     private struct TileInfo
     {
         public Vector2I position;

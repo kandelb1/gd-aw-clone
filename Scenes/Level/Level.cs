@@ -159,10 +159,11 @@ public partial class Level : TileMap
         return null;
     }
 
-    public List<Unit> GetUnits()
+    public List<Unit> GetUnitsByTeam(Team team)
     {
         return GetTree().GetNodesInGroup("units").ToList()
-            .ConvertAll(x => x as Unit);
+            .ConvertAll(x => x as Unit)
+            .Where(x => x.GetTeam() == team).ToList();
     }
 
     public string GetTerrainName(Vector2I pos)
