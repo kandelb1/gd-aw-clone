@@ -119,7 +119,7 @@ public partial class Level : TileMap
             {
                 prevPos = gridPos;
                 // TODO: maybe some other singleton should be handling the mouse, not 'Level'
-                GD.Print($"Mouse at {test1} moved to grid position {gridPos}");
+                // GD.Print($"Mouse at {test1} moved to grid position {gridPos}");
                 EmitSignal(SignalName.MouseChangedPosition, gridPos);
             }
         }
