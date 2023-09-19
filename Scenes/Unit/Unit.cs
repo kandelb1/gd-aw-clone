@@ -49,7 +49,7 @@ public partial class Unit : Node
 
     public void SetGridPosition(Vector2I gridPos)
     {
-        baseUnit.Position = Level.Instance.MapToLocal(gridPos);
+        baseUnit.Position = Level.Instance.GetWorldPosition(gridPos); // TODO: signal up instead of directly calling a function on the parent?
         unitDef.SetGridPosition(gridPos);
     }
     

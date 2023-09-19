@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhxjy7haygme8"]
+
+[ext_resource type="Script" path="res://Scenes/CameraController/CameraController.cs" id="1_tbgft"]
+
+[node name="CameraController" type="Node"]
+script = ExtResource("1_tbgft")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0

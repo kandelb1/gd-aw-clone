@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class UnitSystem : Node
+public partial class UnitSystem : Node2D
 {
 
     [Signal]
@@ -34,7 +34,7 @@ public partial class UnitSystem : Node
     private BaseAction selectedAction;
     private bool shouldResetPosition;
 
-    private Node baseUI;
+    private Node worldUI;
     private AudioStreamPlayer audioPlayer;
 
     public override void _Ready()
@@ -47,7 +47,7 @@ public partial class UnitSystem : Node
         }
         Instance = this;
         
-        baseUI = GetNode<Node>("/root/main/UI"); // TODO: should I really be doing this?
+        worldUI = GetNode<Node>("/root/main/WorldUI"); // TODO: should I really be doing this?
         audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
         audioPlayer.Stream = ResourceLoader.Load<AudioStreamWav>("res://Assets/Sounds/error.wav");
 
@@ -130,7 +130,7 @@ public partial class UnitSystem : Node
             return;
         }
         // show the menu again
-        Vector2 position = Level.Instance.MapToLocal(selectedUnit.GetGridPosition());
+        Vector2 position = Level.Instance.GetWorldPosition(selectedUnit.GetGridPosition());
         List<BaseAction> availableActions = selectedUnit.GetActions().Where(x => x.IsActionAvailable()).ToList();
         CreateActionMenuUI(position, availableActions);
     }
@@ -142,7 +142,7 @@ public partial class UnitSystem : Node
         menu.SetActions(availableActions);
         menu.ActionSelected += SetSelectedAction;
         menu.MenuClosed += HandleMenuClosed;
-        baseUI.AddChild(menu);
+        worldUI.AddChild(menu);
     }
 
     private void HandleMenuClosed()
@@ -156,9 +156,8 @@ public partial class UnitSystem : Node
         if (@event.IsActionPressed("left click"))
         {
             if (ActionEventBus.Instance.IsActionActive()) return;
-            InputEventMouseButton e = (InputEventMouseButton) @event;
-            Vector2I clickPos = Level.Instance.GetGridPosition(e.Position);
-            
+            // InputEventMouseButton e = (InputEventMouseButton) @event;
+            Vector2I clickPos = Level.Instance.GetGridPosition(GetGlobalMousePosition());
 
             if (!IsUnitSelected()) // try selecting a unit
             {

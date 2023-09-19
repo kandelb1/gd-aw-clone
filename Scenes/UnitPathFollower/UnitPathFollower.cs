@@ -46,7 +46,7 @@ public partial class UnitPathFollower : Node
                 FinishMove();
                 return;
             }
-            nextPoint = Level.Instance.MapToLocal(path[pathIndex]);
+            nextPoint = Level.Instance.GetWorldPosition(path[pathIndex]);
             Vector2I moveDir = path[pathIndex] - path[pathIndex - 1];
             EmitSignal(SignalName.UnitMoving, moveDir);
             // I don't think this is necessary
@@ -61,7 +61,7 @@ public partial class UnitPathFollower : Node
     public void MoveAlongPath(Vector2I[] path)
     {
         this.path = path;
-        nextPoint = Level.Instance.MapToLocal(path[0]);
+        nextPoint = Level.Instance.GetWorldPosition(path[0]);
         pathIndex = 0;
         Vector2I moveDir = path[0] - unit.GetGridPosition();
         EmitSignal(SignalName.UnitMoving, moveDir);
@@ -71,7 +71,7 @@ public partial class UnitPathFollower : Node
     private void FinishMove()
     {
         moving = false;
-        unit.SetGridPosition(Level.Instance.LocalToMap(unit.GetPosition()));
+        unit.SetGridPosition(Level.Instance.GetGridPosition(unit.GetPosition()));
         EmitSignal(SignalName.UnitStopped);
     }
 

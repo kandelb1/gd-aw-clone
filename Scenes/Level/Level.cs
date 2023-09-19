@@ -66,7 +66,7 @@ public partial class Level : TileMap
         return GetUsedCells(LEVEL_LAYER).Contains(position);
     }
 
-    public Vector2I GetGridPosition(Vector2 globalPos) => LocalToMap(globalPos);
+    public Vector2I GetGridPosition(Vector2 globalPos) => LocalToMap(ToLocal(globalPos));
 
     public Vector2 GetWorldPosition(Vector2I gridPos) => MapToLocal(gridPos);
 
@@ -108,11 +108,18 @@ public partial class Level : TileMap
     {
         if (@event is InputEventMouseMotion mouseMotion)
         {
-            Vector2I gridPos = LocalToMap(mouseMotion.Position);
+            Vector2 test1 = GetGlobalMousePosition();
+            // Vector2 globalPos = mouseMotion.GlobalPosition;
+            // GD.Print($"GetGlobalMousePosition: {test1} mouseMotion.GlobalPosition: {globalPos}");
+            // Vector2I test1GridPos = LocalToMap(test1);
+            // Vector2I globalPosGridPos = LocalToMap(globalPos);
+            // GD.Print($"test1GridPos: {test1GridPos} globalPosGridPos: {globalPosGridPos}");
+            Vector2I gridPos = LocalToMap(test1);
             if (IsValid(gridPos) && prevPos != gridPos)
             {
                 prevPos = gridPos;
                 // TODO: maybe some other singleton should be handling the mouse, not 'Level'
+                GD.Print($"Mouse at {test1} moved to grid position {gridPos}");
                 EmitSignal(SignalName.MouseChangedPosition, gridPos);
             }
         }
@@ -317,7 +324,11 @@ public partial class Level : TileMap
     {
         UpdateBuildingSprite(buildingDef.GetGridPosition(), buildingDef.GetBuildingName(), buildingDef.GetControllingTeam());
     }
-
+    
+    // TODO: fix bug with buildings above/below other buildings
+    // some buildings take up 2 tiles vertically. when you capture them, we change the cell at both positions
+    // but some maps in aw2 have buildings right next to each other vertically. when we capture a building, we dont want to delete the building above it
+    // maybe we need a separate tilemap layer for building "tops"
     private void UpdateBuildingSprite(Vector2I pos, string buildingName, Team team)
     {
         Vector2I atlasCoords = GetAtlasCoordsForBuilding(buildingName.ToLower(), team);

@@ -10,6 +10,6 @@ public partial class Cursor : Sprite2D
 
     private void HandleMouseMoved(Vector2I pos)
     {
-        Position = Level.Instance.MapToLocal(pos);
+        Position = Level.Instance.GetWorldPosition(pos);
     }
 }
