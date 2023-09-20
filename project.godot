@@ -22,6 +22,7 @@ ActionEventBus="*res://Scenes/autoload/ActionEventBus.cs"
 Level="*res://Scenes/Level/Level.tscn"
 UnitSystem="*res://Scenes/UnitSystem/UnitSystem.tscn"
 TurnSystem="*res://Scenes/TurnSystem/TurnSystem.tscn"
+GameManager="*res://Scenes/GameManager/GameManager.tscn"
 
 [display]
 

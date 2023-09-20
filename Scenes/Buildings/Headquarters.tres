@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BuildingDefinition" load_steps=2 format=3 uid="uid://ct1712c8iy42b"]
+
+[ext_resource type="Script" path="res://Scenes/Buildings/BuildingDefinition.cs" id="1_pa8w0"]
+
+[resource]
+script = ExtResource("1_pa8w0")
+name = "Hq"
+incomePerTurn = 0
+capturePoints = 20
+controllingTeam = 0
+canBuild = false
+allowedTypes = null

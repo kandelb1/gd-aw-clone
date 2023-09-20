@@ -16,6 +16,9 @@ public partial class Level : TileMap
 {
     [Signal]
     public delegate void MouseChangedPositionEventHandler(Vector2I gridPos);
+
+    [Signal]
+    public delegate void BuildingCapturedEventHandler(BuildingDefinition buildingDef);
     
     public static Level Instance { get; private set; }
 
@@ -263,7 +266,7 @@ public partial class Level : TileMap
             if (!Enum.TryParse(team, out Team unitTeam)) return;
             if (!Globals.Instance.DoesUnitExist(name)) return;
             
-            GD.Print($"Spawning {unitTeam} {name} on position {pos}!");
+            GD.Print($"Spawning {unitTeam} {name} on position {pos}");
             SpawnUnit(name, unitTeam, pos);
         }
     }
@@ -306,7 +309,7 @@ public partial class Level : TileMap
             // if (!isBuildingBase) continue;
             if (!Globals.Instance.DoesBuildingExist(name)) continue;
             if (!Enum.TryParse(team, out Team buildingTeam)) return;
-            GD.Print($"{buildingTeam} {name} exists at {pos}");
+            GD.Print($"Spawning {buildingTeam} {name} on position {pos}");
             
             BuildingDefinition building = Globals.Instance.GetBuildingDefinition(name);
             building.SetGridPosition(pos);
@@ -314,16 +317,12 @@ public partial class Level : TileMap
             building.BuildingCaptured += () => { HandleBuildingCaptured(building); };
             buildings.Add(building);
         }
-        GD.Print("----PRINTING BUILDINGS LIST----");
-        foreach (BuildingDefinition def in buildings)
-        {
-            GD.Print($"{def.GetControllingTeam().ToString()} {def.GetBuildingName()} at position {def.GetGridPosition()}");
-        }
     }
 
     private void HandleBuildingCaptured(BuildingDefinition buildingDef)
     {
         UpdateBuildingSprite(buildingDef.GetGridPosition(), buildingDef.GetBuildingName(), buildingDef.GetControllingTeam());
+        EmitSignal(SignalName.BuildingCaptured, buildingDef);
     }
     
     // TODO: fix bug with buildings above/below other buildings
@@ -347,7 +346,7 @@ public partial class Level : TileMap
     private Vector2I GetAtlasCoordsForBuilding(string buildingName, Team team)
     {
         int x = 0;
-        int xOffset = (team == Team.OrangeStar) ? 0 : 8;
+        int xOffset = (team == Team.OrangeStar) ? 0 : 10;
         switch (buildingName)
         {
             case "city":
@@ -361,6 +360,9 @@ public partial class Level : TileMap
                 break;
             case "port":
                 x = 6;
+                break;
+            case "hq":
+                x = 8;
                 break;
         }
         return new Vector2I(x + xOffset, 31);
