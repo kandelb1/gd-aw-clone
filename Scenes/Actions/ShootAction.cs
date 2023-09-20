@@ -57,12 +57,9 @@ public partial class ShootAction : BaseAction
 
     public override void TakeAction(Vector2I pos)
     {
-        // TODO: implement counter-attacks
-        // TODO: signal to a BattleManager to initiate the battle instead of applying .Damage() here
-        // the BattleManager could handle the cinematic and the whole counter-attack thing
-        Unit defendingUnit = Level.Instance.GetUnit(pos);
-        defendingUnit.Damage(DamageCalculator.CalculateDamage(unit, defendingUnit));
         unit.SetExhausted(true);
-        ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ActionCompleted, this);
+        Unit defendingUnit = Level.Instance.GetUnit(pos);
+        // the BattleManager will handle everything from here
+        ActionEventBus.Instance.EmitSignal(ActionEventBus.SignalName.ShootActionTaken, this, unit, defendingUnit);
     }
 }

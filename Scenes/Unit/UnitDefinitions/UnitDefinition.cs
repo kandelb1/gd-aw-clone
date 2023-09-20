@@ -67,7 +67,6 @@ public partial class UnitDefinition : Resource
     {
         health -= amount;
         if (health < 0) health = 0;
-        GD.Print($"{GetUnitName()} took {amount} damage. Health is now at {health}");
         EmitSignal(SignalName.HealthChanged, health);
     }
 

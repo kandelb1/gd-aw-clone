@@ -36,7 +36,8 @@ public partial class Globals : Node
         return allUnits.Any(x => x.GetUnitName() == unitName);
     }
 
-    public UnitDefinition GetUnitDefinition(string unitName) => allUnits.Find(x => x.GetUnitName() == unitName);
+    public UnitDefinition GetUnitDefinition(string unitName) =>
+        (UnitDefinition) allUnits.Find(x => x.GetUnitName() == unitName).Duplicate(true);
 
     public bool DoesBuildingExist(string buildingName)
     {
@@ -64,6 +65,7 @@ public partial class Globals : Node
                 try
                 {
                     UnitDefinition unit = ResourceLoader.Load<UnitDefinition>(fullPath);
+                    // unit.SetPrimaryWeapon((Weapon) unit.GetPrimaryWeapon().Duplicate());
                     allUnits.Add(unit);
                     GD.Print($"Loaded UnitDefinition with name {unit.GetUnitName()}");
                 }

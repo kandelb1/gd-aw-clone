@@ -11,6 +11,9 @@ public partial class ActionEventBus : Node
     [Signal]
     public delegate void ActionTakenEventHandler();
 
+    [Signal]
+    public delegate void ShootActionTakenEventHandler(ShootAction action, Unit attackingUnit, Unit defendingUnit);
+
     private bool actionActive;
 
     public override void _Ready()

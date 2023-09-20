@@ -19,7 +19,11 @@ public partial class Weapon : Resource
 
     public int GetCurrentAmmo() => currentAmmo;
 
-    public void SetCurrentAmmo(int ammo) => currentAmmo = ammo;
+    public void SetCurrentAmmo(int ammo)
+    {
+        currentAmmo = ammo;
+        if (currentAmmo < 0) currentAmmo = 0;
+    }
 
     public bool HasAmmo() => currentAmmo > 0;
 
