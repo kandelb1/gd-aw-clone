@@ -96,14 +96,15 @@ public partial class BattleCinematic : Node2D
         BaseCinematic cinematic = scene.Instantiate<BaseCinematic>();
         cinematic.Setup();
         cinematic.SetUnitVisualHealth(unit.GetVisualHealth());
+        cinematic.SetUnitTeam(unit.GetTeam());
         if (leftSide)
         {
             cinematic.SetLeftSide();
-            cinematic.Position = new Vector2(112, 32);
+            cinematic.Position = new Vector2(96, 32); // TODO: what's the best way to place them?
         }
         else
         {
-            cinematic.Position = new Vector2(128, 32);
+            cinematic.Position = new Vector2(144, 32);
         }
         AddChild(cinematic);
         return cinematic;

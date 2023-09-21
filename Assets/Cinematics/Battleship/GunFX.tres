@@ -1,0 +1,51 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://dv5hdhmto3u6i"]
+
+[ext_resource type="Texture2D" uid="uid://p5d4cdk86mdx" path="res://Assets/Cinematics/Battleship/battleships.png" id="1_umgu7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08fgo"]
+atlas = ExtResource("1_umgu7")
+region = Rect2(1, 262, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fcmbs"]
+atlas = ExtResource("1_umgu7")
+region = Rect2(34, 262, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dbk2f"]
+atlas = ExtResource("1_umgu7")
+region = Rect2(67, 270, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23yqx"]
+atlas = ExtResource("1_umgu7")
+region = Rect2(100, 270, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35jtk"]
+atlas = ExtResource("1_umgu7")
+region = Rect2(133, 270, 32, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08fgo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fcmbs")
+}],
+"loop": false,
+"name": &"fire",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dbk2f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23yqx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35jtk")
+}],
+"loop": false,
+"name": &"smoke",
+"speed": 6.0
+}]

@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://nq703fywuays"]
+[gd_scene load_steps=12 format=3 uid="uid://nq703fywuays"]
 
 [ext_resource type="Script" path="res://Scenes/main.cs" id="1_g02d7"]
 [ext_resource type="PackedScene" uid="uid://bhxjy7haygme8" path="res://Scenes/CameraController/CameraController.tscn" id="3_pva5e"]
 [ext_resource type="PackedScene" uid="uid://bnufgm6ukb4jt" path="res://Scenes/BattleManager/BattleManager.tscn" id="3_umcrg"]
 [ext_resource type="PackedScene" uid="uid://cdj7h33avqdxa" path="res://Scenes/TileHighlighter/TileHighlighter.tscn" id="3_xi5fq"]
-[ext_resource type="PackedScene" uid="uid://bqiqb37d85vjp" path="res://Scenes/BattleCinematic/Battleship/BattleshipCinematic.tscn" id="4_tg2rn"]
 [ext_resource type="PackedScene" uid="uid://4mfe55nnqare" path="res://Scenes/UI/UnitInfo/UnitInfo.tscn" id="6_hl8r2"]
 [ext_resource type="PackedScene" uid="uid://bwmkl82hbd7c4" path="res://Scenes/AIPlayer/AIPlayer.tscn" id="9_64c8i"]
 [ext_resource type="PackedScene" uid="uid://duhq6cskjybo3" path="res://Scenes/BattleCinematic/BattleCinematic/BattleCinematic.tscn" id="11_3cqnj"]
@@ -22,7 +21,6 @@ genericColor = Color(0.831373, 0.266667, 0.92549, 1)
 
 [node name="BattleManager" parent="." node_paths=PackedStringArray("screenUI", "battleCinematic") instance=ExtResource("3_umcrg")]
 screenUI = NodePath("../ScreenUI")
-testCinematic = ExtResource("4_tg2rn")
 battleCinematic = NodePath("../ScreenUI/BattleCinematic")
 
 [node name="Units" type="Node" parent="."]

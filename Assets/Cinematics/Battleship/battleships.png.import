@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://doky5efurycx8"
-path="res://.godot/imported/orange-infantry-mech.png-4134b728119d3224c73b751ac91bbeda.ctex"
+uid="uid://p5d4cdk86mdx"
+path="res://.godot/imported/battleships.png-4af4a3b8290668e4d4ac9ee54235360e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/orange-infantry-mech.png"
-dest_files=["res://.godot/imported/orange-infantry-mech.png-4134b728119d3224c73b751ac91bbeda.ctex"]
+source_file="res://Assets/Cinematics/Battleship/battleships.png"
+dest_files=["res://.godot/imported/battleships.png-4af4a3b8290668e4d4ac9ee54235360e.ctex"]
 
 [params]
 

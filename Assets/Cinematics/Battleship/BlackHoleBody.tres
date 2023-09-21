@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://iv1i2w5j5dui"]
+
+[ext_resource type="Texture2D" uid="uid://p5d4cdk86mdx" path="res://Assets/Cinematics/Battleship/battleships.png" id="1_4b3fn"]
+
+[resource]
+atlas = ExtResource("1_4b3fn")
+region = Rect2(0, 130, 96, 96)

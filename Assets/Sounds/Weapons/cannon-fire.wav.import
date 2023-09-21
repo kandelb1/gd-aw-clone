@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bnf38dfb04iju"
-path="res://.godot/imported/battleship-fire.wav-c6e818153e3d690190b832e90be2fdec.sample"
+path="res://.godot/imported/cannon-fire.wav-b18eeaaf137dcf76b79d5dd104d18b3a.sample"
 
 [deps]
 
-source_file="res://Assets/Sounds/Battleship/battleship-fire.wav"
-dest_files=["res://.godot/imported/battleship-fire.wav-c6e818153e3d690190b832e90be2fdec.sample"]
+source_file="res://Assets/Sounds/Weapons/cannon-fire.wav"
+dest_files=["res://.godot/imported/cannon-fire.wav-b18eeaaf137dcf76b79d5dd104d18b3a.sample"]
 
 [params]
 

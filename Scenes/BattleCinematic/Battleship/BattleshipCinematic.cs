@@ -5,6 +5,11 @@ using System.Linq;
 
 public partial class BattleshipCinematic : BaseCinematic
 {
+
+    private Sprite2D body;
+    private AnimatedSprite2D guns;
+    private AnimatedSprite2D hull;
+    
     private AnimationPlayer animPlayer;
     private StringName animName;
     private int visualHealth;
@@ -16,6 +21,9 @@ public partial class BattleshipCinematic : BaseCinematic
     // TODO: implement easy swapping out of sprites/animations for different teams
     public override void Setup()
     {
+        body = GetNode<Sprite2D>("Body");
+        guns = GetNode<AnimatedSprite2D>("Guns");
+        hull = GetNode<AnimatedSprite2D>("Hull");
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         gunPositions = GetNode("GunPositions").GetChildren().ToList().ConvertAll(x => x as Node2D).ToList();
         gunFXContainer = GetNode<Node2D>("GunFXContainer");
@@ -41,6 +49,13 @@ public partial class BattleshipCinematic : BaseCinematic
                 animName = "fire_1";
                 break;
         }
+    }
+
+    public override void SetUnitTeam(UnitDefinition.Team team)
+    {
+        body.Texture = ResourceLoader.Load<Texture2D>($"res://Assets/Cinematics/Battleship/{team}Body.tres");
+        guns.SpriteFrames = ResourceLoader.Load<SpriteFrames>($"res://Assets/Cinematics/Battleship/{team}Guns.tres"); 
+        hull.SpriteFrames = ResourceLoader.Load<SpriteFrames>($"res://Assets/Cinematics/Battleship/{team}Hull.tres");
     }
 
     public override void SetLeftSide()

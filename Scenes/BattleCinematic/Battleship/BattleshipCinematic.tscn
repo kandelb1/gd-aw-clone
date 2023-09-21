@@ -1,101 +1,12 @@
-[gd_scene load_steps=24 format=3 uid="uid://bqiqb37d85vjp"]
+[gd_scene load_steps=14 format=3 uid="uid://bqiqb37d85vjp"]
 
 [ext_resource type="Script" path="res://Scenes/BattleCinematic/Battleship/BattleshipCinematic.cs" id="1_1bnpw"]
-[ext_resource type="Texture2D" uid="uid://bhi0sf8ogld24" path="res://Assets/orangestar-battleship.png" id="1_3a7ly"]
-[ext_resource type="AudioStream" uid="uid://bnf38dfb04iju" path="res://Assets/Sounds/Battleship/battleship-fire.wav" id="3_7lj2m"]
+[ext_resource type="Texture2D" uid="uid://dyocguvpur7b2" path="res://Assets/Cinematics/Battleship/OrangeStarBody.tres" id="3_kev48"]
+[ext_resource type="SpriteFrames" uid="uid://rlyt0o53xwpm" path="res://Assets/Cinematics/Battleship/OrangeStarGuns.tres" id="4_2xh45"]
+[ext_resource type="SpriteFrames" uid="uid://p116r702g7en" path="res://Assets/Cinematics/Battleship/OrangeStarHull.tres" id="4_m5djc"]
 [ext_resource type="PackedScene" uid="uid://b7io3tkh84dlb" path="res://Scenes/BattleCinematic/Battleship/BattleshipGunFX.tscn" id="4_njv13"]
-[ext_resource type="AudioStream" uid="uid://de6g6cff7rpc1" path="res://Assets/Sounds/Battleship/battleship-fire-last.wav" id="5_sngbc"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1nj4e"]
-atlas = ExtResource("1_3a7ly")
-region = Rect2(177, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o8xtv"]
-atlas = ExtResource("1_3a7ly")
-region = Rect2(242, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_a8lug"]
-atlas = ExtResource("1_3a7ly")
-region = Rect2(307, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e4i6c"]
-atlas = ExtResource("1_3a7ly")
-region = Rect2(372, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fh7mv"]
-atlas = ExtResource("1_3a7ly")
-region = Rect2(437, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w7oxy"]
-atlas = ExtResource("1_3a7ly")
-region = Rect2(112, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_0lfqh"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1nj4e")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_o8xtv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_a8lug")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e4i6c")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fh7mv")
-}],
-"loop": true,
-"name": &"firing",
-"speed": 4.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w7oxy")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 4.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dmenr"]
-atlas = ExtResource("1_3a7ly")
-region = Rect2(0, 97, 112, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jnypq"]
-atlas = ExtResource("1_3a7ly")
-region = Rect2(112, 97, 112, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2wdl0"]
-atlas = ExtResource("1_3a7ly")
-region = Rect2(224, 97, 112, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cr35i"]
-atlas = ExtResource("1_3a7ly")
-region = Rect2(336, 97, 112, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_7tucm"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dmenr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jnypq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2wdl0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cr35i")
-}],
-"loop": true,
-"name": &"default",
-"speed": 4.0
-}]
+[ext_resource type="AudioStream" uid="uid://de6g6cff7rpc1" path="res://Assets/Sounds/Weapons/cannon-fire-2.wav" id="4_rrckb"]
+[ext_resource type="AudioStream" uid="uid://bnf38dfb04iju" path="res://Assets/Sounds/Weapons/cannon-fire.wav" id="5_un2eb"]
 
 [sub_resource type="Animation" id="Animation_d67d7"]
 resource_name = "fire_1"
@@ -110,7 +21,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [&"idle", &"firing", &"idle"]
+"values": [&"idle", &"fire", &"idle"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -134,7 +45,7 @@ tracks/2/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("5_sngbc")
+"stream": ExtResource("4_rrckb")
 }],
 "times": PackedFloat32Array(1)
 }
@@ -167,7 +78,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1, 1.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [&"idle", &"firing", &"idle"]
+"values": [&"idle", &"fire", &"idle"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -191,7 +102,7 @@ tracks/2/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("3_7lj2m")
+"stream": ExtResource("5_un2eb")
 }],
 "times": PackedFloat32Array(1)
 }
@@ -206,7 +117,7 @@ tracks/3/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("5_sngbc")
+"stream": ExtResource("4_rrckb")
 }],
 "times": PackedFloat32Array(1.2)
 }
@@ -242,7 +153,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1, 1.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [&"idle", &"firing", &"idle"]
+"values": [&"idle", &"fire", &"idle"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -266,7 +177,7 @@ tracks/2/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("3_7lj2m")
+"stream": ExtResource("5_un2eb")
 }],
 "times": PackedFloat32Array(1)
 }
@@ -281,7 +192,7 @@ tracks/3/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("3_7lj2m")
+"stream": ExtResource("5_un2eb")
 }],
 "times": PackedFloat32Array(1.2)
 }
@@ -296,7 +207,7 @@ tracks/4/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("5_sngbc")
+"stream": ExtResource("4_rrckb")
 }],
 "times": PackedFloat32Array(1.4)
 }
@@ -335,7 +246,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1, 1.8),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [&"idle", &"firing", &"idle"]
+"values": [&"idle", &"fire", &"idle"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -359,7 +270,7 @@ tracks/2/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("3_7lj2m")
+"stream": ExtResource("5_un2eb")
 }],
 "times": PackedFloat32Array(1)
 }
@@ -374,7 +285,7 @@ tracks/3/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("3_7lj2m")
+"stream": ExtResource("5_un2eb")
 }],
 "times": PackedFloat32Array(1.2)
 }
@@ -389,7 +300,7 @@ tracks/4/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("3_7lj2m")
+"stream": ExtResource("5_un2eb")
 }],
 "times": PackedFloat32Array(1.4)
 }
@@ -404,7 +315,7 @@ tracks/5/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("5_sngbc")
+"stream": ExtResource("4_rrckb")
 }],
 "times": PackedFloat32Array(1.6)
 }
@@ -446,7 +357,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1, 2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [&"idle", &"firing", &"idle"]
+"values": [&"idle", &"fire", &"idle"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -470,7 +381,7 @@ tracks/2/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("3_7lj2m")
+"stream": ExtResource("5_un2eb")
 }],
 "times": PackedFloat32Array(1)
 }
@@ -485,7 +396,7 @@ tracks/3/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("3_7lj2m")
+"stream": ExtResource("5_un2eb")
 }],
 "times": PackedFloat32Array(1.2)
 }
@@ -500,7 +411,7 @@ tracks/4/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("3_7lj2m")
+"stream": ExtResource("5_un2eb")
 }],
 "times": PackedFloat32Array(1.4)
 }
@@ -515,7 +426,7 @@ tracks/5/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("3_7lj2m")
+"stream": ExtResource("5_un2eb")
 }],
 "times": PackedFloat32Array(1.6)
 }
@@ -530,7 +441,7 @@ tracks/6/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("5_sngbc")
+"stream": ExtResource("4_rrckb")
 }],
 "times": PackedFloat32Array(1.8)
 }
@@ -596,7 +507,7 @@ position = Vector2(36, 24)
 position = Vector2(45, 30)
 
 [node name="Body" type="Sprite2D" parent="."]
-texture = ExtResource("1_3a7ly")
+texture = ExtResource("3_kev48")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 112, 96)
@@ -605,14 +516,15 @@ region_rect = Rect2(0, 0, 112, 96)
 
 [node name="Guns" type="AnimatedSprite2D" parent="."]
 position = Vector2(32, 32)
-sprite_frames = SubResource("SpriteFrames_0lfqh")
-animation = &"idle"
+sprite_frames = ExtResource("4_2xh45")
+animation = &"fire"
 
 [node name="Hull" type="AnimatedSprite2D" parent="."]
-position = Vector2(56, 112)
-sprite_frames = SubResource("SpriteFrames_7tucm")
+position = Vector2(48, 112)
+sprite_frames = ExtResource("4_m5djc")
 autoplay = "default"
-frame_progress = 0.0739109
+frame = 1
+frame_progress = 0.961544
 
 [node name="AudioPlayers" type="Node" parent="."]
 

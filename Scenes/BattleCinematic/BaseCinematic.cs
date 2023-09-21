@@ -7,6 +7,8 @@ public abstract partial class BaseCinematic : Node2D
 
     public abstract void SetUnitVisualHealth(int health);
 
+    public abstract void SetUnitTeam(UnitDefinition.Team team);
+
     public abstract void SetLeftSide();
     
     // public abstract void RunIn();
