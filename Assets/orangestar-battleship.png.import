@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bagre2jjrfdtw"
-path="res://.godot/imported/level-tileset.png-3c91337698d79d6765ae024a8148297a.ctex"
+uid="uid://bhi0sf8ogld24"
+path="res://.godot/imported/orangestar-battleship.png-b36cb4a8df84c6cd2a0e731ec1c1c285.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Battle/level-tileset.png"
-dest_files=["res://.godot/imported/level-tileset.png-3c91337698d79d6765ae024a8148297a.ctex"]
+source_file="res://Assets/orangestar-battleship.png"
+dest_files=["res://.godot/imported/orangestar-battleship.png-b36cb4a8df84c6cd2a0e731ec1c1c285.ctex"]
 
 [params]
 

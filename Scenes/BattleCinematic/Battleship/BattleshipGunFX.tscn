@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://b7io3tkh84dlb"]
+
+[ext_resource type="Texture2D" uid="uid://bhi0sf8ogld24" path="res://Assets/orangestar-battleship.png" id="1_ii5us"]
+[ext_resource type="Script" path="res://Scenes/BattleCinematic/Battleship/BattleshipGunFX.cs" id="1_potbj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wy3wr"]
+atlas = ExtResource("1_ii5us")
+region = Rect2(0, 131, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gythx"]
+atlas = ExtResource("1_ii5us")
+region = Rect2(33, 131, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5u4fw"]
+atlas = ExtResource("1_ii5us")
+region = Rect2(1, 164, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5415"]
+atlas = ExtResource("1_ii5us")
+region = Rect2(34, 164, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fy3ci"]
+atlas = ExtResource("1_ii5us")
+region = Rect2(67, 164, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aayps"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wy3wr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gythx")
+}],
+"loop": false,
+"name": &"fire",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5u4fw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5415")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fy3ci")
+}],
+"loop": false,
+"name": &"smoke",
+"speed": 6.0
+}]
+
+[node name="BattleshipGunFX" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_aayps")
+animation = &"fire"
+script = ExtResource("1_potbj")

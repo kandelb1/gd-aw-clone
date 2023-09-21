@@ -1,0 +1,632 @@
+[gd_scene load_steps=24 format=3 uid="uid://bqiqb37d85vjp"]
+
+[ext_resource type="Script" path="res://Scenes/BattleCinematic/Battleship/BattleshipCinematic.cs" id="1_1bnpw"]
+[ext_resource type="Texture2D" uid="uid://bhi0sf8ogld24" path="res://Assets/orangestar-battleship.png" id="1_3a7ly"]
+[ext_resource type="AudioStream" uid="uid://bnf38dfb04iju" path="res://Assets/Sounds/Battleship/battleship-fire.wav" id="3_7lj2m"]
+[ext_resource type="PackedScene" uid="uid://b7io3tkh84dlb" path="res://Scenes/BattleCinematic/Battleship/BattleshipGunFX.tscn" id="4_njv13"]
+[ext_resource type="AudioStream" uid="uid://de6g6cff7rpc1" path="res://Assets/Sounds/Battleship/battleship-fire-last.wav" id="5_sngbc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1nj4e"]
+atlas = ExtResource("1_3a7ly")
+region = Rect2(177, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8xtv"]
+atlas = ExtResource("1_3a7ly")
+region = Rect2(242, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8lug"]
+atlas = ExtResource("1_3a7ly")
+region = Rect2(307, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4i6c"]
+atlas = ExtResource("1_3a7ly")
+region = Rect2(372, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fh7mv"]
+atlas = ExtResource("1_3a7ly")
+region = Rect2(437, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w7oxy"]
+atlas = ExtResource("1_3a7ly")
+region = Rect2(112, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0lfqh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1nj4e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o8xtv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8lug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e4i6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fh7mv")
+}],
+"loop": true,
+"name": &"firing",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w7oxy")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmenr"]
+atlas = ExtResource("1_3a7ly")
+region = Rect2(0, 97, 112, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnypq"]
+atlas = ExtResource("1_3a7ly")
+region = Rect2(112, 97, 112, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wdl0"]
+atlas = ExtResource("1_3a7ly")
+region = Rect2(224, 97, 112, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cr35i"]
+atlas = ExtResource("1_3a7ly")
+region = Rect2(336, 97, 112, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7tucm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmenr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnypq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wdl0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cr35i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="Animation" id="Animation_d67d7"]
+resource_name = "fire_1"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Guns:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [&"idle", &"firing", &"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Guns:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioPlayers/AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_sngbc")
+}],
+"times": PackedFloat32Array(1)
+}
+tracks/2/use_blend = false
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0],
+"method": &"SpawnGunFX"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_d26tk"]
+resource_name = "fire_2"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Guns:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [&"idle", &"firing", &"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Guns:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioPlayers/AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_7lj2m")
+}],
+"times": PackedFloat32Array(1)
+}
+tracks/2/use_blend = false
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioPlayers/AudioStreamPlayer2")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_sngbc")
+}],
+"times": PackedFloat32Array(1.2)
+}
+tracks/3/use_blend = true
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0],
+"method": &"SpawnGunFX"
+}, {
+"args": [1],
+"method": &"SpawnGunFX"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_8l4xl"]
+resource_name = "fire_3"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Guns:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [&"idle", &"firing", &"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Guns:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioPlayers/AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_7lj2m")
+}],
+"times": PackedFloat32Array(1)
+}
+tracks/2/use_blend = false
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioPlayers/AudioStreamPlayer2")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_7lj2m")
+}],
+"times": PackedFloat32Array(1.2)
+}
+tracks/3/use_blend = true
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioPlayers/AudioStreamPlayer3")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_sngbc")
+}],
+"times": PackedFloat32Array(1.4)
+}
+tracks/4/use_blend = true
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [0],
+"method": &"SpawnGunFX"
+}, {
+"args": [1],
+"method": &"SpawnGunFX"
+}, {
+"args": [2],
+"method": &"SpawnGunFX"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_sf0cm"]
+resource_name = "fire_4"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Guns:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [&"idle", &"firing", &"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Guns:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 1.2, 1.4, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioPlayers/AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_7lj2m")
+}],
+"times": PackedFloat32Array(1)
+}
+tracks/2/use_blend = false
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioPlayers/AudioStreamPlayer2")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_7lj2m")
+}],
+"times": PackedFloat32Array(1.2)
+}
+tracks/3/use_blend = true
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioPlayers/AudioStreamPlayer3")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_7lj2m")
+}],
+"times": PackedFloat32Array(1.4)
+}
+tracks/4/use_blend = true
+tracks/5/type = "audio"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioPlayers/AudioStreamPlayer4")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_sngbc")
+}],
+"times": PackedFloat32Array(1.6)
+}
+tracks/5/use_blend = true
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1, 1.2, 1.4, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [0],
+"method": &"SpawnGunFX"
+}, {
+"args": [1],
+"method": &"SpawnGunFX"
+}, {
+"args": [2],
+"method": &"SpawnGunFX"
+}, {
+"args": [3],
+"method": &"SpawnGunFX"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_iy8at"]
+resource_name = "fire_5"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Guns:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [&"idle", &"firing", &"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Guns:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 1.2, 1.4, 1.6, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioPlayers/AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_7lj2m")
+}],
+"times": PackedFloat32Array(1)
+}
+tracks/2/use_blend = false
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioPlayers/AudioStreamPlayer2")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_7lj2m")
+}],
+"times": PackedFloat32Array(1.2)
+}
+tracks/3/use_blend = true
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioPlayers/AudioStreamPlayer3")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_7lj2m")
+}],
+"times": PackedFloat32Array(1.4)
+}
+tracks/4/use_blend = true
+tracks/5/type = "audio"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioPlayers/AudioStreamPlayer4")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_7lj2m")
+}],
+"times": PackedFloat32Array(1.6)
+}
+tracks/5/use_blend = true
+tracks/6/type = "audio"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioPlayers/AudioStreamPlayer5")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_sngbc")
+}],
+"times": PackedFloat32Array(1.8)
+}
+tracks/6/use_blend = true
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(1, 1.2, 1.4, 1.6, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"values": [{
+"args": [0],
+"method": &"SpawnGunFX"
+}, {
+"args": [1],
+"method": &"SpawnGunFX"
+}, {
+"args": [2],
+"method": &"SpawnGunFX"
+}, {
+"args": [3],
+"method": &"SpawnGunFX"
+}, {
+"args": [4],
+"method": &"SpawnGunFX"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_46s4s"]
+_data = {
+"fire_1": SubResource("Animation_d67d7"),
+"fire_2": SubResource("Animation_d26tk"),
+"fire_3": SubResource("Animation_8l4xl"),
+"fire_4": SubResource("Animation_sf0cm"),
+"fire_5": SubResource("Animation_iy8at")
+}
+
+[node name="BattleshipCinematic" type="Node2D"]
+script = ExtResource("1_1bnpw")
+gunFX = ExtResource("4_njv13")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="GunPositions" type="Node2D" parent="."]
+
+[node name="Node2D" type="Node2D" parent="GunPositions"]
+position = Vector2(16, 42)
+
+[node name="Node2D2" type="Node2D" parent="GunPositions"]
+position = Vector2(20, 46)
+
+[node name="Node2D3" type="Node2D" parent="GunPositions"]
+position = Vector2(24, 50)
+
+[node name="Node2D4" type="Node2D" parent="GunPositions"]
+position = Vector2(36, 24)
+
+[node name="Node2D5" type="Node2D" parent="GunPositions"]
+position = Vector2(45, 30)
+
+[node name="Body" type="Sprite2D" parent="."]
+texture = ExtResource("1_3a7ly")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 112, 96)
+
+[node name="GunFXContainer" type="Node2D" parent="."]
+
+[node name="Guns" type="AnimatedSprite2D" parent="."]
+position = Vector2(32, 32)
+sprite_frames = SubResource("SpriteFrames_0lfqh")
+animation = &"idle"
+
+[node name="Hull" type="AnimatedSprite2D" parent="."]
+position = Vector2(56, 112)
+sprite_frames = SubResource("SpriteFrames_7tucm")
+autoplay = "default"
+frame_progress = 0.0739109
+
+[node name="AudioPlayers" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioPlayers"]
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="AudioPlayers"]
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="AudioPlayers"]
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="AudioPlayers"]
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="AudioPlayers"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_46s4s")
+}

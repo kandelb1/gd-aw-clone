@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://duhq6cskjybo3"]
+
+[ext_resource type="Script" path="res://Scenes/BattleCinematic/BattleCinematic/BattleCinematic.cs" id="1_of2am"]
+[ext_resource type="Texture2D" uid="uid://0mvtf86ooq50" path="res://Assets/battle-backgrounds.png" id="2_c23mn"]
+
+[node name="BattleCinematic" type="Node2D"]
+script = ExtResource("1_of2am")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="LeftBackground" type="Sprite2D" parent="."]
+position = Vector2(56, 80)
+texture = ExtResource("2_c23mn")
+region_enabled = true
+region_rect = Rect2(1, 1, 128, 160)
+
+[node name="RightBackground" type="Sprite2D" parent="."]
+position = Vector2(184, 80)
+texture = ExtResource("2_c23mn")
+region_enabled = true
+region_rect = Rect2(1033, 162, 128, 160)
+
+[node name="Node" type="Node" parent="."]
+
+[node name="BattleshipPoint" type="Node2D" parent="Node"]
