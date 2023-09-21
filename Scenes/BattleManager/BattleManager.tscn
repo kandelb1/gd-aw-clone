@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnufgm6ukb4jt"]
+[gd_scene load_steps=3 format=3 uid="uid://bnufgm6ukb4jt"]
 
 [ext_resource type="Script" path="res://Scenes/BattleManager/BattleManager.cs" id="1_ueq5w"]
+[ext_resource type="PackedScene" uid="uid://b3l6ixm1ycmbu" path="res://Scenes/Explosion/Explosion.tscn" id="2_pv1rk"]
 
 [node name="BattleManager" type="Node"]
 script = ExtResource("1_ueq5w")
+explosion = ExtResource("2_pv1rk")

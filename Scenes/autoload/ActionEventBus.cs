@@ -14,6 +14,10 @@ public partial class ActionEventBus : Node
     [Signal]
     public delegate void ShootActionTakenEventHandler(ShootAction action, Unit attackingUnit, Unit defendingUnit);
 
+    // this signal should probably live somewhere else, but it'll be just fine here for the time being
+    [Signal]
+    public delegate void UnitDestroyedEventHandler(BaseUnit unit);
+
     private bool actionActive;
 
     public override void _Ready()
