@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://vi5mvf7v70te"]
+
+[ext_resource type="Texture2D" uid="uid://p5d4cdk86mdx" path="res://Assets/Cinematics/Battleship/battleships.png" id="1_dnf2t"]
+[ext_resource type="Script" path="res://Scenes/BattleCinematic/Battleship/BattleshipBullet.cs" id="2_ckbuv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sbuy"]
+atlas = ExtResource("1_dnf2t")
+region = Rect2(1, 297, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08gy1"]
+atlas = ExtResource("1_dnf2t")
+region = Rect2(34, 297, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p51v7"]
+atlas = ExtResource("1_dnf2t")
+region = Rect2(67, 297, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8w17c"]
+atlas = ExtResource("1_dnf2t")
+region = Rect2(100, 297, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2u3yo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sbuy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08gy1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p51v7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8w17c")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 6.0
+}]
+
+[node name="BattleshipBullet" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_2u3yo")
+animation = &"explode"
+script = ExtResource("2_ckbuv")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

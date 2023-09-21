@@ -37,17 +37,19 @@ public partial class BattleCinematic : Node2D
     private BaseCinematic leftCinematic;
     private BaseCinematic rightCinematic;
 
+    private RandomNumberGenerator rng;
+
     public override void _Ready()
     {
         timer = GetNode<Timer>("Timer");
         timer.Timeout += HandleTimeout;
         leftBackground = GetNode<Sprite2D>("LeftBackground");
         rightBackground = GetNode<Sprite2D>("RightBackground");
+        rng = new RandomNumberGenerator();
     }
 
     public void SetupBattle(Unit attackingUnit, Unit defendingUnit)
     {
-        
         // for now, lets always put the attacking unit on the left and the defending on the right TODO: implement side-switching
         SetupBackground(leftBackground, attackingUnit);
         SetupBackground(rightBackground, defendingUnit);
@@ -55,11 +57,17 @@ public partial class BattleCinematic : Node2D
         rightCinematic = SetupCinematic(false, defendingUnit);
     }
     
-    public void StartBattle(bool counterAttack)
+    public async void StartBattle(bool counterAttack)
     {
         Show();
         timer.Start();
-        leftCinematic?.Fire();
+        leftCinematic.Fire();
+        await ToSignal(leftCinematic, "DoneFiring");
+        GD.Print("Spawning bullets...");
+        rightCinematic.TakeFire(leftCinematic.GetBullet(), leftCinematic.GetBulletsFired(), true);
+        
+        // await on the fire to finish
+        // spawn bullets on the other side?... idk
         if (counterAttack)
         {
             rightCinematic?.Fire();    
@@ -100,13 +108,14 @@ public partial class BattleCinematic : Node2D
         if (leftSide)
         {
             cinematic.SetLeftSide();
-            cinematic.Position = new Vector2(96, 32); // TODO: what's the best way to place them?
+            cinematic.Position = new Vector2(40, -48); // TODO: what's the best way to place them?
+            leftBackground.AddChild(cinematic);
         }
         else
         {
-            cinematic.Position = new Vector2(144, 32);
+            cinematic.Position = new Vector2(-40, -48);
+            rightBackground.AddChild(cinematic);
         }
-        AddChild(cinematic);
         return cinematic;
     }
 

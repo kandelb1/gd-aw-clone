@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://bqiqb37d85vjp"]
+[gd_scene load_steps=15 format=3 uid="uid://bqiqb37d85vjp"]
 
 [ext_resource type="Script" path="res://Scenes/BattleCinematic/Battleship/BattleshipCinematic.cs" id="1_1bnpw"]
+[ext_resource type="PackedScene" uid="uid://vi5mvf7v70te" path="res://Scenes/BattleCinematic/Battleship/BattleshipBullet.tscn" id="3_gsfv2"]
 [ext_resource type="Texture2D" uid="uid://dyocguvpur7b2" path="res://Assets/Cinematics/Battleship/OrangeStarBody.tres" id="3_kev48"]
 [ext_resource type="SpriteFrames" uid="uid://rlyt0o53xwpm" path="res://Assets/Cinematics/Battleship/OrangeStarGuns.tres" id="4_2xh45"]
 [ext_resource type="SpriteFrames" uid="uid://p116r702g7en" path="res://Assets/Cinematics/Battleship/OrangeStarHull.tres" id="4_m5djc"]
@@ -485,9 +486,28 @@ _data = {
 [node name="BattleshipCinematic" type="Node2D"]
 script = ExtResource("1_1bnpw")
 gunFX = ExtResource("4_njv13")
+bullet = ExtResource("3_gsfv2")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="BulletPositions" type="Node2D" parent="."]
+position = Vector2(58, 69)
+
+[node name="Node2D" type="Node2D" parent="BulletPositions"]
+position = Vector2(-34, -1)
+
+[node name="Node2D2" type="Node2D" parent="BulletPositions"]
+position = Vector2(20, -30)
+
+[node name="Node2D3" type="Node2D" parent="BulletPositions"]
+position = Vector2(31, 34)
+
+[node name="Node2D4" type="Node2D" parent="BulletPositions"]
+position = Vector2(-23, 33)
+
+[node name="Node2D5" type="Node2D" parent="BulletPositions"]
+position = Vector2(7, 14)
 
 [node name="GunPositions" type="Node2D" parent="."]
 

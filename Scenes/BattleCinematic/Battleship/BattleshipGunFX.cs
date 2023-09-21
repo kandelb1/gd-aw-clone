@@ -14,18 +14,9 @@ public partial class BattleshipGunFX : AnimatedSprite2D
     public override void _Ready()
     {
         state = AnimState.Fire;
-        // VisibilityChanged += HandleVisibilityChanged;
         Play("fire");
         AnimationFinished += HandleAnimationFinished;
     }
-
-    // private void HandleVisibilityChanged()
-    // {
-    //     if (Visible)
-    //     {
-    //         Play("fire");    
-    //     }
-    // }
 
     private void HandleAnimationFinished()
     {

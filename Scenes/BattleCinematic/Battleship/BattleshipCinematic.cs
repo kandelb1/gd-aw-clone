@@ -17,15 +17,24 @@ public partial class BattleshipCinematic : BaseCinematic
     [Export] private PackedScene gunFX;
     private List<Node2D> gunPositions;
     private Node2D gunFXContainer;
+    
+    [Export] private PackedScene bullet;
+    private List<Node2D> bulletPositions;
+    private int bulletsFired;
 
-    // TODO: implement easy swapping out of sprites/animations for different teams
+    public override PackedScene GetBullet() => bullet;
+
+    public override int GetBulletsFired() => bulletsFired;
+
     public override void Setup()
     {
         body = GetNode<Sprite2D>("Body");
         guns = GetNode<AnimatedSprite2D>("Guns");
         hull = GetNode<AnimatedSprite2D>("Hull");
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        animPlayer.AnimationFinished += HandleAnimationFinished;
         gunPositions = GetNode("GunPositions").GetChildren().ToList().ConvertAll(x => x as Node2D).ToList();
+        bulletPositions = GetNode("BulletPositions").GetChildren().ToList().ConvertAll(x => x as Node2D).ToList();
         gunFXContainer = GetNode<Node2D>("GunFXContainer");
     }
 
@@ -35,18 +44,23 @@ public partial class BattleshipCinematic : BaseCinematic
         {
             case 10 or 9:
                 animName = "fire_5";
+                bulletsFired = 5;
                 break;
             case 8 or 7:
                 animName = "fire_4";
+                bulletsFired = 4;
                 break;
             case 6 or 5:
                 animName = "fire_3";
+                bulletsFired = 3;
                 break;
             case 4 or 3:
                 animName = "fire_2";
+                bulletsFired = 2;
                 break;
             case 2 or 1:
                 animName = "fire_1";
+                bulletsFired = 1;
                 break;
         }
     }
@@ -66,6 +80,22 @@ public partial class BattleshipCinematic : BaseCinematic
     public override void Fire()
     {
         animPlayer.Play(animName);
+    }
+
+    public override void TakeFire(PackedScene bullet, int amount, bool flipped)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            Node2D b = bullet.Instantiate<Node2D>();
+            b.Position = bulletPositions[i].Position;
+            b.Scale = new Vector2(flipped ? -1 : 1, 1);
+            AddChild(b);
+        }
+    }
+
+    private void HandleAnimationFinished(StringName name)
+    {
+        EmitSignal(BaseCinematic.SignalName.DoneFiring);
     }
 
     public void SpawnGunFX(int index)
