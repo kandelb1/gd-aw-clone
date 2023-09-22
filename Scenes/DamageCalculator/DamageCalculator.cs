@@ -28,7 +28,6 @@ public partial class DamageCalculator : Node
         }
         
         int answer = Mathf.FloorToInt(baseDamage * healthModifier * defenseModifier);
-        GD.Print($"{attackingUnit.GetName()} with {attackingUnit.GetHealth()} health attacking {defendingUnit.GetName()} on a {defense}-star tile ---- {answer} damage.");
         return answer;
     }
 
@@ -47,7 +46,6 @@ public partial class DamageCalculator : Node
         }
         
         int answer = Mathf.FloorToInt(baseDamage * healthModifier * defenseModifier);
-        GD.Print($"{attackingUnit.GetName()} with {attackingUnit.GetHealth()} health attacking {defendingUnit.GetName()} on a {defense}-star tile ---- {answer} damage.");
         return answer;
     }
 

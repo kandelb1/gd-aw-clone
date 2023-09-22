@@ -6,6 +6,13 @@ using Godot.Collections;
 
 public partial class TileHighlighter : Node
 {
+
+    [Signal]
+    public delegate void ShowDamageAgainstUnitEventHandler(Unit attackingUnit, Unit defendingUnit);
+
+    [Signal]
+    public delegate void HideDamageAgainstUnitEventHandler();
+
     [Export] private Color moveColor;
     [Export] private Color shootColor;
     // [Export] private Color shootRangeColor;
@@ -20,7 +27,7 @@ public partial class TileHighlighter : Node
         attackCursor = GetNode<AttackCursor>("AttackCursor");
         
         UnitSystem.Instance.ActionSelected += HandleActionSelected;
-        UnitSystem.Instance.ActionDeselected += ClearEverything;
+        UnitSystem.Instance.ActionDeselected += HandleActionDeselected;
         UnitSystem.Instance.UnitDeselected += ClearEverything;
         
         ActionEventBus.Instance.ActionTaken += ClearEverything;
@@ -51,10 +58,11 @@ public partial class TileHighlighter : Node
     {
         if (ActionEventBus.Instance.IsActionActive()) return;
         BaseAction selectedAction = UnitSystem.Instance.GetSelectedAction();
+        List<Vector2I> validPositions;
         switch (selectedAction)
         {
             case MoveAction moveAction:
-                List<Vector2I> validPositions = selectedAction.GetValidPositions();
+                validPositions = selectedAction.GetValidPositions();
                 if (!validPositions.Contains(pos))
                 {
                     Level.Instance.ClearLayer(Level.ARROW_LAYER);
@@ -63,7 +71,22 @@ public partial class TileHighlighter : Node
                 Array<Vector2I> path = Level.Instance.GetPath(selectedAction.GetUnit().GetGridPosition(), pos);
                 Level.Instance.DrawArrowAlongPath(path, true);
                 break;
+            case ShootAction shootAction:
+                validPositions = selectedAction.GetValidPositions();
+                if (!validPositions.Contains(pos))
+                {
+                    EmitSignal(SignalName.HideDamageAgainstUnit);
+                    return;
+                }
+                EmitSignal(SignalName.ShowDamageAgainstUnit, selectedAction.GetUnit(), Level.Instance.GetUnit(pos));
+                break;
         }
+    }
+
+    private void HandleActionDeselected()
+    {
+        EmitSignal(SignalName.HideDamageAgainstUnit);
+        ClearEverything();
     }
 
     private void ClearEverything()
