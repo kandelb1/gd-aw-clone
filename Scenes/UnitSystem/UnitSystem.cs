@@ -67,7 +67,7 @@ public partial class UnitSystem : Node2D
         if (unit.HasAlreadyMoved())
         {
             // this unit isn't exhausted, but they've already moved this turn. show the ActionMenuUI
-            Vector2 position = Level.Instance.MapToLocal(selectedUnit.GetGridPosition());
+            Vector2 position = Level.Instance.GetWorldPosition(selectedUnit.GetGridPosition());
             List<BaseAction> availableActions = selectedUnit.GetActions().Where(x => x.IsActionAvailable()).ToList();
             CreateActionMenuUI(position, availableActions);
             shouldResetPosition = false; // we don't need to set this, but lets stay consistent
