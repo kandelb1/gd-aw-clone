@@ -27,8 +27,8 @@ public partial class TileHighlighter : Node
         attackCursor = GetNode<AttackCursor>("AttackCursor");
         
         UnitSystem.Instance.ActionSelected += HandleActionSelected;
-        UnitSystem.Instance.ActionDeselected += HandleActionDeselected;
-        UnitSystem.Instance.UnitDeselected += ClearEverything;
+        UnitSystem.Instance.ActionDeselected += ClearEverything;
+        UnitSystem.Instance.UnitDeselected += HandleUnitDeselected;
         
         ActionEventBus.Instance.ActionTaken += ClearEverything;
         
@@ -83,7 +83,7 @@ public partial class TileHighlighter : Node
         }
     }
 
-    private void HandleActionDeselected()
+    private void HandleUnitDeselected()
     {
         EmitSignal(SignalName.HideDamageAgainstUnit);
         ClearEverything();
