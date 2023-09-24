@@ -96,12 +96,22 @@ public partial class UnitSystem : Node2D
         EmitSignal(SignalName.ActionDeselected);
     }
     
-    private void TrySelectUnit(Vector2I pos)
+    private void TrySelectUnitOrBuilding(Vector2I pos)
     {
-        if (!Level.Instance.IsOccupied(pos)) return;
-        Unit unit = Level.Instance.GetUnit(pos);
-        if (unit.IsExhausted()) return;
-        SetSelectedUnit(unit);
+        if (Level.Instance.IsOccupied(pos))
+        {
+            Unit unit = Level.Instance.GetUnit(pos);
+            if (unit.IsExhausted()) return;
+            SetSelectedUnit(unit);
+            return;
+        }
+
+        if (Level.Instance.BuildingExistsAt(pos))
+        {
+            BuildingDefinition building = Level.Instance.GetBuildingDefinition(pos);
+            if (building.GetControllingTeam() == UnitDefinition.Team.Neutral) return;
+            EmitSignal(SignalName.BuildingSelected, building);
+        }
     }
 
     private void DeselectUnit()
@@ -162,7 +172,7 @@ public partial class UnitSystem : Node2D
 
             if (!IsUnitSelected()) // try selecting a unit
             {
-                TrySelectUnit(clickPos);
+                TrySelectUnitOrBuilding(clickPos);
             }
             else // see if wherever we clicked is valid
             {

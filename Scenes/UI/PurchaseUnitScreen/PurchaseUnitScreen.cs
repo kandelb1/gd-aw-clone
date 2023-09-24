@@ -6,7 +6,6 @@ using System.Linq;
 
 public partial class PurchaseUnitScreen : PanelContainer
 {
-    // private UnitDefinition.UnitType[] typesAllowed; // list of unit types we are allowed to purchase
     [Export] private PackedScene listEntry;
 
     private VBoxContainer list;
@@ -23,19 +22,18 @@ public partial class PurchaseUnitScreen : PanelContainer
     {
         if (!buildingDef.CanBuild()) return;
         ClearList();
-        GD.Print("PurchaseUnitScreen.HandleBuildingSelected()");
         List<UnitDefinition> purchasableUnits = Globals.Instance.GetAllUnits()
             .Where(x => buildingDef.GetAllowedTypes().Contains(x.GetUnitType()))
             .OrderBy(x => x.GetCost())
             .ToList();
-
-        GD.Print($"BUILDING {buildingDef.GetBuildingName()} IS ALLOWED TO PRODUCE: ");
+        
+        PlayerDefinition currentPlayer = GameManager.Instance.GetCurrentPlayer();
         foreach (UnitDefinition unitDef in purchasableUnits)
         {
-            GD.Print(unitDef.GetUnitName());
             PurchaseUnitButton entry = listEntry.Instantiate<PurchaseUnitButton>();
             entry.SetUnitDefinition(unitDef);
-            // entry.PurchasePressed += HandleButtonPressed;
+            entry.SetTeam(buildingDef.GetControllingTeam());
+            entry.Disabled = !currentPlayer.CanAfford(unitDef.GetCost());
             entry.Pressed += () => HandleButtonPressed(unitDef, buildingDef);
             list.AddChild(entry);
         }
@@ -54,10 +52,29 @@ public partial class PurchaseUnitScreen : PanelContainer
     private void HandleButtonPressed(UnitDefinition unitDef, BuildingDefinition buildingDef)
     {
         GD.Print($"Purchasing {unitDef.GetUnitName()}");
-        // TODO: subtract cost from Player
+        PlayerDefinition currentPlayer = GameManager.Instance.GetCurrentPlayer();
+        currentPlayer.SubtractFunds(unitDef.GetCost());
+        
         BaseUnit baseUnit = Level.Instance.SpawnUnit(unitDef, buildingDef.GetControllingTeam(), buildingDef.GetGridPosition());
         baseUnit.GetUnitDefinition().SetExhausted(true);
         Hide();
+    }
+    
+    public override void _Input(InputEvent @event)
+    {
+        if (@event.IsActionPressed("left click"))
+        {
+            InputEventMouseButton e = @event as InputEventMouseButton;
+            if (!GetRect().HasPoint(e.Position))
+            {
+                Hide();
+            }
+        }
+
+        if (@event.IsActionPressed("right click"))
+        {
+            Hide();
+        }
     }
 
 }

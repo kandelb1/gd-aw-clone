@@ -36,13 +36,10 @@ public partial class UnitActionMenu : Node2D
     {
         if (@event.IsActionPressed("left click") || @event.IsActionPressed("right click"))
         {
-            // Control c = GetNode<Control>("Control");
             PanelContainer c = GetNode<PanelContainer>("PanelContainer");
             InputEventMouseButton e = c.MakeInputLocal(@event) as InputEventMouseButton;
-            
             if (!c.GetRect().HasPoint(e.Position))
             {
-                GD.Print("clicked outside ActionMenu UI");
                 EmitSignal(SignalName.MenuClosed);
                 QueueFree();
             }

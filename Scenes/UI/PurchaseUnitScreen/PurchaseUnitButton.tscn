@@ -1,13 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhnpui6rjmi73"]
+[gd_scene load_steps=5 format=3 uid="uid://dhnpui6rjmi73"]
 
 [ext_resource type="Script" path="res://Scenes/UI/PurchaseUnitScreen/PurchaseUnitButton.cs" id="1_7qwfg"]
 [ext_resource type="SpriteFrames" uid="uid://do1u1fu4g3dvc" path="res://Assets/Animations/OrangeStar/Infantry.tres" id="1_ldyhf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e14bk"]
+bg_color = Color(0.0588235, 0.721569, 0, 0.615686)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_deccw"]
+bg_color = Color(0.305882, 0.290196, 0.27451, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="PurchaseUnitButton" type="Button"]
 custom_minimum_size = Vector2(200, 14)
 offset_right = 200.0
 offset_bottom = 14.0
 focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_e14bk")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_deccw")
 script = ExtResource("1_7qwfg")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
