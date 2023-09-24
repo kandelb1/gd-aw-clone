@@ -6,7 +6,7 @@
 resource_local_to_scene = true
 script = ExtResource("1_4lioj")
 name = "Airport"
-incomePerTurn = 0
+incomePerTurn = 1000
 capturePoints = 20
 controllingTeam = 0
 canBuild = true

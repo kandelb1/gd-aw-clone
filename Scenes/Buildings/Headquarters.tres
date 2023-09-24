@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_pa8w0")
 name = "Hq"
-incomePerTurn = 0
+incomePerTurn = 1000
 capturePoints = 20
 controllingTeam = 0
 canBuild = false

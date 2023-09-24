@@ -252,6 +252,9 @@ public partial class Level : Node2D
 
     public BuildingDefinition GetBuildingDefinition(Vector2I pos) => buildings.Find(x => x.GetGridPosition() == pos);
 
+    public List<BuildingDefinition> GetBuildingsControlledBy(Team team) =>
+        buildings.Where(x => x.GetControllingTeam() == team).ToList();
+
     public int GetDefense(Vector2I pos)
     {
         int layer = BuildingExists(pos) ? BUILDINGS_LAYER : LEVEL_LAYER;

@@ -27,11 +27,21 @@ public partial class GameManager : Node
         
         
         Level.Instance.BuildingCaptured += HandleBuildingCaptured;
+        TurnSystem.Instance.TurnChanged += HandleTurnChanged;
     }
 
     public PlayerDefinition GetCurrentPlayer()
     {
         return TurnSystem.Instance.IsPlayerTurn() ? player : enemy;
+    }
+
+    private void HandleTurnChanged()
+    {
+        PlayerDefinition currentPlayer = GetCurrentPlayer();
+        foreach (BuildingDefinition building in Level.Instance.GetBuildingsControlledBy(currentPlayer.GetTeam()))
+        {
+            currentPlayer.AddFunds(building.GetIncome());
+        }
     }
 
     private void HandleBuildingCaptured(BuildingDefinition buildingDef)
