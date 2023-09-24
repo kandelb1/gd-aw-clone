@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://ohpsgbbdowbj"]
+
+[ext_resource type="PackedScene" uid="uid://nwuc6vfsd2yb" path="res://Scenes/UI/TerrainInfo/TerrainInfo.tscn" id="1_6w00g"]
+[ext_resource type="Script" path="res://Scenes/UI/CombinedInfoPanel/CombinedInfoPanel.cs" id="1_me2g4"]
+[ext_resource type="PackedScene" uid="uid://4mfe55nnqare" path="res://Scenes/UI/UnitInfo/UnitInfo.tscn" id="2_3hn7a"]
+[ext_resource type="PackedScene" uid="uid://7owot7ernm0k" path="res://Scenes/UI/SideSwitchComponent/SideSwitchComponent.tscn" id="4_tasos"]
+
+[node name="CombinedInfoPanel" type="HBoxContainer"]
+layout_direction = 2
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -67.0
+offset_top = -58.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 2
+script = ExtResource("1_me2g4")
+
+[node name="UnitInfo" parent="." instance=ExtResource("2_3hn7a")]
+layout_mode = 2
+
+[node name="TerrainInfo" parent="." instance=ExtResource("1_6w00g")]
+layout_mode = 2
+
+[node name="SideSwitchComponent" parent="." instance=ExtResource("4_tasos")]

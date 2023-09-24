@@ -57,7 +57,7 @@ public partial class Level : Node2D
 
         unitsNode = GetNode("../main/Units"); // TODO: are relative paths bad?
         prevPos = Vector2I.Zero;
-        ChangeMap("CampaignMission1");
+        ChangeMap("CampaignMission17");
         GD.Print("Level ready()");
     }
     

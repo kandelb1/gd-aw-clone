@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c28bmw216x7g0"]
+[gd_scene load_steps=8 format=3 uid="uid://c28bmw216x7g0"]
 
 [ext_resource type="Texture2D" uid="uid://dcvrio8j6uthl" path="res://Assets/UI/damage-indicator.png" id="1_34tpp"]
 [ext_resource type="Script" path="res://Scenes/UI/DamageIndicator/DamageIndicator.cs" id="2_su8gm"]
+[ext_resource type="PackedScene" uid="uid://7owot7ernm0k" path="res://Scenes/UI/SideSwitchComponent/SideSwitchComponent.tscn" id="3_q8pah"]
 
 [sub_resource type="Animation" id="Animation_gf4p7"]
 resource_name = "bounce"
@@ -80,6 +81,8 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 14
 text = "112"
 horizontal_alignment = 2
+
+[node name="SideSwitchComponent" parent="." instance=ExtResource("3_q8pah")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "bounce"
