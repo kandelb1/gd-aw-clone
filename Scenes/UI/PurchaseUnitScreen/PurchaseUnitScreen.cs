@@ -14,8 +14,8 @@ public partial class PurchaseUnitScreen : PanelContainer
     {
         list = GetNode<VBoxContainer>("VBoxContainer");
         UnitSystem.Instance.BuildingSelected += HandleBuildingSelected;
-        
-        Hide();
+
+        Close();
     }
 
     private void HandleBuildingSelected(BuildingDefinition buildingDef)
@@ -37,8 +37,8 @@ public partial class PurchaseUnitScreen : PanelContainer
             entry.Pressed += () => HandleButtonPressed(unitDef, buildingDef);
             list.AddChild(entry);
         }
-        
-        Show();
+
+        Open();
     }
 
     private void ClearList()
@@ -56,24 +56,37 @@ public partial class PurchaseUnitScreen : PanelContainer
         
         BaseUnit baseUnit = Level.Instance.SpawnUnit(unitDef, buildingDef.GetControllingTeam(), buildingDef.GetGridPosition());
         baseUnit.GetUnitDefinition().SetExhausted(true);
-        Hide();
+        Close();
     }
     
     public override void _Input(InputEvent @event)
     {
+        if (!Visible) return;
         if (@event.IsActionPressed("left click"))
         {
             InputEventMouseButton e = @event as InputEventMouseButton;
             if (!GetRect().HasPoint(e.Position))
             {
-                Hide();
+                Close();
             }
         }
 
         if (@event.IsActionPressed("right click"))
         {
-            Hide();
+            Close();
         }
+    }
+
+    private void Open()
+    {
+        Show();
+        UIEventBus.Instance.EmitSignal(UIEventBus.SignalName.PurchaseScreenOpened);
+    }
+
+    private void Close()
+    {
+        Hide();
+        UIEventBus.Instance.EmitSignal(UIEventBus.SignalName.PurchaseScreenClosed); 
     }
 
 }

@@ -13,6 +13,8 @@ public partial class PlayerInfo : PanelContainer
         TurnSystem.Instance.TurnChanged += HandleTurnChanged;
         GameManager.Instance.PlayerFundsChanged += HandleFundsChanged; 
         UpdateText();
+        UIEventBus.Instance.PurchaseScreenOpened += Hide;
+        UIEventBus.Instance.PurchaseScreenClosed += Show;
     }
 
     private void UpdateText()

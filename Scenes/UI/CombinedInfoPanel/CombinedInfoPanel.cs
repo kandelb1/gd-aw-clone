@@ -10,6 +10,8 @@ public partial class CombinedInfoPanel : HBoxContainer
     {
         sideSwitch = GetNode<SideSwitchComponent>("SideSwitchComponent");
         sideSwitch.SideSwitched += HandleSideSwitch;
+        UIEventBus.Instance.PurchaseScreenOpened += Hide;
+        UIEventBus.Instance.PurchaseScreenClosed += Show;
     }
 
     private void HandleSideSwitch(bool leftSide)

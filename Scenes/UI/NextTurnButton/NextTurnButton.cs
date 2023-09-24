@@ -13,6 +13,8 @@ public partial class NextTurnButton : Panel
 
         ActionEventBus.Instance.ActionTaken += HandleActionTaken;
         ActionEventBus.Instance.ActionCompleted += HandleActionCompleted;
+        UIEventBus.Instance.PurchaseScreenOpened += Hide;
+        UIEventBus.Instance.PurchaseScreenClosed += Show;
     }
 
     private void HandleNextTurnPressed()
