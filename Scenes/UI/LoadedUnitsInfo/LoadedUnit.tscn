@@ -21,6 +21,7 @@ size_flags_vertical = 4
 texture = SubResource("AtlasTexture_oyeta")
 
 [node name="HealthContainer" type="HBoxContainer" parent="."]
+layout_direction = 2
 layout_mode = 2
 size_flags_vertical = 4
 alignment = 1
