@@ -33,7 +33,11 @@ public partial class PlayerDefinition : Resource
         EmitSignal(SignalName.FundsChanged, funds);
     }
 
-    public void AddFunds(int amount) => funds += amount;
+    public void AddFunds(int amount)
+    {
+        funds += amount;
+        EmitSignal(SignalName.FundsChanged, funds);
+    }
 
     public Team GetTeam() => team;
 }

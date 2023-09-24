@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://nq703fywuays"]
+[gd_scene load_steps=12 format=3 uid="uid://nq703fywuays"]
 
 [ext_resource type="Script" path="res://Scenes/main.cs" id="1_g02d7"]
 [ext_resource type="PackedScene" uid="uid://bhxjy7haygme8" path="res://Scenes/CameraController/CameraController.tscn" id="3_pva5e"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cdj7h33avqdxa" path="res://Scenes/TileHighlighter/TileHighlighter.tscn" id="3_xi5fq"]
 [ext_resource type="PackedScene" uid="uid://ohpsgbbdowbj" path="res://Scenes/UI/CombinedInfoPanel/CombinedInfoPanel.tscn" id="9_63f6n"]
 [ext_resource type="PackedScene" uid="uid://bwmkl82hbd7c4" path="res://Scenes/AIPlayer/AIPlayer.tscn" id="9_64c8i"]
+[ext_resource type="PackedScene" uid="uid://cbfw3cvl1l2pw" path="res://Scenes/UI/PlayerInfo/PlayerInfo.tscn" id="10_s3gal"]
 [ext_resource type="PackedScene" uid="uid://c28bmw216x7g0" path="res://Scenes/UI/DamageIndicator/DamageIndicator.tscn" id="10_vg0xf"]
 [ext_resource type="PackedScene" uid="uid://c8dtqss3fomk1" path="res://Scenes/UI/NextTurnButton/NextTurnButton.tscn" id="11_8rs4n"]
 [ext_resource type="PackedScene" uid="uid://dvt6aw2dinnkx" path="res://Scenes/UI/PurchaseUnitScreen/PurchaseUnitScreen.tscn" id="23_aploa"]
@@ -48,6 +49,8 @@ offset_left = -71.0
 offset_top = -62.0
 offset_right = -4.0
 offset_bottom = -4.0
+
+[node name="PlayerInfo" parent="ScreenUI" instance=ExtResource("10_s3gal")]
 
 [node name="WorldUI" type="Node" parent="."]
 

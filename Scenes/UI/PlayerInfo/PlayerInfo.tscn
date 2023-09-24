@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbfw3cvl1l2pw"]
+
+[ext_resource type="Script" path="res://Scenes/UI/PlayerInfo/PlayerInfo.cs" id="1_cl4si"]
+
+[node name="PlayerInfo" type="PanelContainer"]
+custom_minimum_size = Vector2(40, 22)
+offset_right = 40.0
+offset_bottom = 22.0
+script = ExtResource("1_cl4si")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 6
+text = "Dave"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Funds" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 6
+text = "$10000"
+horizontal_alignment = 1
+vertical_alignment = 1

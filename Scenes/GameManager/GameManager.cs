@@ -9,6 +9,9 @@ public partial class GameManager : Node
     [Signal]
     public delegate void GameOverEventHandler();
     
+    [Signal]
+    public delegate void PlayerFundsChangedEventHandler(PlayerDefinition player, int newAmount);
+    
     private PlayerDefinition player;
     private PlayerDefinition enemy;
     
@@ -23,7 +26,10 @@ public partial class GameManager : Node
         Instance = this;
         
         enemy = new PlayerDefinition("Hawke", 1000, UnitDefinition.Team.BlackHole);
+        enemy.FundsChanged += (int newAmount) => EmitSignal(SignalName.PlayerFundsChanged, enemy, newAmount);
+        
         player = new PlayerDefinition("Andy", 1000, UnitDefinition.Team.OrangeStar);
+        player.FundsChanged += (int newAmount) => EmitSignal(SignalName.PlayerFundsChanged, player, newAmount);
         
         
         Level.Instance.BuildingCaptured += HandleBuildingCaptured;
