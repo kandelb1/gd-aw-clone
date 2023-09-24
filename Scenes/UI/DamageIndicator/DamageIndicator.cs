@@ -31,7 +31,6 @@ public partial class DamageIndicator : Control
 
     private void HandleSideSwitch(bool leftSide)
     {
-        GD.Print("DamageIndicator.HandleSideSwitch()");
         LayoutDirection = leftSide ? LayoutDirectionEnum.Ltr : LayoutDirectionEnum.Rtl;
     }
 }

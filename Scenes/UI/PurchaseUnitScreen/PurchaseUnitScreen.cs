@@ -51,7 +51,6 @@ public partial class PurchaseUnitScreen : PanelContainer
     
     private void HandleButtonPressed(UnitDefinition unitDef, BuildingDefinition buildingDef)
     {
-        GD.Print($"Purchasing {unitDef.GetUnitName()}");
         PlayerDefinition currentPlayer = GameManager.Instance.GetCurrentPlayer();
         currentPlayer.SubtractFunds(unitDef.GetCost());
         

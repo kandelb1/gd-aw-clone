@@ -137,17 +137,18 @@ public partial class UnitDefinition : Resource
     
     public bool CanShootAt(Unit defendingUnit)
     {
-        
+        bool primaryCanShoot = false;
+        bool secondaryCanShoot = false;
         if (primaryWeap != null)
         {
-            return primaryWeap.GetCurrentAmmo() != 0 && primaryWeap.GetBaseDamageAgainstUnit(defendingUnit) != -1;
+            primaryCanShoot = primaryWeap.HasAmmo() && primaryWeap.GetBaseDamageAgainstUnit(defendingUnit) != -1;
         }
         if (secondaryWeap != null)
         {
-            return secondaryWeap.GetBaseDamageAgainstUnit(defendingUnit) != -1;
+            secondaryCanShoot = secondaryWeap.GetBaseDamageAgainstUnit(defendingUnit) != -1;
         }
 
-        return false;
+        return primaryCanShoot || secondaryCanShoot;
     }
     
     public SpriteFrames GetSpriteFrames()

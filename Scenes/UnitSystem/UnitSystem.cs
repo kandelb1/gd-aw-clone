@@ -102,6 +102,8 @@ public partial class UnitSystem : Node2D
         {
             Unit unit = Level.Instance.GetUnit(pos);
             if (unit.IsExhausted()) return;
+            // TODO: uncomment this later. it's very useful for testing atm
+            // if (unit.GetTeam() != GameManager.Instance.GetCurrentPlayer().GetTeam()) return;
             SetSelectedUnit(unit);
             return;
         }

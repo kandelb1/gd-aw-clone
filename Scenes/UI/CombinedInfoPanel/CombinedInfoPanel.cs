@@ -16,7 +16,6 @@ public partial class CombinedInfoPanel : HBoxContainer
     {
         // if (this.leftSide == leftSide) return;
         // this.leftSide = leftSide;
-        GD.Print("CombinedInfoPanel.HandleSideSwitch()");
         LayoutDirection = leftSide ? LayoutDirectionEnum.Ltr : LayoutDirectionEnum.Rtl;
     }
 }
