@@ -110,6 +110,7 @@ public partial class UnitSystem : Node2D
         {
             BuildingDefinition building = Level.Instance.GetBuildingDefinition(pos);
             if (building.GetControllingTeam() == UnitDefinition.Team.Neutral) return;
+            if (building.GetControllingTeam() != GameManager.Instance.GetCurrentPlayer().GetTeam()) return;
             EmitSignal(SignalName.BuildingSelected, building);
         }
     }
