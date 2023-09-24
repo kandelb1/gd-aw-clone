@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcb732ru6d2bt"]
+
+[ext_resource type="Script" path="res://Scenes/UI/LoadedUnitsInfo/LoadedUnitsInfo.cs" id="1_pyd7u"]
+[ext_resource type="PackedScene" uid="uid://b3jatenarpvg5" path="res://Scenes/UI/LoadedUnitsInfo/LoadedUnit.tscn" id="2_ehevo"]
+
+[node name="LoadedUnitsInfo" type="PanelContainer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -27.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_pyd7u")
+loadedUnitScene = ExtResource("2_ehevo")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10

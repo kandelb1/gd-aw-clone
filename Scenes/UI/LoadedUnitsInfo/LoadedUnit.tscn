@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3jatenarpvg5"]
+
+[ext_resource type="Script" path="res://Scenes/UI/LoadedUnitsInfo/LoadedUnit.cs" id="1_jakj5"]
+[ext_resource type="Texture2D" uid="uid://d3n3r8o1f0wx7" path="res://Assets/Game Boy Advance - Advance Wars 2 Black Hole Rising - Units Map.png" id="1_rev4t"]
+[ext_resource type="Texture2D" uid="uid://dtpisg4v2w3ce" path="res://Assets/UI/heart-icon.png" id="1_xqv4e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oyeta"]
+atlas = ExtResource("1_rev4t")
+region = Rect2(3, 104, 16, 16)
+
+[node name="LoadedUnit" type="VBoxContainer"]
+alignment = 1
+script = ExtResource("1_jakj5")
+
+[node name="Image" type="TextureRect" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_oyeta")
+
+[node name="HealthContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HealthContainer"]
+custom_minimum_size = Vector2(7, 6)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("1_xqv4e")
+stretch_mode = 2
+
+[node name="Health" type="Label" parent="HealthContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 6
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1

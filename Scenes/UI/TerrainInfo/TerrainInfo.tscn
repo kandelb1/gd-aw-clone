@@ -57,7 +57,7 @@ layout_mode = 2
 size_flags_vertical = 4
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/DefenseContainer"]
+[node name="DefenseIcon" type="TextureRect" parent="VBoxContainer/DefenseContainer"]
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
 size_flags_horizontal = 4
