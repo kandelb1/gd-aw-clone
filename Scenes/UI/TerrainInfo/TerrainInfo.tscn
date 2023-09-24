@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://nwuc6vfsd2yb"]
+[gd_scene load_steps=3 format=3 uid="uid://nwuc6vfsd2yb"]
 
 [ext_resource type="Script" path="res://Scenes/UI/TerrainInfo/TerrainInfo.cs" id="1_dja02"]
+[ext_resource type="Texture2D" uid="uid://d2e5fmxhx7fp1" path="res://Assets/UI/star-icon.png" id="2_uyflm"]
 
 [node name="TerrainInfo" type="PanelContainer"]
 custom_minimum_size = Vector2(30, 50)
@@ -51,10 +52,23 @@ grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Defense" type="Label" parent="VBoxContainer"]
+[node name="DefenseContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/DefenseContainer"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_uyflm")
+
+[node name="Defense" type="Label" parent="VBoxContainer/DefenseContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 6
 text = "4"
 horizontal_alignment = 1
+vertical_alignment = 1
